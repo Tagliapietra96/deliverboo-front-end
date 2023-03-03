@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import store from './stores/store';
 export default {
   
 }
