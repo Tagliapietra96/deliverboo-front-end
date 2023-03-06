@@ -5,11 +5,11 @@ import store from './store';
 export const api = reactive({
     get: {
         index: {
-            categories(){
+            categories(storeArray){
                 store.dt.loading = true;
                 axios.get(store.dt.backEndUrl)
                 .then(resp => {
-
+                    storeArray = resp.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
@@ -17,11 +17,11 @@ export const api = reactive({
                     store.dt.loading = false;
                 });
             },
-            restaurants(){
+            restaurants(storeArray){
                 store.dt.loading = true;
                 axios.get(store.dt.backEndUrl)
                 .then(resp => {
-
+                    storeArray = resp.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
@@ -29,11 +29,11 @@ export const api = reactive({
                     store.dt.loading = false;
                 });
             },
-            dishes(){
+            dishes(storeArray){
                 store.dt.loading = true;
                 axios.get(store.dt.backEndUrl)
                 .then(resp => {
-
+                    storeArray = resp.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
@@ -43,11 +43,11 @@ export const api = reactive({
             }
         },
         show:{
-            categories(){
+            categories(storeArray){
                 store.dt.loading = true;
                 axios.get(store.dt.backEndUrl)
                 .then(resp => {
-
+                    storeArray = resp.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
@@ -55,11 +55,11 @@ export const api = reactive({
                     store.dt.loading = false;
                 });
             },
-            restaurants(){
+            restaurants(storeArray){
                 store.dt.loading = true;
                 axios.get(store.dt.backEndUrl)
                 .then(resp => {
-
+                    storeArray = resp.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
@@ -67,11 +67,11 @@ export const api = reactive({
                     store.dt.loading = false;
                 });
             },
-            dishes(){
+            dishes(storeArray){
                 store.dt.loading = true;
                 axios.get(store.dt.backEndUrl)
                 .then(resp => {
-
+                    storeArray = resp.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
