@@ -1,5 +1,5 @@
 <template lang="">
-  sto cazzo
+  
 </template>
 
 <script>

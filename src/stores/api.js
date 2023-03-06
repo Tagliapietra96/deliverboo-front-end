@@ -1,63 +1,82 @@
 import { reactive } from 'vue';
 import axios from 'axios';
+import store from './store';
 
 export const api = reactive({
     get: {
         index: {
             categories(){
-                axios.get()
+                store.dt.loading = true;
+                axios.get(store.dt.backEndUrl)
                 .then(resp => {
 
+                    store.dt.loading = false;
                 })
                 .catch(e => {
 
+                    store.dt.loading = false;
                 });
             },
             restaurants(){
-                axios.get()
+                store.dt.loading = true;
+                axios.get(store.dt.backEndUrl)
                 .then(resp => {
 
+                    store.dt.loading = false;
                 })
                 .catch(e => {
 
+                    store.dt.loading = false;
                 });
             },
             dishes(){
-                axios.get()
+                store.dt.loading = true;
+                axios.get(store.dt.backEndUrl)
                 .then(resp => {
 
+                    store.dt.loading = false;
                 })
                 .catch(e => {
 
+                    store.dt.loading = false;
                 });
             }
         },
         show:{
             categories(){
-                axios.get()
+                store.dt.loading = true;
+                axios.get(store.dt.backEndUrl)
                 .then(resp => {
 
+                    store.dt.loading = false;
                 })
                 .catch(e => {
 
+                    store.dt.loading = false;
                 });
             },
             restaurants(){
-                axios.get()
+                store.dt.loading = true;
+                axios.get(store.dt.backEndUrl)
                 .then(resp => {
 
+                    store.dt.loading = false;
                 })
                 .catch(e => {
 
+                    store.dt.loading = false;
                 });
             },
             dishes(){
-                axios.get()
+                store.dt.loading = true;
+                axios.get(store.dt.backEndUrl)
                 .then(resp => {
 
+                    store.dt.loading = false;
                 })
                 .catch(e => {
 
+                    store.dt.loading = false;
                 });
             }
         }
