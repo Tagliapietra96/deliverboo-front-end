@@ -1,7 +1,7 @@
 <template lang="">
     <footer class="bg-dark pb-3 pt-5">
-        <div class="container">
-            <div class="row">
+        <div class="container pb-3">
+            <div class="row justify-content-between align-items-center">
                 <div class="col-4">
                     <a class="text-decoration-none" href="http://localhost:5174/">
                         <div class= "fs-1 fw-bold d-flex align-items-center text-light">
@@ -10,8 +10,8 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-8">
-
+                <div class="col-4">
+                    <div class="text-white">Copyright 2022/2023 &#169; Privacy policy &#174;<br> <span class="fw-semibold">Boolean Careers </span>&#8226; Classe #79 &#8226; <i><span class="fw-bold">DreamTeam6</span></i></div>
                 </div>
             </div>
         </div>
