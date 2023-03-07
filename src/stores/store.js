@@ -2,6 +2,23 @@ import { reactive } from 'vue';
 import { api } from './api';
 export const store = reactive({
     dt:{
+        headerLinks: [
+            {
+                name: 'Lavora con noi',
+                url: 'http://127.0.0.1:8000',
+                active: false
+            },
+            {
+                name: 'Vai ai ristoranti',
+                url: '#',
+                active: false
+            },
+            {
+                name: 'Il tuo carrello',
+                url: '#',
+                active: false
+            },
+        ],
         loading: false,
         beUrl: 'http://127.0.0.1:8000',
         categoriesUrl: '/api/categories',
