@@ -23,7 +23,7 @@ const router = createRouter({
       component: RestautantShowPage,
     },
     {
-      path: "/piatto",
+      path: "/piatto/:id",
       name: "dish",
       component: RestautantShowPage,
     },
