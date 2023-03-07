@@ -31,9 +31,6 @@ export default {
 };
 </script>
 
-<<<<<<< HEAD
-<style scoped lang="scss"></style>
-=======
 <style scoped lang="scss">
  .bg-first-section {
   background-image: url("../assets/bg-welcome.png");
@@ -54,4 +51,3 @@ export default {
 }
 
 </style>
->>>>>>> 96d163281b0a33d26c59097237e44fedcf5de3b2
