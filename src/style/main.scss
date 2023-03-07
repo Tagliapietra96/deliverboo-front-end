@@ -1,24 +1,33 @@
 @use "bootstrap/scss/bootstrap";
 @use "@fortawesome/fontawesome-free/css/all.min.css";
 
+/*****VARIABLES******/
+$primary: #c76262 ;
+$primary-darker: #b34d4d;
+
+
+/*****GENERALS******/
+
+
+/*****UTILITIES******/
 .custom-color{
-    color: #c76262 !important;
+    color: $primary !important;
 }
+
 .custom-bg{
-    background-color: #c76262 !important;
+    background-color:$primary !important;
 }
 
 .btn-custom{
-    background-color: #c76262 !important;
-    border-color: #c76262 !important;
+    background-color:$primary !important;
+    border-color:$primary !important;
     color: #fff!important;
     transition: all, .3s;
     &:hover{
-        background-color: #b34d4d !important;
+        background-color: $primary-darker !important;
         transform: scale(1.05);
     }
     &:active{
         transform: scale(.95);
     }
-
 }
