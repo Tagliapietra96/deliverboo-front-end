@@ -1,10 +1,19 @@
-<template lang="">sjnfsmflsdflfsslkslmk</template>
+<template lang="">
+  <div v-for="element in store.dt.restaurantsList">
+    {{ element }}
+  </div>
+</template>
 
 <script>
 import { store } from "../../stores/store";
 export default {
   data() {
-    return {};
+    return {
+      store,
+    };
+  },
+  mounted() {
+    store.fn.fetchRestaurants();
   },
 };
 </script>

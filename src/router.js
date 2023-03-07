@@ -23,10 +23,10 @@ const router = createRouter({
       component: RestautantShowPage,
     },
     {
-      path:"piatto",
-      name:"dish",
+      path: "/piatto",
+      name: "dish",
       component: RestautantShowPage,
-    }
+    },
   ],
 });
 
