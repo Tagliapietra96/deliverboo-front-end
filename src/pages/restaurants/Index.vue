@@ -12,7 +12,9 @@
       <label>{{ category.name }}</label>
     </div>
     <div v-for="(restaurant, i) in store.dt.restaurantsList" :key="i">
-      {{ restaurant.name }}
+      <div v-if="restaurant">
+        {{ restaurant.name }}
+      </div>
     </div>
   </div>
 </template>
@@ -36,18 +38,30 @@ export default {
       } else {
         this.selectedCategory.push(category);
       }
-      axios
-        .get(store.dt.beUrl + store.dt.restaurantFiltersUrl, {
-          params: {
-            category: this.selectedCategory,
-          },
-        })
-        .then((response) => {
-          this.store.dt.restaurantsList = response.data; // aggiorna la lista dei ristoranti con la risposta della chiamata
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+
+      if (this.selectedCategory.length === 0) {
+        axios
+          .get(store.dt.beUrl + store.dt.restaurantsUrl)
+          .then((response) => {
+            this.store.dt.restaurantsList = response.data.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        axios
+          .get(store.dt.beUrl + store.dt.restaurantFiltersUrl, {
+            params: {
+              category: this.selectedCategory,
+            },
+          })
+          .then((response) => {
+            this.store.dt.restaurantsList = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
   },
   mounted() {
