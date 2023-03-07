@@ -52,7 +52,7 @@ export default {
         axios
           .get(store.dt.beUrl + store.dt.restaurantFiltersUrl, {
             params: {
-              category: this.selectedCategory,
+              category: this.selectedCategory, // passa le categorie selezionate come array di parametri
             },
           })
           .then((response) => {
