@@ -20,13 +20,13 @@
       </div>
       <div class="col-7 img-section position-relative filter-hover">
           <a href="">
-            <img class="my-img-fluid rounded-2" src="https://goldenbarristorante.it/wp-content/uploads/2020/02/s9.jpg" alt="">
+            <img class="my-img-fluid rounded-2" src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="">
             <span class="description">Perfetti da condividere</span>
           </a>
         </div>
         <div class="col-5 img-section position-relative filter-hover">
           <a href="">      
-              <img class="my-img-fluid rounded-2" src="https://cdn.vox-cdn.com/thumbor/bif3U7XKUqWpOUv91_fXLfzsIx8=/0x0:6000x4000/1200x675/filters:focal(2520x1520:3480x2480)/cdn.vox-cdn.com/uploads/chorus_image/image/71262429/Le_Fantome.0.jpg" alt="">
+              <img class="my-img-fluid rounded-2" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="">
               <span class="description">Esclusiva Deliveboo</span>
           </a>
         </div>
