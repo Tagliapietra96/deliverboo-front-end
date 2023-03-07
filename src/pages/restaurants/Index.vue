@@ -1,14 +1,16 @@
 <template>
   <div>
-    <div v-for="category in store.dt.categoriesList" :key="category.id">
+    <div
+      v-for="category in store.dt.categoriesList"
+      :key="category.id"
+      @click="fetchRestaurants(category.name)"
+    >
       <input
         type="checkbox"
-        v-model="selectedCategory"
-        :value="category.name"
+        :checked="selectedCategory.includes(category.name)"
       />
       <label>{{ category.name }}</label>
     </div>
-    <button @click="fetchRestaurants">Cerca</button>
     <div v-for="(restaurant, i) in store.dt.restaurantsList" :key="i">
       {{ restaurant.name }}
     </div>
@@ -26,7 +28,14 @@ export default {
     };
   },
   methods: {
-    fetchRestaurants() {
+    fetchRestaurants(category) {
+      if (this.selectedCategory.includes(category)) {
+        this.selectedCategory = this.selectedCategory.filter(
+          (cat) => cat !== category
+        );
+      } else {
+        this.selectedCategory.push(category);
+      }
       axios
         .get(store.dt.beUrl + store.dt.restaurantFiltersUrl, {
           params: {
