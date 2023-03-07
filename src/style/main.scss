@@ -1,2 +1,24 @@
 @use "bootstrap/scss/bootstrap";
 @use "@fortawesome/fontawesome-free/css/all.min.css";
+
+.custom-color{
+    color: #c76262 !important;
+}
+.custom-bg{
+    background-color: #c76262 !important;
+}
+
+.btn-custom{
+    background-color: #c76262 !important;
+    border-color: #c76262 !important;
+    color: #fff!important;
+    transition: all, .3s;
+    &:hover{
+        background-color: #b34d4d !important;
+        transform: scale(1.05);
+    }
+    &:active{
+        transform: scale(.95);
+    }
+
+}
