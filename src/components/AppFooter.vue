@@ -11,7 +11,7 @@
                     </a>
                 </div>
                 <div class="col-4">
-                    <div class="text-white">Copyright 2022/2023 &#169; Privacy policy &#174;<br> <span class="fw-semibold">Boolean Careers </span>&#8226; Classe #79 &#8226; <i><span class="fw-bold">DreamTeam6</span></i></div>
+                    <div class="text-white"><span class="fw-semibold">Boolean Careers </span>&#8226; Classe #79 &#8226; <i><span class="fw-bold">DreamTeam6</span></i> <br> <small>Copyright 2022/2023 &#169; Privacy policy &#174;</small></div>
                 </div>
             </div>
         </div>
