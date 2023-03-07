@@ -1,88 +1,84 @@
 import { reactive } from 'vue';
+import { store } from './store';
 import axios from 'axios';
-// import store from './store';
 
 export const api = reactive({
-    get: {
-        index: {
-            categories(storeArray){
-                // store.dt.loading = true;
-                axios.get(store.dt.backEndUrl + '/api/categories')
-                .then(resp => {
-                    storeArray = resp.data;
-                    // store.dt.loading = false;
-                    console.log(resp.data)
-                })
-                .catch(e => {
-
-                    // store.dt.loading = false;
-                });
-            },
-            restaurants(storeArray){
+    get:{
+        index:{
+            categories(){
                 store.dt.loading = true;
-                axios.get(store.dt.backEndUrl)
+                axios.get(store.dt.beUrl + store.dt.categoriesUrl)
                 .then(resp => {
-                    storeArray = resp.data;
+                    store.dt.categoriesList = resp.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
 
                     store.dt.loading = false;
-                });
+                })
             },
-            dishes(storeArray){
+            restaurants(){
                 store.dt.loading = true;
-                axios.get(store.dt.backEndUrl)
+                axios.get(store.dt.beUrl + store.dt.restaurantsUrl)
                 .then(resp => {
-                    storeArray = resp.data;
+                    store.dt.restaurantsList = resp.data.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
 
                     store.dt.loading = false;
-                });
-            }
+                })
+            },
+            dishes(){
+                store.dt.loading = true;
+                axios.get(store.dt.beUrl + store.dt.dishesUrl)
+                .then(resp => {
+                    store.dt.dishesList = resp.data.data;
+                    store.dt.loading = false;
+                })
+                .catch(e => {
+
+                    store.dt.loading = false;
+                })
+            },
         },
         show:{
-            categories(storeArray){
+            categories(){
                 store.dt.loading = true;
-                axios.get(store.dt.backEndUrl)
+                axios.get(store.dt.beUrl + store.dt.categoriesUrl)
                 .then(resp => {
-                    storeArray = resp.data;
+                    store.dt.categoriesList = resp.data.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
 
                     store.dt.loading = false;
-                });
+                })
             },
-            restaurants(storeArray){
+            restaurants(){
                 store.dt.loading = true;
-                axios.get(store.dt.backEndUrl)
+                axios.get(store.dt.beUrl + store.dt.restaurantsUrl)
                 .then(resp => {
-                    storeArray = resp.data;
+                    store.dt.restaurantsList = resp.data.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
 
                     store.dt.loading = false;
-                });
+                })
             },
-            dishes(storeArray){
+            dishes(){
                 store.dt.loading = true;
-                axios.get(store.dt.backEndUrl)
+                axios.get(store.dt.beUrl + store.dt.dishesUrl)
                 .then(resp => {
-                    storeArray = resp.data;
+                    store.dt.dishesList = resp.data.data;
                     store.dt.loading = false;
                 })
                 .catch(e => {
 
                     store.dt.loading = false;
-                });
-            }
+                })
+            },
         }
-    },
-    post:{
-
     }
 });

@@ -1,36 +1,34 @@
 import { reactive } from 'vue';
-import api from './api';
-
+import { api } from './api';
 export const store = reactive({
     dt:{
         loading: false,
-        backEndUrl: 'http://127.0.0.1:8000',
-        allCategories: [],
-        allRestaurants: [],
-        allDishes: [],
-        singleCategories: [],
-        singleRestaurants: [],
-        singleDishes: [],
+        beUrl: 'http://127.0.0.1:8000',
+        categoriesUrl: '/api/categories',
+        restaurantsUrl: '/api/restaurants',
+        dishesUrl: '/api/dishes',
+        categoriesList: [],
+        restaurantsList: [],
+        dishesList: [],
     },
     fn:{
         fetchCategories(){
-            api.get.index.categories(allCategories);
+            api.get.index.categories();
         },
         fetchRestaurants(){
-            api.get.index.restaurants(allRestaurants);
+            api.get.index.restaurants();
         },
         fetchDishes(){
-            api.get.index.dishes(allDishes);
+            api.get.index.dishes();
         },
         showCategories(){
-            api.get.show.categories(singleCategories);
+            api.get.show.categories();
         },
         showRestaurants(){
-            api.get.show.restaurants(singleRestaurants);
+            api.get.show.restaurants();
         },
         showDishes(){
-            api.get.show.dishes(singleDishes);
-        },
-        
+            api.get.show.dishes();
+        }
     }
 });
