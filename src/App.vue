@@ -1,13 +1,15 @@
 <template lang="">
-  <TheHeader></TheHeader>
+  <AppHeader/>
   <router-view></router-view>
+  <AppFooter/>
 </template>
 
 <script>
 import { store } from "./stores/store";
-import TheHeader from './components/TheHeader.vue'; 
+import AppHeader from './components/AppHeader.vue'; 
+import AppFooter from './components/AppFooter.vue'; 
 export default {
-  components: { TheHeader },
+  components: { AppHeader, AppFooter },
   data() {
     return {};
   },
