@@ -24,7 +24,6 @@ export const api = reactive({
           .then((resp) => {
             store.dt.restaurantsList = resp.data.data;
             store.dt.loading = false;
-            console.log(store.dt.restaurantsList);
           })
           .catch((e) => {
             store.dt.loading = false;
