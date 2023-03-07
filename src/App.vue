@@ -1,21 +1,15 @@
 <template lang="">
-  
+  <router-view></router-view>
 </template>
 
 <script>
-import { store } from './stores/store';
+import { store } from "./stores/store";
 export default {
   data() {
-    return {
-      
-    }
+    return {};
   },
-  mounted() {
-
-  },
+  mounted() {},
 };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

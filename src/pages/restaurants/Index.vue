@@ -1,19 +1,12 @@
-<template lang="">
-  
-</template>
+<template lang="">sjnfsmflsdflfsslkslmk</template>
 
 <script>
-import { store } from '../../stores/store';
+import { store } from "../../stores/store";
 export default {
   data() {
-    return {
-      
-    }
+    return {};
   },
-
 };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
