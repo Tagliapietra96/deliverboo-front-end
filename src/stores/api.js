@@ -71,7 +71,7 @@ export const api = reactive({
       dishes() {
         store.dt.loading = true;
         axios
-          .get(store.dt.beUrl + store.dt.dishesUrl)
+          .get(store.dt.beUrl + store.dt.dishesUrl + this.$route.params.id)
           .then((resp) => {
             store.dt.dishesList = resp.data.data;
             store.dt.loading = false;

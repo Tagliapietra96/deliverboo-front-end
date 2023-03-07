@@ -1,15 +1,15 @@
 <template>
-    <div>
+    <div class="shadow-container">
         
-        <div class="container">
+        <div class="container pb-5">
 
-            <h1 class="py-5">IL NOSTRO MENU</h1>
+            <h3 class="py-5">IL NOSTRO MENU</h3>
 
             <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
                 <div class="col" v-for="dish in store.dt.dishesList" :key="dish.id">
-                    <div class="card">
+                    <div class="card shadow">
                         <img :src="dish.image" class="card-img-top" alt="...">
-                        {{ dish.image }}
+                        <!-- {{ dish.image }} -->
                         <!-- <img :src="store.dt.beUrl + '/storage/' + dish.image" class="card-img-top" alt="...">
 
                         <img src="" alt=""> -->
@@ -29,7 +29,6 @@
 
 <script>
 import { store } from "../../stores/store";
-import axios from "axios";
 export default {
     data() {
         return {
@@ -51,5 +50,13 @@ export default {
         aspect-ratio: 3/4;
         object-fit: cover;
     }
+    &:hover{
+        transform: scale(1.05);
+    }
+ }
+
+ .shadow-container{
+    // box-shadow:
+    box-shadow: inset 0px 8px 6px -6px #888, inset 0px 8px 6px -6px #888;
  }
 </style>
