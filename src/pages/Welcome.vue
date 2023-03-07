@@ -27,7 +27,7 @@
         <div class="col-5 img-section position-relative filter-hover">
           <a href="">      
               <img class="my-img-fluid rounded-2" src="https://cdn.vox-cdn.com/thumbor/bif3U7XKUqWpOUv91_fXLfzsIx8=/0x0:6000x4000/1200x675/filters:focal(2520x1520:3480x2480)/cdn.vox-cdn.com/uploads/chorus_image/image/71262429/Le_Fantome.0.jpg" alt="">
-              <span class="description">Confort Food</span>
+              <span class="description">Esclusiva Deliveboo</span>
           </a>
         </div>
     </div>
