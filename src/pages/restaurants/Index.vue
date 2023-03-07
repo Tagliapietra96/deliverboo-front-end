@@ -28,7 +28,7 @@ export default {
   methods: {
     fetchRestaurants() {
       axios
-        .get(store.dt.beUrl + store.dt.restaurantsUrl, {
+        .get(store.dt.beUrl + store.dt.restaurantFiltersUrl, {
           params: {
             category: this.selectedCategory,
           },
