@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import WelcomePage from "./pages/Welcome.vue";
-import RestaurantsIndex from "./pages/restaurants/Index.vue";
-import RestautantShow from "./pages/restaurants/Show.vue";
+import RestaurantsIndexPage from "./pages/restaurants/Index.vue";
+import RestautantShowPage from "./pages/restaurants/Show.vue";
 
 const router = createRouter({
   // Serve ad indicare come gestire l'url al cambio pagina
@@ -15,13 +15,18 @@ const router = createRouter({
     {
       path: "/i-nostri-ristoranti",
       name: "restaurants",
-      component: RestaurantsIndex,
+      component: RestaurantsIndexPage,
     },
     {
       path: "/ristorante",
       name: "restaurant",
-      component: RestautantShow,
+      component: RestautantShowPage,
     },
+    {
+      path:"piatto",
+      name:"dish",
+      component: RestautantShowPage,
+    }
   ],
 });
 
