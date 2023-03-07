@@ -11,8 +11,8 @@ import DishesList from "./components/dishes/DishesList.vue";
 import AppHeader from './components/AppHeader.vue'; 
 import AppFooter from './components/AppFooter.vue'; 
 export default {
-  components: {DishesList},
-  components: { AppHeader, AppFooter },
+
+  components: { DishesList, AppHeader, AppFooter },
   data() {
     return {};
   },
