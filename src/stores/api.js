@@ -1,20 +1,21 @@
 import { reactive } from 'vue';
 import axios from 'axios';
-import store from './store';
+// import store from './store';
 
 export const api = reactive({
     get: {
         index: {
             categories(storeArray){
-                store.dt.loading = true;
-                axios.get(store.dt.backEndUrl)
+                // store.dt.loading = true;
+                axios.get(store.dt.backEndUrl + '/api/categories')
                 .then(resp => {
                     storeArray = resp.data;
-                    store.dt.loading = false;
+                    // store.dt.loading = false;
+                    console.log(resp.data)
                 })
                 .catch(e => {
 
-                    store.dt.loading = false;
+                    // store.dt.loading = false;
                 });
             },
             restaurants(storeArray){

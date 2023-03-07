@@ -4,7 +4,7 @@ import api from './api';
 export const store = reactive({
     dt:{
         loading: false,
-        backEndUrl: 'http://127.0.0.1:8000/',
+        backEndUrl: 'http://127.0.0.1:8000',
         allCategories: [],
         allRestaurants: [],
         allDishes: [],

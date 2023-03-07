@@ -3,12 +3,13 @@
 </template>
 
 <script>
-import store from './stores/store';
+import {store} from './stores/store';
+
 export default {
-  
+  mounted() {
+    store.fn.fetchCategories();
+  }
 }
 </script>
 
-<style lang="scss">
-  
-</style>
+<style lang="scss"></style>
