@@ -1,6 +1,5 @@
 <template lang="">
     <header class="navbar bg-light fixed-top">
-    
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Offcanvas navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -36,7 +35,6 @@
                 </div>
             </div>
         </div>
-
     </header>
 </template>
   
