@@ -101,7 +101,11 @@ export default {
 }
 
 .filter-hover:hover{
+  filter: grayscale(0);
+  transition: filter, .5s;
+  &:hover{
   filter: grayscale(100%);
+}
 }
 
 .my-col{
