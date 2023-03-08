@@ -10,10 +10,6 @@
                     <div class="card shadow">
                         <!-- {{dishesList[3].name}} -->
                         <img src="" class="card-img-top" alt="...">
-                        <!-- {{ dish.image }} -->
-                        <!-- <img :src="store.dt.beUrl + '/storage/' + dish.image" class="card-img-top" alt="...">
-
-                        <img src="" alt=""> -->
 
                         <div class="card-body">
                             <h5 class="card-title">{{  }}</h5>
@@ -21,6 +17,16 @@
                             <p> Ingredienti: <strong>{{  }}</strong></p>
                             <p>Prezzo: {{  }}€</p>
                         </div>
+
+                        <div class="my-3 bg-white">
+                                <button class="btn btn-sm btn-primary btn-custom ">-</button>
+                                <span class="px-3">1</span>
+                                <button class="btn btn-sm btn-primary btn-custom m-3 ">+</button>
+                                <button class="btn btn-sm btn-primary btn-custom">
+                                    <span>14,50€</span>
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div> 
                     </div>
                 </div>
             </div>

@@ -5,26 +5,38 @@
 
             <h3 class="py-5">IL NOSTRO MENU</h3>
 
-            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
+            <div class="row row-cols-1 row-cols-md-3  g-4">
                 <div class="col" v-for="dish in store.dt.dishesList" :key="dish.id">
-                    <div class="card shadow">
-                        <img :src="dish.image" class="card-img-top" alt="...">
-                        <!-- {{ dish.image }} -->
-                        <!-- <img :src="store.dt.beUrl + '/storage/' + dish.image" class="card-img-top" alt="...">
+                    
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4 d-flex align-items-center p-3">
+                                <img :src="dish.image" class="img-fluid rounded" alt="...">
+                            </div>
 
-                        <img src="" alt=""> -->
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{ dish.name }}</h5>
-                            <p class="card-text">{{ dish.description }}</p>
-                            <p> Ingredienti: <strong>{{ dish.ingredients }}</strong></p>
-                            <p>Prezzo: {{ dish.price }}€</p>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ dish.name }}</h5>
+                                    <p class="card-text">{{ dish.description }}</p>
+                                    <p class="card-text"><small class="text-muted">Prezzo: {{ dish.price }}€</small></p>
+                                    
+                                    <!-- <div class="my-3">
+                                        <button class="btn btn-sm btn-primary btn-custom ">-</button>
+                                        <span class="px-3">1</span>
+                                        <button class="btn btn-sm btn-primary btn-custom m-3 ">+</button>
+                                        <button class="btn btn-sm btn-primary btn-custom"><i class="fa-solid fa-cart-shopping"></i></button>
+                                    </div> -->
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
         </div>
     </div>
+    
 </template>
 
 <script>
@@ -46,9 +58,10 @@ export default {
  .card{
     height: 100%;
     background-color: #f9fafa;
+    transition: all, .4s;
     img{
-        aspect-ratio: 3/4;
-        object-fit: cover;
+        aspect-ratio: 1/2;
+        object-fit: cover
     }
     &:hover{
         transform: scale(1.05);
@@ -57,6 +70,6 @@ export default {
 
  .shadow-container{
     // box-shadow:
-    box-shadow: inset 0px 8px 6px -6px #888, inset 0px 8px 6px -6px #888;
+    box-shadow: inset 0px 8px 6px -6px #888;
  }
 </style>
