@@ -1,37 +1,56 @@
 <template>
-  <Loader v-if="store.dt.loading"/>
+  <Loader v-if="store.dt.loading" />
   <div class="container">
-  <div class="d-flex">
-    <div class="link-container py-4">
-      <span class="title ps-3 custom-color">Categoria</span>
-    <div class="pt-3 px-3" v-for="category in store.dt.categoriesList" :key="category.id" @click="store.fn.fetchRestaurants(category.name)">
-      <div class="form-check">
-        <input class="form-check-input my-checkbox" type="checkbox" id="flexCheckChecked" :checked="store.dt.selectedCategories.includes(category.name)"/>
-        <label class="form-check-label text-category ps-2">{{ category.name }}</label>
+    <div class="d-flex">
+      <div class="link-container py-4">
+        <span class="title ps-3 custom-color">Categoria</span>
+        <div
+          class="pt-3 px-3"
+          v-for="category in store.dt.categoriesList"
+          :key="category.id"
+          @click="store.fn.fetchRestaurants(category.name)"
+        >
+          <div class="form-check">
+            <input
+              class="form-check-input my-checkbox"
+              type="checkbox"
+              id="flexCheckChecked"
+              :checked="store.dt.selectedCategories.includes(category.name)"
+            />
+            <label class="form-check-label text-category ps-2">{{
+              category.name
+            }}</label>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-    <div class="py-4 ps-3 flex-fill">
-      <div class="row g-3">
-        <div class=" col-12 col-md-6 col-lg-4"  v-for="(restaurant, i) in store.dt.restaurantsList" :key="i">
-          <div class="card shadow rounded-3">
-            <div v-if="restaurant">
-              <div class="img-container">
-                <img class="my-img-fluid" :src="restaurant.image" alt="">
-              </div>
-              <h2 class="title"> {{ restaurant.name }} </h2>
-              <div class="d-flex justify-content-center pb-3">
-                <button @click="fetchDishes(restaurant.id)" class="btn btn-custom">Menù</button>
+      <div class="py-4 ps-3 flex-fill">
+        <div class="row g-3">
+          <div
+            class="col-12 col-md-6 col-lg-4"
+            v-for="(restaurant, i) in store.dt.restaurantsList"
+            :key="i"
+          >
+            <div class="card shadow rounded-3">
+              <div v-if="restaurant">
+                <div class="img-container">
+                  <img class="my-img-fluid" :src="restaurant.image" alt="" />
+                </div>
+                <h2 class="title">{{ restaurant.name }}</h2>
+                <div class="d-flex justify-content-center pb-3">
+                  <router-link
+                    :to="{
+                      name: 'ristorante',
+                      params: { name: restaurant.name },
+                    }"
+                    @click="OnMenuClick(restaurant.id)"
+                    class="btn btn-custom"
+                    >Menù</router-link
+                  >
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-</div>    
-    <div v-for="(dish, i) in store.dt.dishesList" :key="i">
-      <div v-if="dish">
-        {{ dish.name }}
       </div>
     </div>
   </div>
@@ -42,40 +61,31 @@ import { store } from "../../stores/store";
 import axios from "axios";
 import Loader from "../../components/Loader.vue";
 export default {
-    data() {
-        return {
-            store,
-        };
+  data() {
+    return {
+      store,
+    };
+  },
+  methods: {
+    OnMenuClick(restaurantId) {
+      store.dt.selectedRestaurant = restaurantId;
     },
-    methods: {
-        fetchDishes(restaurantId) {
-            axios
-                .get(store.dt.beUrl + store.dt.dishesUrl + restaurantId)
-                .then((response) => {
-                this.store.dt.dishesList = response.data;
-                console.log(this.store.dt.dishesList);
-            })
-                .catch((error) => {
-                console.log(error);
-            });
-        },
-    },
-    mounted() {
-        console.log(store.dt.selectedCategories);
-        store.fn.fetchCategories();
-        store.fn.fetchRestaurants();
-    },
-    components: { Loader }
+  },
+  mounted() {
+    console.log(store.dt.selectedCategories);
+    store.fn.fetchCategories();
+    store.fn.fetchRestaurants();
+  },
+  components: { Loader },
 };
 </script>
 
 <style scoped>
 .link-container {
   width: 250px;
+}
 
-} 
-
-.title{
+.title {
   /* font-family: bold; */
   font-weight: bold;
   font-size: 1.5rem;
@@ -103,13 +113,12 @@ export default {
 }
 
 .card:hover {
-  transition: transform, .5s;
+  transition: transform, 0.5s;
   transform: scale(1.05);
 }
 
-.text-category:hover{
+.text-category:hover {
   font-weight: bold;
   color: #c76262;
 }
-
 </style>

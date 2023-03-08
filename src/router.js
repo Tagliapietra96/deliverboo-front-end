@@ -19,8 +19,8 @@ const router = createRouter({
       component: RestaurantsIndexPage,
     },
     {
-      path: "/ristorante",
-      name: "restaurant",
+      path: "/ristorante/:name",
+      name: "ristorante",
       component: RestautantShowPage,
     },
     {
@@ -31,8 +31,8 @@ const router = createRouter({
     {
       path: "/:catchAll(.*)",
       name: "not-found",
-      component: NotFoundPage
-    }
+      component: NotFoundPage,
+    },
   ],
 });
 
