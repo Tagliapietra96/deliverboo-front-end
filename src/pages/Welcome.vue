@@ -7,7 +7,7 @@
   <div class=" py-5">
     <h2 class=" pt-3 title">La selezione di Deliveboo</h2>
     <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
-    <div class="row g-5">
+    <div class="row g-2 g-sm-3 g-md-5">
       
       <div v-for="element, i in store.dt.categoriesList" :class="colSelector(i)" class=" col-6 img-section position-relative filter-hover">
         <router-link :to="'/i-nostri-ristoranti'" @click="onCardClick(element.name)">
@@ -66,6 +66,7 @@ export default {
     onCardClick(category) {
       store.dt.selectedCategories = [];
       store.dt.selectedCategories.push(category);
+      store.dt.headerLinks[1].active = true;
     }
   },
   mounted() {
