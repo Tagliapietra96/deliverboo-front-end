@@ -1,15 +1,16 @@
 <template lang="">
-  <!-- <TheHeader></TheHeader> -->
-  <div class="bg-first-section">
+  <Loader v-if="store.dt.loading"/>
+  <main v-else>
+    <div class="bg-first-section">
   </div>
 <div class=" container">
-  <div class=" pt-5 pb-4">
-    <h2 class="pb-4 title">La selezione di Deliveboo</h2>
-    <div class="row g-4">
+  <div class=" py-5">
+    <h2 class="pb-5 pt-3 title">La selezione di Deliveboo</h2>
+    <div class="row g-5">
       
       <div v-for="element, i in store.dt.categoriesList" :class="colSelector(i)" class=" img-section position-relative filter-hover">
         <router-link :to="'/i-nostri-ristoranti'" @click="onCardClick(element.name)">
-        <img class="my-img-fluid rounded-2" src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzdCUyMGZvb2R8ZW58MHx8MHx8&w=1000&q=80" alt="">
+        <img class="my-img-fluid rounded-4" :src="store.dt.categoriesImgs[i]" alt="">
           <span class="description">{{element.name}}</span>
         </router-link>
       </div>
@@ -33,67 +34,79 @@
       </div>
     </div>
 </div>
+  </main>
+  
 </template>
 
 <script>
-  import { store } from "../stores/store";
+import { store } from "../stores/store";
+import Loader from '../components/Loader.vue';
 export default {
-    data() {
-        return {
-            store,
-        };
-    },
-    methods: {
-      colSelector(num){
-        if(num % 4 === 0){
-          return 'col-5';
-        }else if((num - 1) % 4 === 0){
-          return 'col-7';
-        }else{
-          if(num % 2 === 0){
+  components: { Loader },
+  data() {
+    return {
+      store,
+    };
+  },
+  methods: {
+    colSelector(num) {
+      if (num % 4 === 0) {
+        return 'col-5';
+      } else if ((num - 1) % 4 === 0) {
+        return 'col-7';
+      } else {
+        if (num % 2 === 0) {
           return 'col-7'
-        }else{
+        } else {
           return 'col-5'
         }
-        }
-      },
-      onCardClick(category){
-        store.dt.selectedCategories = [];
-        store.dt.selectedCategories.push(category);
       }
     },
-    mounted() { 
-        store.fn.fetchCategories();
-    },
+    onCardClick(category) {
+      store.dt.selectedCategories = [];
+      store.dt.selectedCategories.push(category);
+    }
+  },
+  mounted() {
+    store.fn.fetchCategories();
+  },
 };
 </script>
 
 <style scoped lang="scss">
- .bg-first-section {
+.bg-first-section {
   background-image: url("../assets/bg-homepage.jpg");
   height: 60vh;
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
   background-size: cover;
 }
 
 
-.title{
+.title {
   font-family: bold;
-  font-weight: bold;
+  font-weight: bolder;
+  font-size: 3rem;
 }
-.img-section{
-  height: 200px;
-};
 
-.my-img-fluid{
+.img-section {
+  height: 200px;
+}
+
+;
+
+.my-img-fluid {
   width: 100%;
   height: 100%;
   object-fit: cover;
   box-shadow: 1px 1px 14px #000000;
-};
+}
 
-.description{
+;
+
+.description {
   font-size: 3rem;
   font-family: 'Times New Roman', Times, serif;
   font-weight: bolder;
@@ -102,35 +115,41 @@ export default {
   bottom: 50%;
   right: 50%;
   transform: translate(50%, 50%);
+
+  * {
+    box-shadow: 10px 10x black;
+  }
 }
 
-.filter-hover{
+.filter-hover {
   filter: grayscale(0);
-  transition: filter, .5s;
-  &:hover{
-  filter: grayscale(100%);
-}
+  transform: scale(1);
+  transition: filter, .5s, transform, .5s;
+
+  &:hover {
+    filter: grayscale(100%);
+    transform: scale(1.05);
+  }
 }
 
-.my-col{
+.my-col {
   display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 64px 16px;
-    color: #ffff;
+  flex-direction: column;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 64px 16px;
+  color: #ffff;
 }
 
 
-.btn-white{
+.btn-white {
   background-color: #ffffff !important;
-    border-color: #ffffff !important;
-    color: #c76262!important;
-    &:hover{
-        background-color: #ffffff !important;
-        transform: scale(1.05);
-    }
-}
+  border-color: #ffffff !important;
+  color: #c76262 !important;
 
-</style>
+  &:hover {
+    background-color: #ffffff !important;
+    transform: scale(1.05);
+  }
+}</style>

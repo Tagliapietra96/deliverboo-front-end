@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <Loader v-if="store.dt.loading"/>
+  <div v-else>
     <div
       v-for="category in store.dt.categoriesList"
       :key="category.id"
@@ -28,30 +29,32 @@
 <script>
 import { store } from "../../stores/store";
 import axios from "axios";
+import Loader from "../../components/Loader.vue";
 export default {
-  data() {
-    return {
-      store,
-    };
-  },
-  methods: {
-    fetchDishes(restaurantId) {
-      axios
-        .get(store.dt.beUrl + store.dt.dishesUrl + restaurantId)
-        .then((response) => {
-          this.store.dt.dishesList = response.data;
-          console.log(this.store.dt.dishesList);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    data() {
+        return {
+            store,
+        };
     },
-  },
-  mounted() {
-    console.log(store.dt.selectedCategories)
-    store.fn.fetchCategories();
-    store.fn.fetchRestaurants();
-  },
+    methods: {
+        fetchDishes(restaurantId) {
+            axios
+                .get(store.dt.beUrl + store.dt.dishesUrl + restaurantId)
+                .then((response) => {
+                this.store.dt.dishesList = response.data;
+                console.log(this.store.dt.dishesList);
+            })
+                .catch((error) => {
+                console.log(error);
+            });
+        },
+    },
+    mounted() {
+        console.log(store.dt.selectedCategories);
+        store.fn.fetchCategories();
+        store.fn.fetchRestaurants();
+    },
+    components: { Loader }
 };
 </script>
 
