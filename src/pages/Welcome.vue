@@ -6,35 +6,19 @@
   <div class=" pt-5 pb-4">
     <h2 class="pb-4 title">La selezione di Deliveboo</h2>
     <div class="row g-4">
-      <div class="col-5 img-section position-relative filter-hover">
-        <a href="">
+      
+      <div v-for="element, i in store.dt.categoriesList" :class="colSelector(i)" class=" img-section position-relative filter-hover">
+        <router-link :to="'/i-nostri-ristoranti'" @click="onCardClick(element.name)">
         <img class="my-img-fluid rounded-2" src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzdCUyMGZvb2R8ZW58MHx8MHx8&w=1000&q=80" alt="">
-          <span class="description">Confort Food</span>
-        </a>
+          <span class="description">{{element.name}}</span>
+        </router-link>
       </div>
-      <div class="col-7 img-section position-relative rounded-2 filter-hover">
-        <a href="">
-          <img class="my-img-fluid rounded-2" src="https://www.finedininglovers.it/sites/g/files/xknfdk1106/files/l_4480_tiramisu-zenzero-fichi.jpg" alt="">
-          <span class="description">Dolci e Dessert</span>
-        </a>
-      </div>
-      <div class="col-7 img-section position-relative filter-hover">
-          <a href="">
-            <img class="my-img-fluid rounded-2" src="https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg" alt="">
-            <span class="description">Perfetti da condividere</span>
-          </a>
-        </div>
-        <div class="col-5 img-section position-relative filter-hover">
-          <a href="">      
-              <img class="my-img-fluid rounded-2" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="">
-              <span class="description">Esclusiva Deliveboo</span>
-          </a>
-        </div>
+      
     </div>
   </div>
 </div>
   <div class="pt-5">
-    <div class="bg-custom">
+    <div class="custom-bg">
       <div class="my-col">
         <div>
           <h2 class="pb-4 title text-center ">Lavora con noi!</h2>
@@ -53,15 +37,33 @@
 
 <script>
   import { store } from "../stores/store";
-import axios from "axios";
 export default {
     data() {
         return {
             store,
         };
     },
+    methods: {
+      colSelector(num){
+        if(num % 4 === 0){
+          return 'col-5';
+        }else if((num - 1) % 4 === 0){
+          return 'col-7';
+        }else{
+          if(num % 2 === 0){
+          return 'col-7'
+        }else{
+          return 'col-5'
+        }
+        }
+      },
+      onCardClick(category){
+        store.dt.selectedCategories = [];
+        store.dt.selectedCategories.push(category);
+      }
+    },
     mounted() { 
-        store.fn.fetchRestaurants();
+        store.fn.fetchCategories();
     },
 };
 </script>
@@ -92,15 +94,17 @@ export default {
 };
 
 .description{
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
   color: white;
   position: absolute;
-  bottom: 0;
-  right: 5%;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
 }
 
-.filter-hover:hover{
+.filter-hover{
   filter: grayscale(0);
   transition: filter, .5s;
   &:hover{
@@ -118,19 +122,6 @@ export default {
     color: #ffff;
 }
 
-.btn-custom{
-    background-color: #c76262 !important;
-    border-color: #c76262 !important;
-    color: #fff!important;
-    transition: all, .3s;
-    &:hover{
-        background-color: #b34d4d !important;
-        transform: scale(1.05);
-    }
-    &:active{
-        transform: scale(.95);
-    }
-}
 
 .btn-white{
   background-color: #ffffff !important;
@@ -142,7 +133,4 @@ export default {
     }
 }
 
-.bg-custom{
-    background-color: #c76262;
-}
 </style>
