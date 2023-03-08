@@ -28,13 +28,14 @@ export const store = reactive({
     categoriesList: [],
     restaurantsList: [],
     dishesList: [],
+    selectedCategories: [],
   },
   fn: {
     fetchCategories() {
       api.get.index.categories();
     },
-    fetchRestaurants() {
-      api.get.index.restaurants();
+    fetchRestaurants(category) {
+      api.get.index.restaurants(category);
     },
     fetchDishes() {
       api.get.index.dishes();

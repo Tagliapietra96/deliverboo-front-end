@@ -3,11 +3,11 @@
     <div
       v-for="category in store.dt.categoriesList"
       :key="category.id"
-      @click="fetchRestaurants(category.name)"
+      @click="store.fn.fetchRestaurants(category.name)"
     >
       <input
         type="checkbox"
-        :checked="selectedCategory.includes(category.name)"
+        :checked="store.dt.selectedCategories.includes(category.name)"
       />
       <label>{{ category.name }}</label>
     </div>
@@ -32,43 +32,9 @@ export default {
   data() {
     return {
       store,
-      selectedCategory: [],
     };
   },
   methods: {
-    fetchRestaurants(category) {
-      if (this.selectedCategory.includes(category)) {
-        this.selectedCategory = this.selectedCategory.filter(
-          (cat) => cat !== category
-        );
-      } else {
-        this.selectedCategory.push(category);
-      }
-
-      if (this.selectedCategory.length === 0) {
-        axios
-          .get(store.dt.beUrl + store.dt.restaurantsUrl)
-          .then((response) => {
-            this.store.dt.restaurantsList = response.data.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        axios
-          .get(store.dt.beUrl + store.dt.restaurantFiltersUrl, {
-            params: {
-              category: this.selectedCategory,
-            },
-          })
-          .then((response) => {
-            this.store.dt.restaurantsList = response.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    },
     fetchDishes(restaurantId) {
       axios
         .get(store.dt.beUrl + store.dt.dishesUrl + restaurantId)
@@ -82,6 +48,7 @@ export default {
     },
   },
   mounted() {
+    console.log(store.dt.selectedCategories)
     store.fn.fetchCategories();
     store.fn.fetchRestaurants();
   },
