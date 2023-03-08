@@ -24,7 +24,7 @@ export const store = reactive({
     categoriesUrl: "/api/categories",
     restaurantsUrl: "/api/restaurants/index",
     restaurantFiltersUrl: "/api/restaurants",
-    dishesUrl: "/api/dishes",
+    dishesUrl: "/api/dishes/",
     categoriesList: [],
     restaurantsList: [],
     dishesList: [],
