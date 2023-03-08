@@ -23,7 +23,8 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item" v-for="element in store.dt.headerLinks">
-                            <a class="nav-link" :class="(element.active) ? 'active' : ''" @click="onLinkClick(element);" :href.lazy="element.url">{{element.name}}</a>
+                            <a v-if="element.url === 'http://127.0.0.1:8000'" class="nav-link" :class="(element.active) ? 'active' : ''" @click="onLinkClick(element);" :href="element.url">{{element.name}}</a>
+                            <router-link v-else class="nav-link" :class="(element.active) ? 'active' : ''" @click="onLinkClick(element);" :to="element.url">{{element.name}}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -35,11 +36,11 @@
   
 <script>
 import { store } from "../stores/store";
+
 export default {
     data() {
         return {
             store,
-
         };
     },
     methods: {
@@ -48,7 +49,7 @@ export default {
                 element.active = false;
             });
             obj.active = true;
-            store.dt.selectedCategories = ['Italiano'];
+            store.dt.selectedCategories = [];
         },
     },
     mounted() { 

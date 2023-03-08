@@ -10,7 +10,7 @@ export const store = reactive({
       },
       {
         name: "Vai ai ristoranti",
-        url: "http://localhost:5174/i-nostri-ristoranti",
+        url: {path: "/i-nostri-ristoranti"},
         active: false,
       },
       {
