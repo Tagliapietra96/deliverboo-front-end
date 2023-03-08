@@ -1,5 +1,5 @@
 <template lang="">
-    <header class="navbar bg-light fixed-top navbar-expand-md shadow">
+    <header class="navbar bg-light fixed-top navbar-expand-lg shadow">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="http://localhost:5174/">
                 <div class="logo fs-2 fw-bold d-flex align-items-center custom-color" style="height:48px">
@@ -23,8 +23,8 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item" v-for="element in store.dt.headerLinks">
-                            <a v-if="element.url === 'http://127.0.0.1:8000'" class="nav-link" :class="(element.active) ? 'active' : ''" @click="onLinkClick(element);" :href="element.url">{{element.name}}</a>
-                            <router-link v-else class="nav-link" :class="(element.active) ? 'active' : ''" @click="onLinkClick(element);" :to="element.url">{{element.name}}</router-link>
+                            <a v-if="element.url === 'http://127.0.0.1:8000'" class="nav-link" :class="(element.active) ? 'active' : ''" @click="onLinkClick(element);" :href="element.url"><i :class="element.icon" class="me-2 ms-2"></i>{{element.name}}</a>
+                            <router-link v-else class="nav-link" :class="(element.active) ? 'active' : ''" @click="onLinkClick(element);" :to="element.url"><i :class="element.icon" class="me-2 ms-2"></i>{{element.name}}</router-link>
                         </li>
                     </ul>
                 </div>

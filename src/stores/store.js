@@ -7,16 +7,19 @@ export const store = reactive({
         name: "Lavora con noi",
         url: "http://127.0.0.1:8000",
         active: false,
+        icon: "fa-solid fa-user-tie"
       },
       {
         name: "Vai ai ristoranti",
         url: {path: "/i-nostri-ristoranti"},
         active: false,
+        icon: "fa-solid fa-utensils"
       },
       {
         name: "Il tuo carrello",
         url: "#",
         active: false,
+        icon: 'fa-solid fa-cart-shopping'
       },
     ],
     categoriesImgs: [
