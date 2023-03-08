@@ -1,32 +1,32 @@
 <template>
   <div class="container">
   <div class="d-flex">
-    <div class="link-container">
-      <span class="title pt-3 ps-3">Categoria</span>
-    <div class="pt-3 px-3" v-for="category in store.dt.categoriesList"
-      :key="category.id"
-      @click="store.fn.fetchRestaurants(category.name)"
-    >
-      <input
-        type="checkbox"
-        :checked="store.dt.selectedCategories.includes(category.name)"
-      />
-      <label class="ps-2">{{ category.name }}</label>
+    <div class="link-container py-4">
+      <span class="title ps-3 custom-color">Categoria</span>
+    <div class="pt-3 px-3" v-for="category in store.dt.categoriesList" :key="category.id" @click="store.fn.fetchRestaurants(category.name)">
+      <div class="form-check">
+        <input class="form-check-input my-checkbox" type="checkbox" id="flexCheckChecked" :checked="store.dt.selectedCategories.includes(category.name)"/>
+        <label class="form-check-label text-category ps-2">{{ category.name }}</label>
+      </div>
     </div>
   </div>
-  <div class="">
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 justify-content-center">
-        <div class=" col card m-3 shadow p-3 rounded-3" v-for="(restaurant, i) in store.dt.restaurantsList" :key="i">
-          <div v-if="restaurant">
-            <div class="img-container">
-              <img class="my-img-fluid rounded-3" :src="restaurant.image" alt="">
+    <div class="py-4 ps-3 flex-fill">
+      <div class="row g-3">
+        <div class=" col-12 col-md-6 col-lg-4"  v-for="(restaurant, i) in store.dt.restaurantsList" :key="i">
+          <div class="card shadow rounded-3">
+            <div v-if="restaurant">
+              <div class="img-container">
+                <img class="my-img-fluid" :src="restaurant.image" alt="">
+              </div>
+              <h2 class="title"> {{ restaurant.name }} </h2>
+              <div class="d-flex justify-content-center pb-3">
+                <button @click="fetchDishes(restaurant.id)" class="btn btn-custom">Menù</button>
+              </div>
             </div>
-            <h2 class="title"> {{ restaurant.name }} </h2>
-          <button @click="fetchDishes(restaurant.id)">Menù</button>
           </div>
         </div>
+      </div>
     </div>
-</div>
 </div>    
     <div v-for="(dish, i) in store.dt.dishesList" :key="i">
       <div v-if="dish">
@@ -68,12 +68,12 @@ export default {
 
 <style scoped>
 .link-container {
-  width: 300px;
+  width: 250px;
 
 } 
 
 .title{
-  font-family: bold;
+  /* font-family: bold; */
   font-weight: bold;
   font-size: 1.5rem;
   text-align: center;
@@ -82,7 +82,7 @@ export default {
 
 .img-container {
   width: 100%;
-  height: 200px;
+  height: 150px;
   object-fit: cover;
   padding-bottom: 1rem;
 }
@@ -91,6 +91,21 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.my-checkbox:hover {
+  width: 20px;
+  height: 20px;
+  transform: scale(1.05);
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.text-category:hover{
+  font-weight: bold;
+  color: #c76262;
 }
 
 </style>
