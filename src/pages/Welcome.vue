@@ -5,10 +5,11 @@
   </div>
 <div class=" container">
   <div class=" py-5">
-    <h2 class="pb-5 pt-3 title">La selezione di Deliveboo</h2>
+    <h2 class=" pt-3 title">La selezione di Deliveboo</h2>
+    <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
     <div class="row g-5">
       
-      <div v-for="element, i in store.dt.categoriesList" :class="colSelector(i)" class=" img-section position-relative filter-hover">
+      <div v-for="element, i in store.dt.categoriesList" :class="colSelector(i)" class=" col-6 img-section position-relative filter-hover">
         <router-link :to="'/i-nostri-ristoranti'" @click="onCardClick(element.name)">
         <img class="my-img-fluid rounded-4" :src="store.dt.categoriesImgs[i]" alt="">
           <span class="description">{{element.name}}</span>
@@ -51,14 +52,14 @@ export default {
   methods: {
     colSelector(num) {
       if (num % 4 === 0) {
-        return 'col-5';
+        return 'col-md-5';
       } else if ((num - 1) % 4 === 0) {
-        return 'col-7';
+        return 'col-md-7';
       } else {
         if (num % 2 === 0) {
-          return 'col-7'
+          return 'col-md-7'
         } else {
-          return 'col-5'
+          return 'col-md-5'
         }
       }
     },
@@ -86,7 +87,7 @@ export default {
 
 
 .title {
-  font-family: bold;
+  // font-family: bold;
   font-weight: bolder;
   font-size: 3rem;
 }
@@ -152,4 +153,24 @@ export default {
     background-color: #ffffff !important;
     transform: scale(1.05);
   }
-}</style>
+}
+
+@media screen and (max-width: 1000px) {
+  .description {
+  font-size: 2rem;
+  }
+
+}
+@media screen and (max-width: 500px) {
+  .description {
+  font-size: 1.5rem;
+  }
+
+}
+@media screen and (max-width: 385px) {
+  .description {
+  font-size: 1rem;
+  }
+
+}
+</style>
