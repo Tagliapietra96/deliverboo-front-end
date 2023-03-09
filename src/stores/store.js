@@ -47,6 +47,7 @@ export const store = reactive({
     restaurantsList: [],
     dishesList: [],
     selectedCategories: [],
+    myChart:[],
     selectedRestaurant: Number,
     quantityDish: 1,
   },
