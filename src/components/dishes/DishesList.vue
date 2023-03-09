@@ -56,22 +56,10 @@ export default {
     };
   },
   methods: {
-    fetchDishes(restaurantId) {
-      axios
-        .get(store.dt.beUrl + store.dt.dishesUrl + restaurantId)
-        .then((response) => {
-          this.store.dt.dishesList = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    onDishClick(dishId) {
-      store.fn.showDishes(dishId);
-    },
+    
   },
   mounted() {
-    this.fetchDishes(store.dt.selectedRestaurant);
+    store.fn.fetchDishes();
   },
 };
 </script>

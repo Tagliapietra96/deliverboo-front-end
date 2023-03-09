@@ -58,7 +58,7 @@ export const store = reactive({
       api.get.index.restaurants(category);
     },
     fetchDishes() {
-      api.get.index.dishes();
+      api.get.index.dishes(store.dt.selectedRestaurant);
     },
     showCategories() {
       api.get.show.categories();

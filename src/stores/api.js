@@ -55,12 +55,12 @@ export const api = reactive({
             });
         }
       },
-      dishes() {
+      dishes(id) {
         store.dt.loading = true;
         axios
-          .get(store.dt.beUrl + store.dt.dishesUrl)
+          .get(store.dt.beUrl + store.dt.dishesUrl + id)
           .then((resp) => {
-            store.dt.dishesList = resp.data.data;
+            store.dt.dishesList = resp.data;
             store.dt.loading = false;
           })
           .catch((e) => {
