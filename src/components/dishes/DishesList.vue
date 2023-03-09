@@ -1,11 +1,13 @@
 <template>
-  <div class="shadow-container">
+  <Loader v-if="store.dt.loading"></Loader>
+  <div v-else class="shadow-container">
     <div class="container pb-5">
       <h3 class="py-5">IL NOSTRO MENU</h3>
 
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" v-for="dish in store.dt.dishesList" :key="dish.id">
           <router-link
+            class="text-decoration-none text-dark"
             :to="{ name: 'dish', params: { id: dish.id } }"
             @click="onDishClick(dish.id)"
           >
@@ -45,7 +47,9 @@
 <script>
 import { store } from "../../stores/store";
 import axios from "axios";
+import Loader from "../Loader.vue";
 export default {
+  components: { Loader },
   data() {
     return {
       store,
