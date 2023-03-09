@@ -4,6 +4,8 @@ import RestaurantsIndexPage from "./pages/restaurants/Index.vue";
 import RestautantShowPage from "./pages/restaurants/Show.vue";
 import DishShowPage from "./components/dishes/SingleDish.vue";
 import NotFoundPage from "./pages/NotFound.vue";
+import ProductsPage from "./pages/products/product.vue";
+import CheckoutPage from "./pages/checkout/_id.vue";
 
 const router = createRouter({
   // Serve ad indicare come gestire l'url al cambio pagina
@@ -33,6 +35,16 @@ const router = createRouter({
       path: "/:catchAll(.*)",
       name: "not-found",
       component: NotFoundPage,
+    },
+    {
+      path: "/products",
+      name: "products",
+      component: ProductsPage,
+    },
+    {
+      path: "/checkout/:id",
+      name: "checkout",
+      component: CheckoutPage,
     },
   ],
 });
