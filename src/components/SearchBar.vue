@@ -29,6 +29,11 @@
   .my-border{
     border: 1px solid #c76262;
     padding: .2rem ;
+    transition: padding, .5s;
+
+    &:hover{
+        padding: .4rem;
+    }
   }
 
   .form-control:focus{
