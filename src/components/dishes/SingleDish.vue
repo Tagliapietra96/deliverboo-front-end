@@ -1,8 +1,6 @@
 <template>
   <div class="shadow-container">
     <div class="container pb-5">
-      <h3 class="py-5">SINGOLO PIATTO (prova)</h3>
-
       <div
         v-for="(dish, i) in store.dt.dishesList"
         class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4"
