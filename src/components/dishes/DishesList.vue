@@ -5,36 +5,37 @@
 
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <div class="col" v-for="dish in store.dt.dishesList" :key="dish.id">
-          <div class="card mb-3" style="max-width: 540px">
-            <div class="row g-0">
-              <div class="col-md-4 d-flex align-items-center p-3">
-                <img :src="dish.image" class="img-fluid rounded" alt="..." />
-              </div>
+          <router-link
+            :to="{ name: 'dish', params: { id: dish.id } }"
+            @click="onDishClick(dish.id)"
+          >
+            <div class="card mb-3" style="max-width: 540px">
+              <div class="row g-0">
+                <div class="col-md-4 d-flex align-items-center p-3">
+                  <img :src="dish.image" class="img-fluid rounded" alt="..." />
+                </div>
 
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{ dish.name }}</h5>
-                  <p class="card-text">{{ dish.description }}</p>
-                  <p class="card-text">
-                    <small class="text-muted">Prezzo: {{ dish.price }}€</small>
-                  </p>
-                  <router-link
-                    :to="{ name: 'dish', params: { id: dish.id } }"
-                    @click="onDishClick(dish.id)"
-                    class="btn btn-custom"
-                    >Piatto</router-link
-                  >
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ dish.name }}</h5>
+                    <p class="card-text">{{ dish.description }}</p>
+                    <p class="card-text">
+                      <small class="text-muted"
+                        >Prezzo: {{ dish.price }}€</small
+                      >
+                    </p>
 
-                  <!-- <div class="my-3">
+                    <!-- <div class="my-3">
                                         <button class="btn btn-sm btn-primary btn-custom ">-</button>
                                         <span class="px-3">1</span>
                                         <button class="btn btn-sm btn-primary btn-custom m-3 ">+</button>
                                         <button class="btn btn-sm btn-primary btn-custom"><i class="fa-solid fa-cart-shopping"></i></button>
                                     </div> -->
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>

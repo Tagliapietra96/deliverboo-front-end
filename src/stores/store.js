@@ -49,6 +49,7 @@ export const store = reactive({
     selectedCategories: [],
     selectedDish: Number,
     selectedRestaurant: Number,
+    quantityDish: 1,
   },
   fn: {
     fetchCategories() {
