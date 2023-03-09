@@ -47,7 +47,6 @@ export const store = reactive({
     restaurantsList: [],
     dishesList: [],
     selectedCategories: [],
-    selectedDish: Number,
     selectedRestaurant: Number,
     quantityDish: 1,
   },
@@ -67,8 +66,8 @@ export const store = reactive({
     showRestaurants() {
       api.get.show.restaurants();
     },
-    showDishes() {
-      api.get.show.dishes();
+    showDishes(id) {
+      api.get.show.dishes(id);
     },
   },
 });

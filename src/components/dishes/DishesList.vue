@@ -67,7 +67,7 @@ export default {
         });
     },
     onDishClick(dishId) {
-      store.dt.selectedDish = dishId;
+      store.fn.showDishes(dishId);
     },
   },
   mounted() {
@@ -91,7 +91,7 @@ export default {
   }
 }
 
-.my-container{
+.my-container {
   min-height: calc(100vh - 214px);
 }
 </style>

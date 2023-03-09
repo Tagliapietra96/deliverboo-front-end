@@ -20,40 +20,40 @@ export const api = reactive({
       restaurants(category) {
         store.dt.loading = true;
         if (store.dt.selectedCategories.includes(category)) {
-            store.dt.selectedCategories = store.dt.selectedCategories.filter(
-              (cat) => cat !== category
-            );
-          } else if(category !== undefined){
-            store.dt.selectedCategories.push(category);
-          }
-    
-          if (store.dt.selectedCategories.length === 0) {
-            axios
-              .get(store.dt.beUrl + store.dt.restaurantsUrl)
-              .then((response) => {
-                store.dt.restaurantsList = response.data.data;
-                store.dt.loading = false;
-              })
-              .catch((error) => {
-                console.log(error);
-                store.dt.loading = false;
-              });
-          } else {
-            axios
-              .get(store.dt.beUrl + store.dt.restaurantFiltersUrl, {
-                params: {
-                  category: store.dt.selectedCategories,
-                },
-              })
-              .then((response) => {
-                store.dt.restaurantsList = response.data;
-                store.dt.loading = false;
-              })
-              .catch((error) => {
-                console.log(error);
-                store.dt.loading = false;
-              });
-          }
+          store.dt.selectedCategories = store.dt.selectedCategories.filter(
+            (cat) => cat !== category
+          );
+        } else if (category !== undefined) {
+          store.dt.selectedCategories.push(category);
+        }
+
+        if (store.dt.selectedCategories.length === 0) {
+          axios
+            .get(store.dt.beUrl + store.dt.restaurantsUrl)
+            .then((response) => {
+              store.dt.restaurantsList = response.data.data;
+              store.dt.loading = false;
+            })
+            .catch((error) => {
+              console.log(error);
+              store.dt.loading = false;
+            });
+        } else {
+          axios
+            .get(store.dt.beUrl + store.dt.restaurantFiltersUrl, {
+              params: {
+                category: store.dt.selectedCategories,
+              },
+            })
+            .then((response) => {
+              store.dt.restaurantsList = response.data;
+              store.dt.loading = false;
+            })
+            .catch((error) => {
+              console.log(error);
+              store.dt.loading = false;
+            });
+        }
       },
       dishes() {
         store.dt.loading = true;
@@ -93,12 +93,12 @@ export const api = reactive({
             store.dt.loading = false;
           });
       },
-      dishes() {
+      dishes(dishId) {
         store.dt.loading = true;
         axios
-          .get(store.dt.beUrl + store.dt.dishesUrl + this.$route.params.id)
+          .get(store.dt.beUrl + store.dt.dishShowUrl + dishId)
           .then((resp) => {
-            store.dt.dishesList = resp.data.data;
+            store.dt.dishesList = resp.data;
             store.dt.loading = false;
           })
           .catch((e) => {

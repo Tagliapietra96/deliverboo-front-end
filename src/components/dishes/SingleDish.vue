@@ -57,16 +57,6 @@ export default {
     };
   },
   methods: {
-    fetchDish(dishId) {
-      axios
-        .get(store.dt.beUrl + store.dt.dishShowUrl + dishId)
-        .then((response) => {
-          this.store.dt.dishesList = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
     onLessClick() {
       if (store.dt.quantityDish === 1) {
         store.dt.quantityDish = 1;
@@ -79,7 +69,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchDish(store.dt.selectedDish);
+    store.fn.showDishes(1);
   },
 };
 </script>
