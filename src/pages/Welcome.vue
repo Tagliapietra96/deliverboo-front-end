@@ -3,12 +3,12 @@
   <main v-else>
     <div class="bg-first-section">
   </div>
+  <SearchBar class="pt-5"></SearchBar>
 <div class=" container">
   <div class=" py-5">
     <h2 class=" pt-3 title">La selezione di DeliveBoo</h2>
     <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
     <div class="row g-2 g-sm-3 g-md-5">
-      
       <div v-for="element, i in store.dt.categoriesList" :class="colSelector(i)" class=" col-6 img-section position-relative filter-hover">
         <router-link :to="'/i-nostri-ristoranti'" @click="onCardClick(element.name)">
         <img class="my-img-fluid rounded-4" :src="store.dt.categoriesImgs[i]" alt="">
@@ -42,8 +42,9 @@
 <script>
 import { store } from "../stores/store";
 import Loader from '../components/Loader.vue';
+import SearchBar from "../components/SearchBar.vue";
 export default {
-  components: { Loader },
+  components: { Loader, SearchBar },
   data() {
     return {
       store,
