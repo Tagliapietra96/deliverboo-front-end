@@ -32,12 +32,11 @@ import { store } from "../../stores/store";
 export default {
     data() {
         return {
-            store,
             products: [],
         };
     },
     async mounted() {
-        const responce = await axios.get(store.dt.beUrl + '/api/products');
+        let responce = await axios.get(store.dt.beUrl + '/api/products');
         this.products = responce.data.data;
     },
 };
