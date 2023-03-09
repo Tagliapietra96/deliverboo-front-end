@@ -183,7 +183,7 @@ export default {
   transition: all, 0.4s;
 
   img {
-
+    min-height: 250px;
     object-fit: cover;
   }
 
