@@ -20,7 +20,7 @@
       <div class="py-4">
         <div class="row g-3">
           <div class="col-12 col-md-6 col-lg-4" v-for="(restaurant, i) in store.dt.restaurantsList" :key="i">
-            <div class="card shadow rounded-3">
+            <div class="card shadow rounded-3 overflow-hidden">
               <div v-if="restaurant">
                 <div class="img-container">
                   <img class="my-img-fluid" :src="restaurant.image" alt="" />

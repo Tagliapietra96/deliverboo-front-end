@@ -3,7 +3,7 @@
   <div v-else class="my-container">
     <div v-if="cardShow.active" :class="cardShow.active ? 'active' : ''" class="selected-dish">
       <div class="h-100 w-100 bg-invisible">
-        <div class="card card-show border-0 rounded-4">
+        <div class="card card-show border-0 rounded-4 overflow-hidden">
           <button @click="exitShow()" class="btn btn-primary btn-custom close-show"><i
               class="fa-solid fa-xmark"></i></button>
           <img :src="cardShow.card.image" class="card-img-top" alt="...">
@@ -38,7 +38,7 @@
 
       <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4">
         <div class="col" v-for="dish in store.dt.dishesList" :key="dish.id">
-          <div class="card card-index h-100 mb-3 shadow" @click="onCardClick(dish)">
+          <div class="card card-index h-100 mb-3 shadow overflow-hidden" @click="onCardClick(dish)">
             <div class="row g-0 h-100">
               <div class=" col-4 h-100">
                 <img :src="dish.image" class="img-fluid rounded-start h-100" alt="...">
