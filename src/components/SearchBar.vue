@@ -8,7 +8,7 @@
             v-model="filterName"
             @input="$emit('filterName', filterName)"
             type="search"
-            placeholder="Cerca"
+            placeholder="Cerca nome del ristorante"
             aria-label="Search"
           />
         </div>
