@@ -1,35 +1,25 @@
 <template>
   <Loader v-if="store.dt.loading" />
-  <div class="container">
-    <div class="d-flex">
-      <div class="link-container py-4">
+  <div v-else class="container">
+    <button @click="filtering = true" :class="(filtering) ? 'active' : ''" class="btn btn-primary btn-custom open-search shadow"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <div class="my-container">
+      <div class="link-container shadow py-4" :class="(filtering) ? 'active' : ''">
         <span class="title ps-3 custom-color">Categoria</span>
-        <div
-          class="pt-3 px-3"
-          v-for="category in store.dt.categoriesList"
-          :key="category.id"
-          @click="store.fn.fetchRestaurants(category.name)"
-        >
-          <div class="form-check">
-            <input
-              class="form-check-input my-checkbox"
-              type="checkbox"
-              id="flexCheckChecked"
-              :checked="store.dt.selectedCategories.includes(category.name)"
-            />
+        <button @click="filtering = false"  class="btn-close close-search" aria-label="Close"></button>
+        <div class="pt-3 px-3" v-for="category in store.dt.categoriesList" :key="category.id"
+          @click="store.fn.fetchRestaurants(category.name)">
+          <div class="form-check my-form-check">
+            <input class="form-check-input my-checkbox" type="checkbox" id="flexCheckChecked"
+              :checked="store.dt.selectedCategories.includes(category.name)" />
             <label class="form-check-label text-category ps-2">{{
               category.name
             }}</label>
           </div>
         </div>
       </div>
-      <div class="py-4 ps-3 flex-fill">
+      <div class="py-4">
         <div class="row g-3">
-          <div
-            class="col-12 col-md-6 col-lg-4"
-            v-for="(restaurant, i) in store.dt.restaurantsList"
-            :key="i"
-          >
+          <div class="col-12 col-md-6 col-lg-4" v-for="(restaurant, i) in store.dt.restaurantsList" :key="i">
             <div class="card shadow rounded-3">
               <div v-if="restaurant">
                 <div class="img-container">
@@ -37,15 +27,10 @@
                 </div>
                 <h2 class="title">{{ restaurant.name }}</h2>
                 <div class="d-flex justify-content-center pb-3">
-                  <router-link
-                    :to="{
-                      name: 'ristorante',
-                      params: { name: restaurant.name },
-                    }"
-                    @click="onMenuClick(restaurant.id)"
-                    class="btn btn-custom"
-                    >Menù</router-link
-                  >
+                  <router-link :to="{
+                    name: 'ristorante',
+                    params: { name: restaurant.name },
+                  }" @click="onMenuClick(restaurant.id)" class="btn btn-primary btn-custom">Menù</router-link>
                 </div>
               </div>
             </div>
@@ -64,6 +49,7 @@ export default {
   data() {
     return {
       store,
+      filtering: false,
     };
   },
   methods: {
@@ -80,9 +66,46 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
+.open-search{
+  position: fixed;
+  border-radius: 50% !important;
+  height: 60px;
+  width: 60px;
+  top: 89px;
+  left: 15px;
+  transition: left, .5s, opacity, .5s;
+  &.active{
+    left: -150px;
+    opacity: 0;
+  }
+}
 .link-container {
   width: 250px;
+  position: fixed;
+  left: -400px;
+  top: 74px;
+  bottom: 0;
+  background-color: white !important;
+  z-index: 15;
+  opacity: 0;
+  transition: all, .5s;
+  &.active{
+    left: 0;
+    opacity: .99;
+  }
+  
+
+  .close-search{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+.my-container {
+  min-height: calc(100vh - 74px);
 }
 
 .title {
@@ -106,19 +129,31 @@ export default {
   object-fit: cover;
 }
 
-.my-checkbox:hover {
-  width: 20px;
-  height: 20px;
-  transform: scale(1.05);
+.my-form-check {
+  * {
+    transition: transform, .5s, font-weight, .5s, color, .5s;
+  }
+
+  &:hover {
+    .my-checkbox {
+      // width: 20px;
+      // height: 20px;
+      transform: scale(1.05);
+    }
+
+    .text-category {
+      font-weight: bold;
+      color: #c76262;
+    }
+  }
 }
 
-.card:hover {
+
+
+.card {
   transition: transform, 0.5s;
-  transform: scale(1.05);
-}
 
-.text-category:hover {
-  font-weight: bold;
-  color: #c76262;
-}
-</style>
+  &:hover {
+    transform: scale(1.05);
+  }
+}</style>

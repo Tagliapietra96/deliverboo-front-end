@@ -32,4 +32,8 @@ export default {
 };
 </script>
   
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+footer{
+    height: 345px;
+}
+</style>
