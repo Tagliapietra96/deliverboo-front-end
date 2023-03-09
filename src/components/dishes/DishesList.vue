@@ -3,8 +3,9 @@
   <div v-else class="my-container">
     <div v-if="cardShow.active" :class="cardShow.active ? 'active' : ''" class="selected-dish">
       <div class="h-100 w-100 bg-invisible">
-        <div class="card card-show border-0 rounded-4" >
-          <button @click="exitShow()"  class="btn-close close-show text-white" aria-label="Close"></button>
+        <div class="card card-show border-0 rounded-4">
+          <button @click="exitShow()" class="btn btn-primary btn-custom close-show"><i
+              class="fa-solid fa-xmark"></i></button>
           <img :src="cardShow.card.image" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{ cardShow.card.name }}</h5>
@@ -14,10 +15,13 @@
                 € {{ totalPrice(cardShow.card.price, cardShow.quantity) }}
               </div>
               <div class="text-center py-3">
-                <div class="btn-group btn-group-lg" role="group" >
-                  <button type="button" class="btn btn-primary btn-custom" @click="minusBtn()">-</button>
-                  <button type="button" class="btn btn-primary btn-custom" @click="chartBtn()"><i class="fa-solid fa-cart-shopping me-3"></i> {{ cardShow.quantity }} </button>
-                  <button type="button" class="btn btn-primary btn-custom" @click="plusBtn()">+</button>
+                <div class="btn-group " role="group">
+                  <button type="button" class="btn btn-primary btn-custom d-none d-sm-inline"
+                    @click="minusBtn()">-</button>
+                  <button type="button" class="btn btn-primary btn-custom" @click="chartBtn()"><i
+                      class="fa-solid fa-cart-shopping me-3 d-none d-md-inline"></i> {{ cardShow.quantity }} </button>
+                  <button type="button" class="btn btn-primary btn-custom d-none d-sm-inline"
+                    @click="plusBtn()">+</button>
                 </div>
               </div>
             </div>
@@ -32,21 +36,19 @@
     <div class="container pb-5">
       <h3 class="py-5">IL NOSTRO MENU</h3>
 
-      <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4">
         <div class="col" v-for="dish in store.dt.dishesList" :key="dish.id">
-          <div class="card shadow card-index mb-3" @click="onCardClick(dish)">
-            <div class="row g-0">
-              <div class="col-md-4 d-flex align-items-center p-3">
-                <img :src="dish.image" class="img-fluid rounded" alt="..." />
+          <div class="card card-index h-100 mb-3 shadow" @click="onCardClick(dish)">
+            <div class="row g-0 h-100">
+              <div class=" col-4 h-100">
+                <img :src="dish.image" class="img-fluid rounded-start h-100" alt="...">
               </div>
-
-              <div class="col-md-8">
-                <div class="card-body">
+              <div class=" col-8 h-100">
+                <div class="card-body h-100 d-flex flex-column">
                   <h5 class="card-title">{{ dish.name }}</h5>
                   <p class="card-text">{{ dish.description }}</p>
-                  <p class="card-text">
-                    <small class="text-muted">Prezzo: {{ dish.price }}€</small>
-                  </p>
+                  <div class="flex-fill"></div>
+                  <p class="card-text"><small class="text-muted">Prezzo:€ {{ dish.price }}</small></p>
                 </div>
               </div>
             </div>
@@ -81,31 +83,31 @@ export default {
     exitShow() {
       this.cardShow.active = false;
     },
-    minusBtn(){
-      if(this.cardShow.quantity === 1){
+    minusBtn() {
+      if (this.cardShow.quantity === 1) {
         this.cardShow.quantity = 99;
-      }else{
+      } else {
         this.cardShow.quantity--;
       }
-      
+
     },
-    plusBtn(){
-      if(this.cardShow.quantity === 99){
+    plusBtn() {
+      if (this.cardShow.quantity === 99) {
         this.cardShow.quantity = 1;
-      }else{
+      } else {
         this.cardShow.quantity++;
       }
     },
-    chartBtn(){
-      if(this.cardShow.quantity < 1){
+    chartBtn() {
+      if (this.cardShow.quantity < 1) {
         this.cardShow.quantity = 1;
-      }else if(this.cardShow.quantity > 99){
+      } else if (this.cardShow.quantity > 99) {
         this.cardShow.quantity = 99;
-      }else{};
+      } else { };
     },
-    totalPrice(num1, num2){
+    totalPrice(num1, num2) {
       let total = num1 * num2
-     return (Math.round(total * 100) / 100).toFixed(2);
+      return (Math.round(total * 100) / 100).toFixed(2);
     }
   },
   mounted() {
@@ -140,18 +142,29 @@ export default {
     transform: translate(-50%, -50%);
     width: 40vw;
 
-    .close-show{
-      
+    &:hover {
+      .close-show {
+        opacity: 1;
+      }
+    }
+
+    .close-show {
+
       position: absolute;
       top: 15px;
       right: 15px;
-      transition: transform, .4s;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      opacity: .3;
+      transition: opacity, .4s;
 
-      &:hover{
-        transform: scale(1.1);
+      &:hover {
+        transform: rotate(360deg)
       }
-      &:active{
-        transform: scale(.9);
+
+      &:active {
+        transform: rotate(-360deg);
       }
     }
 
@@ -167,12 +180,10 @@ export default {
 
 
 .card-index {
-  height: 100%;
-  background-color: #f9fafa;
   transition: all, 0.4s;
 
   img {
-    aspect-ratio: 1/2;
+
     object-fit: cover;
   }
 
@@ -184,5 +195,4 @@ export default {
 
 .my-container {
   min-height: calc(100vh - 214px);
-}
-</style>
+}</style>
