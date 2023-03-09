@@ -106,7 +106,7 @@ export default {
 }
 
 .my-container {
-  min-height: calc(100vh - 74px);
+  min-height: calc(100vh - 214px);
 }
 
 .title {
