@@ -42,7 +42,7 @@
                       name: 'ristorante',
                       params: { name: restaurant.name },
                     }"
-                    @click="OnMenuClick(restaurant.id)"
+                    @click="onMenuClick(restaurant.id)"
                     class="btn btn-custom"
                     >Menù</router-link
                   >
@@ -67,7 +67,7 @@ export default {
     };
   },
   methods: {
-    OnMenuClick(restaurantId) {
+    onMenuClick(restaurantId) {
       store.dt.selectedRestaurant = restaurantId;
     },
   },

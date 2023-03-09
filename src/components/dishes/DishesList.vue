@@ -18,6 +18,12 @@
                   <p class="card-text">
                     <small class="text-muted">Prezzo: {{ dish.price }}€</small>
                   </p>
+                  <router-link
+                    :to="{ name: 'dish', params: { id: dish.id } }"
+                    @click="onDishClick(dish.id)"
+                    class="btn btn-custom"
+                    >Piatto</router-link
+                  >
 
                   <!-- <div class="my-3">
                                         <button class="btn btn-sm btn-primary btn-custom ">-</button>
@@ -50,11 +56,13 @@ export default {
         .get(store.dt.beUrl + store.dt.dishesUrl + restaurantId)
         .then((response) => {
           this.store.dt.dishesList = response.data;
-          console.log(this.store.dt.selectedRestaurant);
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    onDishClick(dishId) {
+      store.dt.selectedDish = dishId;
     },
   },
   mounted() {

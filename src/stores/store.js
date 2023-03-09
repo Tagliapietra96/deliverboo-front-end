@@ -42,10 +42,12 @@ export const store = reactive({
     restaurantsUrl: "/api/restaurants/index",
     restaurantFiltersUrl: "/api/restaurants",
     dishesUrl: "/api/dishes/",
+    dishShowUrl: "/api/dishes/show/",
     categoriesList: [],
     restaurantsList: [],
     dishesList: [],
     selectedCategories: [],
+    selectedDish: Number,
     selectedRestaurant: Number,
   },
   fn: {

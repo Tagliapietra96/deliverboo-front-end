@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import WelcomePage from "./pages/Welcome.vue";
 import RestaurantsIndexPage from "./pages/restaurants/Index.vue";
 import RestautantShowPage from "./pages/restaurants/Show.vue";
+import DishShowPage from "./components/dishes/SingleDish.vue";
 import NotFoundPage from "./pages/NotFound.vue";
 
 const router = createRouter({
@@ -26,7 +27,7 @@ const router = createRouter({
     {
       path: "/piatto/:id",
       name: "dish",
-      component: RestautantShowPage,
+      component: DishShowPage,
     },
     {
       path: "/:catchAll(.*)",
