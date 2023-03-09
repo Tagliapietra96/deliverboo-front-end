@@ -17,6 +17,8 @@
           </div>
         </div>
       </div>
+      <h2 class="pt-4">I ristoranti su Deliveboo</h2>
+      <SearchBar></SearchBar>
       <div class="py-4">
         <div class="row g-3">
           <div class="col-12 col-md-6 col-lg-4" v-for="(restaurant, i) in store.dt.restaurantsList" :key="i">
@@ -43,8 +45,8 @@
 
 <script>
 import { store } from "../../stores/store";
-import axios from "axios";
 import Loader from "../../components/Loader.vue";
+import SearchBar from "../../components/SearchBar.vue";
 export default {
   data() {
     return {
@@ -62,7 +64,7 @@ export default {
     store.fn.fetchCategories();
     store.fn.fetchRestaurants();
   },
-  components: { Loader },
+  components: { Loader, SearchBar },
 };
 </script>
 
