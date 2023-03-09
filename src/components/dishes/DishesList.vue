@@ -1,6 +1,6 @@
 <template>
   <Loader v-if="store.dt.loading"></Loader>
-  <div v-else class="shadow-container">
+  <div v-else class="my-container">
     <div class="container pb-5">
       <h3 class="py-5">IL NOSTRO MENU</h3>
 
@@ -91,8 +91,7 @@ export default {
   }
 }
 
-.shadow-container {
-  // box-shadow:
-  box-shadow: inset 0px 8px 6px -6px #888;
+.my-container{
+  min-height: calc(100vh - 214px);
 }
 </style>
