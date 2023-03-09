@@ -5,7 +5,7 @@
   </div>
 <div class=" container">
   <div class=" py-5">
-    <h2 class=" pt-3 title">La selezione di Deliveboo</h2>
+    <h2 class=" pt-3 title">La selezione di DeliveBoo</h2>
     <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
     <div class="row g-2 g-sm-3 g-md-5">
       
@@ -25,7 +25,7 @@
         <div>
           <h2 class="pb-4 title text-center ">Lavora con noi!</h2>
         </div>
-        <p class="text-center pb-4">Diventa partner di Deliveboo e raggiungi sempre più clienti. Ci occupiamo noi di prendere gli ordini, così che la tua unica preoccupazione sia continuare a preparare il miglior cibo.</p>
+        <p class="text-center pb-4">Diventa partner di DeliveBoo e raggiungi sempre più clienti. Ci occupiamo noi di prendere gli ordini, così che la tua unica preoccupazione sia continuare a preparare il miglior cibo.</p>
         <a class="text-center" href="http://127.0.0.1:8000">
           <button class="btn btn-custom btn-white">Lavora con noi!</button>
         </a>
