@@ -1,5 +1,5 @@
 <template lang="">
-    <header class="navbar bg-light fixed-top navbar-expand-lg shadow">
+    <header class="navbar bg-light fixed-top navbar-expand-lg shadow" id="navbar">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="http://localhost:5174/">
                 <div class="logo fs-2 fw-bold d-flex align-items-center custom-color" style="height:48px">
@@ -56,9 +56,28 @@ export default {
         
     },
 };
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 74 || document.documentElement.scrollTop > 74) {
+    document.getElementById("navbar").style.opacity = ".7";
+    
+  } else {
+    document.getElementById("navbar").style.opacity = "1";
+  }
+}
 </script>
   
 <style lang="scss" scoped>
+
+    #navbar{
+        transition: opacity, .8s;
+
+        &:hover{
+            opacity: 1 !important;
+        }
+    }
     .header-spacer{
         height: 74px;
     }
