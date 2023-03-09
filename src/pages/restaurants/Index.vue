@@ -136,15 +136,22 @@ export default {
   }
 
   &:hover {
+    cursor: pointer;
     .my-checkbox {
       // width: 20px;
       // height: 20px;
       transform: scale(1.05);
+      &:hover{
+        cursor: pointer;
+      }
     }
 
     .text-category {
       font-weight: bold;
       color: #c76262;
+      &:hover{
+        cursor: pointer;
+      }
     }
   }
 }
