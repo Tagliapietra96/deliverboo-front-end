@@ -75,6 +75,7 @@ export default {
   width: 60px;
   top: 89px;
   left: 15px;
+  z-index: 15;
   transition: left, .5s, opacity, .5s;
   &.active{
     left: -150px;
