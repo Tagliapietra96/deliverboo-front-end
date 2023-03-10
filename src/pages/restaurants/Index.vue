@@ -53,6 +53,12 @@
                   <img class="my-img-fluid" :src="restaurant.image" alt="" />
                 </div>
                 <h2 class="title">{{ restaurant.name }}</h2>
+                <span
+                  v-for="(category, index) in restaurant.categories"
+                  :key="index"
+                >
+                  {{ category.name }}
+                </span>
                 <div class="d-flex justify-content-center pb-3">
                   <router-link
                     :to="{
@@ -111,7 +117,7 @@ export default {
     store.fn.fetchRestaurants();
   },
   beforeUnmount() {
-    store.fn.saveStorage()
+    store.fn.saveStorage();
   },
   components: { Loader, SearchBar },
 };
