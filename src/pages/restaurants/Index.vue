@@ -1,75 +1,69 @@
 <template>
   <Loader v-if="store.dt.loading" />
   <div v-else class="container">
-    <button
-      @click="filtering = true"
-      :class="filtering ? 'active' : ''"
-      class="btn btn-primary btn-custom open-search shadow"
-    >
+    <button @click="filtering = true" :class="filtering ? 'active' : ''"
+      class="btn btn-primary btn-custom open-search shadow d-block d-md-none">
       <i class="fa-solid fa-magnifying-glass"></i>
     </button>
     <div class="my-container">
-      <div
-        class="link-container shadow py-4"
-        :class="filtering ? 'active' : ''"
-      >
+      <div class="link-container shadow py-4" :class="filtering ? 'active' : ''">
         <span class="title ps-3 custom-color">Categoria</span>
-        <button
-          @click="filtering = false"
-          class="btn-close close-search"
-          aria-label="Close"
-        ></button>
-        <div
-          class="pt-3 px-3"
-          v-for="category in store.dt.categoriesList"
-          :key="category.id"
-          @click="store.fn.fetchRestaurants(category.name)"
-        >
+        <button @click="filtering = false" class="btn-close close-search" aria-label="Close"></button>
+        <div class="pt-3 px-3" v-for="category in store.dt.categoriesList" :key="category.id"
+          @click="store.fn.fetchRestaurants(category.name)">
           <div class="form-check my-form-check">
-            <input
-              class="form-check-input my-checkbox"
-              type="checkbox"
-              id="flexCheckChecked"
-              :checked="store.dt.selectedCategories.includes(category.name)"
-            />
+            <input class="form-check-input my-checkbox" type="checkbox" id="flexCheckChecked"
+              :checked="store.dt.selectedCategories.includes(category.name)" />
             <label class="form-check-label text-category ps-2">{{
               category.name
             }}</label>
           </div>
         </div>
+        <div @click="store.dt.selectedCategories = []; store.fn.fetchRestaurants();" class="custom-color text-decoration-underline delete-categories ps-3">
+          Svuota campi di ricerca
+        </div>
       </div>
       <h2 class="pt-4">I ristoranti su DeliveBoo</h2>
+      
       <SearchBar @filterName="filterChild"></SearchBar>
+      <div class="d-none d-md-block text-center mb-3 fw-bolder">
+          <button @click="(filtering) ? filtering = false : filtering = true" :class="filtering ? 'active' : ''"
+            class="btn btn-primary btn-custom open-search shadow static">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      <div v-if="store.dt.restaurantsMessage !== ''" class="alert alert-info custom-color fw-bolder py-4 fs-4">
+        {{ store.dt.restaurantsMessage }}
+        
+      </div>
       <div class="py-4">
         <div class="row g-3">
-          {{ store.dt.restaurantsMessage }}
-          <div
-            class="col-12 col-md-6 col-lg-4"
-            v-for="(restaurant, i) in filterRestaurants"
-            :key="i"
-          >
+
+          <div class="col-12 col-md-6 col-lg-4" v-for="(restaurant, i) in filterRestaurants" :key="i">
             <div class="card shadow rounded-3 overflow-hidden">
               <div v-if="restaurant">
                 <div class="img-container">
                   <img class="my-img-fluid" :src="restaurant.image" alt="" />
                 </div>
                 <h2 class="title">{{ restaurant.name }}</h2>
-                <span
-                  v-for="(category, index) in restaurant.categories"
-                  :key="index"
-                >
-                  {{ category.name }}
-                </span>
-                <div class="d-flex justify-content-center pb-3">
-                  <router-link
-                    :to="{
-                      name: 'ristorante',
-                      params: { name: restaurant.name },
-                    }"
-                    @click="onMenuClick(restaurant.id)"
-                    class="btn btn-primary btn-custom"
-                    >Menù</router-link
-                  >
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-6 col-xl-4 d-flex justify-content-center"
+                      v-for="(category, index) in restaurant.categories" :key="index">
+                      <div class=" badge text-bg-danger py-2 rounded-pill custom-bg w-100">
+                        <small>
+                          {{ category.name }}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-center pb-3 pt-4">
+                  <router-link :to="{
+                    name: 'ristorante',
+                    params: { name: restaurant.name },
+                  }" @click="onMenuClick(restaurant.id)" class="btn btn-primary btn-custom">Menù</router-link>
                 </div>
               </div>
             </div>
@@ -125,6 +119,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.alert-info{
+  text-align: center;
+background-color: #c7626245;
+  border-color: #c76262;
+}
+
 .open-search {
   position: fixed;
   border-radius: 50% !important;
@@ -134,11 +135,23 @@ export default {
   left: 15px;
   z-index: 15;
   transition: left, 0.5s, opacity, 0.5s;
+
+  &.static{
+    position: static !important;
+    height: 80px;
+  width: 80px;
+
+    &.active{
+      opacity: 1;
+    }
+  }
+
   &.active {
     left: -150px;
     opacity: 0;
   }
 }
+
 .link-container {
   width: 250px;
   position: fixed;
@@ -149,6 +162,13 @@ export default {
   z-index: 15;
   opacity: 0;
   transition: all, 0.5s;
+
+  .delete-categories{
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px;
+  }
+
   &.active {
     left: 0;
     opacity: 0.99;
@@ -191,12 +211,16 @@ export default {
     transition: transform, 0.5s, font-weight, 0.5s, color, 0.5s;
   }
 
+
+
   &:hover {
     cursor: pointer;
+
     .my-checkbox {
       // width: 20px;
       // height: 20px;
       transform: scale(1.05);
+
       &:hover {
         cursor: pointer;
       }
@@ -205,6 +229,7 @@ export default {
     .text-category {
       font-weight: bold;
       color: #c76262;
+
       &:hover {
         cursor: pointer;
       }

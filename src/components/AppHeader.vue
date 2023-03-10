@@ -4,6 +4,7 @@
       <router-link
         class="navbar-brand d-flex align-items-center"
         :to="'/'"
+        @click="onLogoClick()"
       >
         <div
           class="logo fs-2 fw-bold d-flex align-items-center custom-color"
@@ -95,7 +96,13 @@ export default {
       obj.active = true;
       store.dt.selectedCategories = [];
     },
+    onLogoClick() {
+      store.dt.headerLinks.forEach((element) => {
+        element.active = false;
+      });
+    }
   },
+
   computed: {
     quantity(){
       let toReturn = 0;

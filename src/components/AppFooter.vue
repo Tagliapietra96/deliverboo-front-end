@@ -3,7 +3,7 @@
         <div class="container pb-3">
             <div class="row justify-content-between align-items-center">
                 <div class="col-4">
-                    <router-link class="text-decoration-none" :to="'/'">
+                    <router-link class="text-decoration-none" :to="'/'" @click="onLogoClick()">
                         <div class= "fs-1 fw-bold d-flex align-items-center text-light">
                             <i class="fa-solid fa-bowl-food px-2"></i>
                             DeliveBoo
@@ -25,6 +25,13 @@ export default {
         return {
 
         };
+    },
+    methods: {
+        onLogoClick() {
+      store.dt.headerLinks.forEach((element) => {
+        element.active = false;
+      });
+    }
     },
     mounted() {
 
