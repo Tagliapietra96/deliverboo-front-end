@@ -259,18 +259,20 @@ export default {
 .my-pop-up {
   position: fixed;
   top: calc(74px + 20px);
-  right: 20px;
+  right: -400px;
   width: 30vw;
   z-index: -1;
   opacity: 0;
   transition: all, 0.4s;
 
   &.active {
+    right: 20px;
     z-index: 15;
     opacity: 1;
   }
 
   &:hover {
+    right: 20px;
     z-index: 15;
     opacity: 1;
     .delete {
@@ -280,7 +282,7 @@ export default {
 
   .delete {
     position: absolute;
-    top: 7px;
+    bottom: 7px;
     right: 7px;
     opacity: 0.3;
     transition: opacity, 0.4s;
