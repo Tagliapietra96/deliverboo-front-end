@@ -10,6 +10,9 @@
         </div>
       </div>
     </div>
+    <button v-if="myChart.length > 0" class="btn btn-ptimary btn-custom mt-3" @click="dropChart()">
+      Elimina carrello
+    </button>
   </div>
 </template>
 
@@ -20,12 +23,21 @@ export default {
       myChart: [],
     };
   },
+  methods: {
+    dropChart(){
+      this.myChart = [];
+      localStorage.setItem("myChart", JSON.stringify(this.myChart));
+      const myChart = localStorage.getItem("myChart");
+    if (myChart) {
+      this.myChart = JSON.parse(myChart);
+    }
+    },
+  },
   mounted() {
     const myChart = localStorage.getItem("myChart");
     if (myChart) {
       this.myChart = JSON.parse(myChart);
     }
-    console.log(this.myChart)
   },
 };
 </script>

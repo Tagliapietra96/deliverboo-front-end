@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <h2 class="pt-4">I ristoranti su Deliveboo</h2>
+      <h2 class="pt-4">I ristoranti su DeliveBoo</h2>
       <SearchBar @filterName="filterChild"></SearchBar>
       <div class="py-4">
         <div class="row g-3">
