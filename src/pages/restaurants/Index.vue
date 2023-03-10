@@ -24,7 +24,7 @@
         </div>
       </div>
       <h2 class="pt-4">I ristoranti su DeliveBoo</h2>
-      
+
       <SearchBar @filterName="filterChild"></SearchBar>
       <div class="d-none d-md-block text-center mb-3 fw-bolder">
           <button @click="(filtering) ? filtering = false : filtering = true" :class="filtering ? 'active' : ''"
@@ -34,7 +34,7 @@
         </div>
       <div v-if="store.dt.restaurantsMessage !== ''" class="alert alert-info custom-color fw-bolder py-4 fs-4">
         {{ store.dt.restaurantsMessage }}
-        
+
       </div>
       <div class="py-4">
         <div class="row g-3">
@@ -244,6 +244,6 @@ background-color: #c7626245;
 .category-badge{
   position: absolute;
   top: 0;
-  z-index: 23;
+  z-index: 3;
 }
 </style>
