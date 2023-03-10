@@ -1,9 +1,9 @@
 <template lang="">
   <header class="navbar bg-light fixed-top navbar-expand-lg shadow" id="navbar">
     <div class="container">
-      <a
+      <router-link
         class="navbar-brand d-flex align-items-center"
-        href="http://localhost:5173/"
+        :to="'/'"
       >
         <div
           class="logo fs-2 fw-bold d-flex align-items-center custom-color"
@@ -12,7 +12,7 @@
           <i class="fa-solid fa-bowl-food px-2"></i>
           DeliveBoo
         </div>
-      </a>
+      </router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -65,7 +65,7 @@
                 :to="element.url"
                 ><i :class="element.icon" class="me-2 ms-2"></i
                 >{{ element.name }}
-                <span v-if="i === 2 && store.dt.myChart.length > 0">( {{store.dt.myChart.length}} )</span>
+                <span v-if="i === 2 && store.dt.myChart.length > 0">( {{quantity}} )</span>
                 </router-link
               >
             </li>
@@ -84,6 +84,7 @@ export default {
   data() {
     return {
       store,
+      
     };
   },
   methods: {
@@ -94,6 +95,15 @@ export default {
       obj.active = true;
       store.dt.selectedCategories = [];
     },
+  },
+  computed: {
+    quantity(){
+      let toReturn = 0;
+      store.dt.myChart.forEach(element =>{
+        toReturn += element.quantity;
+      })
+      return toReturn;
+    }
   },
 };
 

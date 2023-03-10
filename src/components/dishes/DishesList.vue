@@ -1,68 +1,44 @@
 <template>
   <Loader v-if="store.dt.loading"></Loader>
   <div v-else class="my-container">
-    <div
-      v-if="store.dt.myChart.length > 0 && !forcedExit"
-      :class="popUpVisibility ? 'active' : ''"
-      class="card my-pop-up shadow overflow-hidden p-3"
-    >
-      <button
-        @click="deletePop()"
-        class="delete btn-sm btn btn-primary btn-custom"
-      >
+    <div v-if="store.dt.myChart.length > 0 && !forcedExit" :class="popUpVisibility ? 'active' : ''"
+      class="card my-pop-up shadow overflow-hidden p-3">
+      <button @click="deletePop()" class="delete btn-sm btn btn-primary btn-custom">
         <i class="fa-solid fa-trash-can"></i>
       </button>
       <div>
         <div class="row">
           <div class="col-12 col-md-6 col-lg-5 col-xl-4">
-            <img
-              :src="store.dt.myChart[store.dt.myChart.length - 1].item.image"
-              class="img-fluid"
-              alt=""
-            />
+            <img :src="store.dt.myChart[shoppingIndex].item.image" class="img-fluid" alt="" />
           </div>
           <div class="col-12 col-md-6 col-lg-7 col-xl-8">
             <h5 class="d-none d-xxl-block">
               Hai aggiunto al tuo carrello:
-              {{ store.dt.myChart[store.dt.myChart.length - 1].item.name }}!
+              {{ store.dt.myChart[shoppingIndex].item.name }}!
             </h5>
             <div class="d-none d-md-flex justify-content-around pt-3">
-              <button
-                class="btn btn-primary btn-custom btn-sm px-3"
-                @click="minusPop()"
-              >
+              <button class="btn btn-primary btn-custom btn-sm px-3" @click="minusPop()">
                 -
               </button>
               <div class="card w-25 text-center py-2 d-none d-lg-block">
-                {{ store.dt.myChart[store.dt.myChart.length - 1].quantity }}
+                {{ store.dt.myChart[shoppingIndex].quantity }}
               </div>
-              <button
-                class="btn btn-primary btn-custom btn-sm px-3"
-                @click="plusPop()"
-              >
+              <button class="btn btn-primary btn-custom btn-sm px-3" @click="plusPop()">
                 +
               </button>
             </div>
             <div class="pt-3">
-              <router-link :to="'/cart'" class="custom-color" @click="toChartPage()"
-                ><small>Vai al tuo carrello!</small></router-link
-              >
+              <router-link :to="'/cart'" class="custom-color" @click="toChartPage()"><small>Vai al tuo
+                  carrello!</small></router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div
-      v-if="cardShow.active"
-      :class="cardShow.active ? 'active' : ''"
-      class="selected-dish"
-    >
+    <div v-if="cardShow.active" :class="cardShow.active ? 'active' : ''" class="selected-dish">
       <div class="h-100 w-100 bg-invisible">
         <div class="card card-show border-0 rounded-4 overflow-hidden">
-          <button
-            @click="exitShow()"
-            class="btn btn-primary btn-custom close-show"
-          >
+          <button @click="exitShow()" class="btn btn-primary btn-custom close-show">
             <i class="fa-solid fa-xmark"></i>
           </button>
           <img :src="cardShow.card.image" class="card-img-top" alt="..." />
@@ -75,28 +51,14 @@
               </div>
               <div class="text-center py-3">
                 <div class="btn-group" role="group">
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-custom d-none d-sm-inline"
-                    @click="minusBtn()"
-                  >
+                  <button type="button" class="btn btn-primary btn-custom d-none d-sm-inline" @click="minusBtn()">
                     -
                   </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-custom"
-                    @click="chartBtn()"
-                  >
-                    <i
-                      class="fa-solid fa-cart-shopping me-3 d-none d-md-inline"
-                    ></i>
+                  <button type="button" class="btn btn-primary btn-custom" @click="chartBtn()">
+                    <i class="fa-solid fa-cart-shopping me-3 d-none d-md-inline"></i>
                     {{ cardShow.quantity }}
                   </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary btn-custom d-none d-sm-inline"
-                    @click="plusBtn()"
-                  >
+                  <button type="button" class="btn btn-primary btn-custom d-none d-sm-inline" @click="plusBtn()">
                     +
                   </button>
                 </div>
@@ -110,21 +72,12 @@
     <div class="container pb-5">
       <h3 class="py-5">IL NOSTRO MENU</h3>
 
-      <div
-        class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4"
-      >
+      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4">
         <div class="col" v-for="dish in store.dt.dishesList" :key="dish.id">
-          <div
-            class="card card-index h-100 mb-3 shadow overflow-hidden"
-            @click="onCardClick(dish)"
-          >
+          <div class="card card-index h-100 mb-3 shadow overflow-hidden" @click="onCardClick(dish)">
             <div class="row g-0 h-100">
               <div class="col-4 h-100">
-                <img
-                  :src="dish.image"
-                  class="img-fluid rounded-start h-100"
-                  alt="..."
-                />
+                <img :src="dish.image" class="img-fluid rounded-start h-100" alt="..." />
               </div>
               <div class="col-8 h-100">
                 <div class="card-body h-100 d-flex flex-column">
@@ -132,7 +85,7 @@
                   <p class="card-text">{{ dish.description }}</p>
                   <div class="flex-fill"></div>
                   <p class="card-text">
-                    <small class="text-muted">Prezzo:€ {{ dish.price }}</small>
+                    <small class="text-muted">Prezzo:€ {{ dish.price.toFixed(2) }}</small>
                   </p>
                 </div>
               </div>
@@ -159,6 +112,7 @@ export default {
       },
       popUpVisibility: false,
       forcedExit: false,
+      shoppingIndex: 0,
     };
   },
   methods: {
@@ -191,14 +145,33 @@ export default {
         this.cardShow.quantity = 99;
       }
 
-      store.dt.myChart.push({
+      const toPush = {
         item: this.cardShow.card,
         quantity: this.cardShow.quantity,
         price: this.totalPrice(
           this.cardShow.card.price,
           this.cardShow.quantity
         ),
-      });
+      }
+
+      let toReturn = true;
+
+      store.dt.myChart.forEach((element, i) => {
+        if(element.item.id === toPush.item.id){
+          toReturn = false;
+          element.quantity += toPush.quantity;
+          element.price = this.totalPrice(
+            element.item.price,
+            element.quantity
+          );
+          this.shoppingIndex = i;
+        }
+      })
+
+      if (toReturn) {
+        store.dt.myChart.push(toPush);
+        this.shoppingIndex = (store.dt.myChart.length - 1);
+      }
 
       this.exitShow();
       this.forcedExit = false;
@@ -228,9 +201,9 @@ export default {
     deletePop() {
       this.popUpVisibility = false;
       this.forcedExit = true;
-      store.dt.myChart.pop();
+      store.dt.myChart.splice(this.shoppingIndex, 1);
     },
-    toChartPage(){
+    toChartPage() {
       store.dt.headerLinks.forEach(element => {
         element.active = false;
       });
@@ -269,6 +242,7 @@ export default {
     right: 20px;
     z-index: 15;
     opacity: 1;
+
     .delete {
       opacity: 1;
     }
@@ -287,6 +261,7 @@ export default {
     aspect-ratio: 1/1;
   }
 }
+
 .selected-dish {
   position: fixed;
   top: 0;

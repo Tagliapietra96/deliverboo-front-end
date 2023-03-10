@@ -13,7 +13,12 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() {
+    store.fn.loadStorage()
+  },
+  beforeUnmount(){
+    store.fn.saveStorage()
+  }
 };
 </script>
 

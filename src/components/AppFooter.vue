@@ -3,12 +3,12 @@
         <div class="container pb-3">
             <div class="row justify-content-between align-items-center">
                 <div class="col-4">
-                    <a class="text-decoration-none" href="http://localhost:5174/">
+                    <router-link class="text-decoration-none" :to="'/'">
                         <div class= "fs-1 fw-bold d-flex align-items-center text-light">
                             <i class="fa-solid fa-bowl-food px-2"></i>
                             DeliveBoo
                         </div>
-                    </a>
+                    </router-link>
                 </div>
                 <div class="col-4">
                     <div class="text-white"><span class="fw-semibold">Boolean Careers </span>&#8226; Classe #79 &#8226; <i><span class="fw-bold">DreamTeam6</span></i> <br> <small>Copyright 2022/2023 &#169; Privacy policy &#174;</small></div>
