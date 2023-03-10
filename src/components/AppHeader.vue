@@ -47,7 +47,7 @@
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item" v-for="element in store.dt.headerLinks">
+            <li class="nav-item" v-for="element, i in store.dt.headerLinks">
               <a
                 v-if="element.url === 'http://127.0.0.1:8000'"
                 class="nav-link"
@@ -60,7 +60,7 @@
               <router-link
                 v-else
                 class="nav-link"
-                :class="element.active ? 'active' : ''"
+                :class="(element.active ? 'active' : '') + (store.dt.myChart.length > 0 && i === 2 ? ' custom-color' : '')"
                 @click="onLinkClick(element)"
                 :to="element.url"
                 ><i :class="element.icon" class="me-2 ms-2"></i
@@ -93,7 +93,6 @@ export default {
       store.dt.selectedCategories = [];
     },
   },
-  mounted() {},
 };
 
 window.onscroll = function () {

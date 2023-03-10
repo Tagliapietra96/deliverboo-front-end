@@ -106,9 +106,12 @@ export default {
     },
   },
   mounted() {
-    console.log(store.dt.selectedCategories);
+    store.fn.loadStorage();
     store.fn.fetchCategories();
     store.fn.fetchRestaurants();
+  },
+  beforeUnmount() {
+    store.fn.saveStorage()
   },
   components: { Loader, SearchBar },
 };

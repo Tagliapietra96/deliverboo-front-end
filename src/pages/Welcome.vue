@@ -81,6 +81,11 @@ export default {
   },
   mounted() {
     store.fn.fetchCategories();
+    store.fn.loadStorage();
+
+  },
+  beforeUnmount() {
+    store.fn.saveStorage()
   },
 };
 </script>
@@ -165,11 +170,13 @@ export default {
     font-size: 2rem;
   }
 }
+
 @media screen and (max-width: 500px) {
   .description {
     font-size: 1.5rem;
   }
 }
+
 @media screen and (max-width: 385px) {
   .description {
     font-size: 1rem;

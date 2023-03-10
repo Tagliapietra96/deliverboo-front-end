@@ -230,9 +230,6 @@ export default {
       this.forcedExit = true;
       store.dt.myChart.pop();
     },
-    saveMyChartToLocalStorage() {
-      localStorage.setItem("myChart", JSON.stringify(this.store.dt.myChart));
-    },
     toChartPage(){
       store.dt.headerLinks.forEach(element => {
         element.active = false;
@@ -242,13 +239,10 @@ export default {
   },
   mounted() {
     store.fn.fetchDishes();
-    const myChart = localStorage.getItem("myChart");
-    if (myChart) {
-      this.store.dt.myChart = JSON.parse(myChart);
-    }
+    store.fn.loadStorage();
   },
   beforeUnmount() {
-    this.saveMyChartToLocalStorage();
+    store.fn.saveStorage()
   },
 };
 </script>
