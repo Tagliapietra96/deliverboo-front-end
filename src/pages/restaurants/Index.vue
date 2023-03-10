@@ -42,22 +42,18 @@
           <div class="col-12 col-md-6 col-lg-4" v-for="(restaurant, i) in filterRestaurants" :key="i">
             <div class="card shadow rounded-3 overflow-hidden">
               <div v-if="restaurant">
-                <div class="img-container">
+                <div class="img-container position-relative">
                   <img class="my-img-fluid" :src="restaurant.image" alt="" />
                 </div>
                 <h2 class="title">{{ restaurant.name }}</h2>
-                <div class="container">
-                  <div class="row justify-content-center">
-                    <div class="col-6 col-xl-4 d-flex justify-content-center"
-                      v-for="(category, index) in restaurant.categories" :key="index">
-                      <div class=" badge text-bg-danger py-2 rounded-pill custom-bg w-100">
-                        <small>
-                          {{ category.name }}
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <div class="category-badge">
+                  <span class="badge custom-bg m-2"
+                  v-for="(category, index) in restaurant.categories"
+                  :key="index"
+                  >
+                  {{ category.name }}
+                </span>
+              </div>
 
                 <div class="d-flex justify-content-center pb-3 pt-4">
                   <router-link :to="{
@@ -243,5 +239,11 @@ background-color: #c7626245;
   &:hover {
     transform: scale(1.05);
   }
+}
+
+.category-badge{
+  position: absolute;
+  top: 0;
+  z-index: 23;
 }
 </style>
