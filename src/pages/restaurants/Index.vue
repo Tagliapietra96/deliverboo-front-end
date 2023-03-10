@@ -50,16 +50,18 @@
           >
             <div class="card shadow rounded-3 overflow-hidden">
               <div v-if="restaurant">
-                <div class="img-container">
+                <div class="img-container position-relative">
                   <img class="my-img-fluid" :src="restaurant.image" alt="" />
                 </div>
                 <h2 class="title">{{ restaurant.name }}</h2>
-                <span
+                <div class="category-badge">
+                  <span class="badge custom-bg m-2"
                   v-for="(category, index) in restaurant.categories"
                   :key="index"
-                >
+                  >
                   {{ category.name }}
                 </span>
+              </div>
                 <div class="d-flex justify-content-center pb-3">
                   <router-link
                     :to="{
@@ -218,5 +220,11 @@ export default {
   &:hover {
     transform: scale(1.05);
   }
+}
+
+.category-badge{
+  position: absolute;
+  top: 0;
+  z-index: 23;
 }
 </style>
