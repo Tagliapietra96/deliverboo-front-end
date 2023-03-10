@@ -31,6 +31,7 @@ export const api = reactive({
           axios
             .get(store.dt.beUrl + store.dt.restaurantsUrl)
             .then((response) => {
+              store.dt.restaurantsMessage = "";
               store.dt.restaurantsList = response.data.data;
               store.dt.loading = false;
             })
@@ -46,7 +47,10 @@ export const api = reactive({
               },
             })
             .then((response) => {
-              store.dt.restaurantsList = response.data;
+              store.dt.restaurantsMessage = response.data.message;
+
+              store.dt.restaurantsList = response.data.restaurants;
+
               store.dt.loading = false;
             })
             .catch((error) => {

@@ -42,6 +42,7 @@
       <SearchBar @filterName="filterChild"></SearchBar>
       <div class="py-4">
         <div class="row g-3">
+          {{ store.dt.restaurantsMessage }}
           <div
             class="col-12 col-md-6 col-lg-4"
             v-for="(restaurant, i) in filterRestaurants"
