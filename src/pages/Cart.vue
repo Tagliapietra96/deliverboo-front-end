@@ -5,9 +5,7 @@
     <div class="row row-cols-1">
       <div class="col" v-for="(item, index) in myChart" :key="index">
         <div class="single-row py-3 px-5">
-          <div v-for="(item2, index) in item" :key="index">
-            <div class="fw-bolder">{{ item2.name }}</div>
-          </div>
+            <div class="fw-bolder">{{ item.item.name }}:</div>
           <div>€ {{ item.price }}</div>
         </div>
       </div>
@@ -27,6 +25,7 @@ export default {
     if (myChart) {
       this.myChart = JSON.parse(myChart);
     }
+    console.log(this.myChart)
   },
 };
 </script>
