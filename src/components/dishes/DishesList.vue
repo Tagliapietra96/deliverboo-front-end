@@ -44,8 +44,8 @@
               </button>
             </div>
             <div class="pt-3">
-              <a href="" class="custom-color"
-                ><small>Vai al tuo carrello!</small></a
+              <router-link :to="'/cart'" class="custom-color" @click="toChartPage()"
+                ><small>Vai al tuo carrello!</small></router-link
               >
             </div>
           </div>
@@ -233,6 +233,12 @@ export default {
     saveMyChartToLocalStorage() {
       localStorage.setItem("myChart", JSON.stringify(this.store.dt.myChart));
     },
+    toChartPage(){
+      store.dt.headerLinks.forEach(element => {
+        element.active = false;
+      });
+      store.dt.headerLinks[2].active = true;
+    }
   },
   mounted() {
     store.fn.fetchDishes();
