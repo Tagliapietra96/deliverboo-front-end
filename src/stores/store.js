@@ -17,7 +17,7 @@ export const store = reactive({
       },
       {
         name: "Il tuo carrello",
-        url: "#",
+        url: { path: "/cart" },
         active: false,
         icon: "fa-solid fa-cart-shopping",
       },
@@ -47,7 +47,7 @@ export const store = reactive({
     restaurantsList: [],
     dishesList: [],
     selectedCategories: [],
-    myChart:[],
+    myChart: [],
     selectedRestaurant: Number,
     quantityDish: 1,
   },

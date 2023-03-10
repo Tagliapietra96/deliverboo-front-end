@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import WelcomePage from "./pages/Welcome.vue";
 import RestaurantsIndexPage from "./pages/restaurants/Index.vue";
 import RestautantShowPage from "./pages/restaurants/Show.vue";
+import CartShow from "./pages/Cart.vue";
 import DishShowPage from "./components/dishes/SingleDish.vue";
 import NotFoundPage from "./pages/NotFound.vue";
 
@@ -33,6 +34,11 @@ const router = createRouter({
       path: "/:catchAll(.*)",
       name: "not-found",
       component: NotFoundPage,
+    },
+    {
+      path: "/cart",
+      name: "cart",
+      component: CartShow,
     },
   ],
 });
