@@ -64,7 +64,9 @@
                 @click="onLinkClick(element)"
                 :to="element.url"
                 ><i :class="element.icon" class="me-2 ms-2"></i
-                >{{ element.name }}</router-link
+                >{{ element.name }}
+                <span v-if="i === 2 && store.dt.myChart.length > 0">( {{store.dt.myChart.length}} )</span>
+                </router-link
               >
             </li>
           </ul>
