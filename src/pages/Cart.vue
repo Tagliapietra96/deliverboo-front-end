@@ -19,7 +19,14 @@
     </button>
   </div>
   <form action="" method="POST">
-    <button type="submit" @click.prevent="payment()">paga</button>
+    <button
+      type="submit"
+      :disabled="store.dt.myChart.length === 0"
+      @click.prevent="payment()"
+    >
+      paga
+    </button>
+    <div>{{ resultPayment }}</div>
   </form>
 </template>
 
@@ -30,6 +37,7 @@ export default {
   data() {
     return {
       store,
+      resultPayment: "",
     };
   },
   methods: {
@@ -41,15 +49,13 @@ export default {
     payment() {
       console.log("ciao");
       axios
-        .post(
-          "http://127.0.0.1:8000/api/orders/make/payment?token=fake-valid-nonce&dishes[]=2&dishes[]=1"
-        )
+        .post(this.dishBuyLink)
         .then((response) => {
-          console.log(response.data);
+          this.resultPayment = "Transazione avvenuta con successo";
         })
         .catch((error) => {
           console.log(error);
-          store.dt.loading = false;
+          this.resultPayment = "Transazione negata";
         });
     },
   },
@@ -59,6 +65,18 @@ export default {
   },
   beforeUnmount() {
     store.fn.saveStorage();
+  },
+  computed: {
+    dishesBuy() {
+      return store.dt.myChart.flatMap((item) =>
+        Array.from({ length: item.quantity }, () => `&dishes[]=${item.item.id}`)
+      );
+    },
+    dishBuyLink() {
+      return `http://127.0.0.1:8000/api/orders/make/payment?token=fake-valid-nonce${this.dishesBuy.join(
+        ""
+      )}`;
+    },
   },
 };
 </script>
