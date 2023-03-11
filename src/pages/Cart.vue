@@ -17,25 +17,86 @@
     >
       Elimina carrello
     </button>
+    {{ total_order }}
+    <form class="row g-3 needs-validation" novalidate @submit.prevent="submit">
+      <div class="col-md-4">
+        <label for="customer_name" class="form-label">Nome e Cognome</label>
+        <input
+          type="text"
+          v-model="customer_name"
+          class="form-control"
+          name="customer_name"
+          required
+        />
+        <div class="invalid-feedback">Inserisci nome e cognome.</div>
+      </div>
+      <div class="col-md-4">
+        <label for="customer_address" class="form-label">Indirizzo</label>
+        <input
+          type="text"
+          v-model="customer_address"
+          class="form-control"
+          name="customer_address"
+          required
+        />
+        <div class="invalid-feedback">Inserisci un indirizzo.</div>
+      </div>
+
+      <div class="col-md-4">
+        <label for="customer_phone" class="form-label"
+          >Numero di telefono</label
+        >
+        <input
+          type="number"
+          v-model="customer_phone"
+          class="form-control"
+          name="customer_phone"
+          required
+        />
+        <div class="invalid-feedback">Inserisci un numero di telefono.</div>
+      </div>
+
+      <div class="col-12">
+        <button
+          class="btn btn-primary"
+          :disabled="store.dt.myChart.length === 0"
+          type="submit"
+        >
+          Submit form
+        </button>
+      </div>
+    </form>
   </div>
-  <form action="" method="POST">
-    <button
-      type="submit"
-      :disabled="store.dt.myChart.length === 0"
-      @click.prevent="payment()"
-    >
-      paga
-    </button>
-    <div>{{ resultPayment }}</div>
-  </form>
+  <div>{{ resultPayment }}</div>
 </template>
 
 <script>
+(() => {
+  "use strict";
+  const forms = document.querySelectorAll(".needs-validation");
+  Array.from(forms).forEach((form) => {
+    form.addEventListener(
+      "submit",
+      (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
+})();
 import { store } from "../stores/store";
 import axios from "axios";
 export default {
   data() {
     return {
+      customer_name: "",
+      customer_address: "",
+      customer_phone: "",
       store,
       resultPayment: "",
     };
@@ -46,12 +107,41 @@ export default {
       store.fn.saveStorage();
       store.fn.loadStorage();
     },
+    submit() {
+      axios
+        .post(
+          "http://localhost:8000/api/take-data-order",
+          {
+            customer_name: this.customer_name,
+            customer_address: this.customer_address,
+            customer_phone: this.customer_phone,
+            status: "OK",
+            order_date: "2023/03/14",
+            order_time: "2023/03/1",
+            total_order: this.total_order,
+            /* dishesIds: this.dishesIds, */
+          },
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+            },
+          }
+        )
+        .then((response) => {
+          this.payment();
+          console.log("success");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     payment() {
       console.log("ciao");
       axios
         .post(this.dishBuyLink)
         .then((response) => {
           this.resultPayment = "Transazione avvenuta con successo";
+          store.dt.myChart = [];
         })
         .catch((error) => {
           console.log(error);
@@ -67,6 +157,11 @@ export default {
     store.fn.saveStorage();
   },
   computed: {
+    total_order() {
+      return store.dt.myChart.reduce((total, item) => {
+        return total + parseFloat(item.price);
+      }, 0);
+    },
     dishesBuy() {
       return store.dt.myChart.flatMap((item) =>
         Array.from({ length: item.quantity }, () => `&dishes[]=${item.item.id}`)
@@ -76,6 +171,11 @@ export default {
       return `http://127.0.0.1:8000/api/orders/make/payment?token=fake-valid-nonce${this.dishesBuy.join(
         ""
       )}`;
+    },
+    dishesIds() {
+      return store.dt.myChart.flatMap((item) =>
+        Array.from({ length: item.quantity }, () => item.item.id)
+      );
     },
   },
 };
