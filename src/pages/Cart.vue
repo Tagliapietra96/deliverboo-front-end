@@ -42,7 +42,7 @@ export default {
       console.log("ciao");
       axios
         .post(
-          "http://127.0.0.1:8000/api/orders/make/payment?token=fake-valid-nonce&dish=5&dish=9"
+          "http://127.0.0.1:8000/api/orders/make/payment?token=fake-valid-nonce&dishes[]=2&dishes[]=1"
         )
         .then((response) => {
           console.log(response.data);
