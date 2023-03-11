@@ -1,25 +1,49 @@
 <template>
   <Loader v-if="store.dt.loading" />
   <div v-else class="container">
-    <button @click="filtering = true" :class="filtering ? 'active' : ''"
-      class="btn btn-primary btn-custom open-search shadow d-block d-md-none">
+    <button
+      @click="filtering = true"
+      :class="filtering ? 'active' : ''"
+      class="btn btn-primary btn-custom open-search shadow d-block d-md-none"
+    >
       <i class="fa-solid fa-magnifying-glass"></i>
     </button>
     <div class="my-container">
-      <div class="link-container shadow py-4" :class="filtering ? 'active' : ''">
+      <div
+        class="link-container shadow py-4"
+        :class="filtering ? 'active' : ''"
+      >
         <span class="title ps-3 custom-color">Categoria</span>
-        <button @click="filtering = false" class="btn-close close-search" aria-label="Close"></button>
-        <div class="pt-3 px-3" v-for="category in store.dt.categoriesList" :key="category.id"
-          @click="store.fn.fetchRestaurants(category.name)">
+        <button
+          @click="filtering = false"
+          class="btn-close close-search"
+          aria-label="Close"
+        ></button>
+        <div
+          class="pt-3 px-3"
+          v-for="category in store.dt.categoriesList"
+          :key="category.id"
+          @click="store.fn.fetchRestaurants(category.name)"
+        >
           <div class="form-check my-form-check">
-            <input class="form-check-input my-checkbox" type="checkbox" id="flexCheckChecked"
-              :checked="store.dt.selectedCategories.includes(category.name)" />
+            <input
+              class="form-check-input my-checkbox"
+              type="checkbox"
+              id="flexCheckChecked"
+              :checked="store.dt.selectedCategories.includes(category.name)"
+            />
             <label class="form-check-label text-category ps-2">{{
               category.name
             }}</label>
           </div>
         </div>
-        <div @click="store.dt.selectedCategories = []; store.fn.fetchRestaurants();" class="custom-color text-decoration-underline delete-categories ps-3">
+        <div
+          @click="
+            store.dt.selectedCategories = [];
+            store.fn.fetchRestaurants();
+          "
+          class="custom-color text-decoration-underline delete-categories ps-3"
+        >
           Svuota campi di ricerca
         </div>
       </div>
@@ -27,19 +51,27 @@
 
       <SearchBar @filterName="filterChild"></SearchBar>
       <div class="d-none d-md-block text-center mb-3 fw-bolder">
-          <button @click="(filtering) ? filtering = false : filtering = true" :class="filtering ? 'active' : ''"
-            class="btn btn-primary btn-custom open-search shadow static">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
-      <div v-if="store.dt.restaurantsMessage !== ''" class="alert alert-info custom-color fw-bolder py-4 fs-4">
+        <button
+          @click="filtering ? (filtering = false) : (filtering = true)"
+          :class="filtering ? 'active' : ''"
+          class="btn btn-primary btn-custom open-search shadow static"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      <div
+        v-if="store.dt.restaurantsMessage !== ''"
+        class="alert alert-success custom-color fw-bolder py-4 fs-4"
+      >
         {{ store.dt.restaurantsMessage }}
-
       </div>
       <div class="py-4">
         <div class="row g-3">
-
-          <div class="col-12 col-md-6 col-lg-4" v-for="(restaurant, i) in filterRestaurants" :key="i">
+          <div
+            class="col-12 col-md-6 col-lg-4"
+            v-for="(restaurant, i) in filterRestaurants"
+            :key="i"
+          >
             <div class="card shadow rounded-3 overflow-hidden">
               <div v-if="restaurant">
                 <div class="img-container position-relative">
@@ -47,19 +79,25 @@
                 </div>
                 <h2 class="title">{{ restaurant.name }}</h2>
                 <div class="category-badge">
-                  <span class="badge custom-bg m-2"
-                  v-for="(category, index) in restaurant.categories"
-                  :key="index"
+                  <span
+                    class="badge custom-bg m-2"
+                    v-for="(category, index) in restaurant.categories"
+                    :key="index"
                   >
-                  {{ category.name }}
-                </span>
-              </div>
+                    {{ category.name }}
+                  </span>
+                </div>
 
                 <div class="d-flex justify-content-center pb-3 pt-4">
-                  <router-link :to="{
-                    name: 'ristorante',
-                    params: { name: restaurant.name },
-                  }" @click="onMenuClick(restaurant.id)" class="btn btn-primary btn-custom">Menù</router-link>
+                  <router-link
+                    :to="{
+                      name: 'ristorante',
+                      params: { name: restaurant.name },
+                    }"
+                    @click="onMenuClick(restaurant.id)"
+                    class="btn btn-primary btn-custom"
+                    >Menù</router-link
+                  >
                 </div>
               </div>
             </div>
@@ -115,10 +153,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.alert-info{
+.alert-info {
   text-align: center;
-background-color: #c7626245;
+  background-color: #c7626245;
   border-color: #c76262;
 }
 
@@ -132,12 +169,12 @@ background-color: #c7626245;
   z-index: 15;
   transition: left, 0.5s, opacity, 0.5s;
 
-  &.static{
+  &.static {
     position: static !important;
     height: 80px;
-  width: 80px;
+    width: 80px;
 
-    &.active{
+    &.active {
       opacity: 1;
     }
   }
@@ -159,7 +196,7 @@ background-color: #c7626245;
   opacity: 0;
   transition: all, 0.5s;
 
-  .delete-categories{
+  .delete-categories {
     cursor: pointer;
     position: absolute;
     bottom: 20px;
@@ -207,8 +244,6 @@ background-color: #c7626245;
     transition: transform, 0.5s, font-weight, 0.5s, color, 0.5s;
   }
 
-
-
   &:hover {
     cursor: pointer;
 
@@ -241,7 +276,7 @@ background-color: #c7626245;
   }
 }
 
-.category-badge{
+.category-badge {
   position: absolute;
   top: 0;
   z-index: 3;
