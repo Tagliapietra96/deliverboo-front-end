@@ -119,7 +119,7 @@ export default {
             order_date: "2023/03/14",
             order_time: "2023/03/1",
             total_order: this.total_order,
-            /* dishesIds: this.dishesIds, */
+            dish_id: this.dish_id,
           },
           {
             headers: {
@@ -172,7 +172,7 @@ export default {
         ""
       )}`;
     },
-    dishesIds() {
+    dish_id() {
       return store.dt.myChart.flatMap((item) =>
         Array.from({ length: item.quantity }, () => item.item.id)
       );
