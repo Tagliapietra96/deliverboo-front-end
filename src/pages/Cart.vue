@@ -9,6 +9,12 @@
           <div>€ {{ item.price }}</div>
         </div>
       </div>
+      <div class="col">
+        <div class="single-row py-3 px-5">
+          <div class="fw-bolder">Totale</div>
+          <div>€ {{ total_order }}</div>
+        </div>
+      </div>
     </div>
     <button
       v-if="store.dt.myChart.length > 0"
@@ -17,8 +23,7 @@
     >
       Elimina carrello
     </button>
-    {{ total_order }}
-    <form class="row g-3 needs-validation" novalidate @submit.prevent="submit">
+    <form class="row g-3" novalidate @submit.prevent="submit">
       <div class="col-md-4">
         <label for="customer_name" class="form-label">Nome e Cognome</label>
         <input
@@ -26,9 +31,12 @@
           v-model="customer_name"
           class="form-control"
           name="customer_name"
+          :class="{ 'is-invalid': formSubmitted && !customer_name }"
           required
         />
-        <div class="invalid-feedback">Inserisci nome e cognome.</div>
+        <div class="invalid-feedback" v-if="formSubmitted && !customer_name">
+          Inserisci nome e cognome.
+        </div>
       </div>
       <div class="col-md-4">
         <label for="customer_address" class="form-label">Indirizzo</label>
@@ -37,11 +45,13 @@
           v-model="customer_address"
           class="form-control"
           name="customer_address"
+          :class="{ 'is-invalid': formSubmitted && !customer_address }"
           required
         />
-        <div class="invalid-feedback">Inserisci un indirizzo.</div>
+        <div class="invalid-feedback" v-if="formSubmitted && !customer_address">
+          Inserisci un indirizzo.
+        </div>
       </div>
-
       <div class="col-md-4">
         <label for="customer_phone" class="form-label"
           >Numero di telefono</label
@@ -51,18 +61,24 @@
           v-model="customer_phone"
           class="form-control"
           name="customer_phone"
+          :class="{ 'is-invalid': formSubmitted && !customer_phone }"
           required
         />
-        <div class="invalid-feedback">Inserisci un numero di telefono.</div>
+        <div class="invalid-feedback" v-if="formSubmitted && !customer_phone">
+          Inserisci un numero di telefono.
+        </div>
       </div>
-
       <div class="col-12">
         <button
           class="btn btn-primary"
-          :disabled="store.dt.myChart.length === 0"
+          :disabled="
+            store.dt.myChart.length === 0 ||
+            (formSubmitted &&
+              (!customer_name || !customer_address || !customer_phone))
+          "
           type="submit"
         >
-          Submit form
+          Paga e procedi con l'ordine
         </button>
       </div>
     </form>
@@ -71,24 +87,6 @@
 </template>
 
 <script>
-(() => {
-  "use strict";
-  const forms = document.querySelectorAll(".needs-validation");
-  Array.from(forms).forEach((form) => {
-    form.addEventListener(
-      "submit",
-      (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        form.classList.add("was-validated");
-      },
-      false
-    );
-  });
-})();
 import { store } from "../stores/store";
 import axios from "axios";
 export default {
@@ -97,6 +95,7 @@ export default {
       customer_name: "",
       customer_address: "",
       customer_phone: "",
+      formSubmitted: false,
       store,
       resultPayment: "",
     };
@@ -108,6 +107,7 @@ export default {
       store.fn.loadStorage();
     },
     submit() {
+      this.formSubmitted = true;
       axios
         .post(
           "http://localhost:8000/api/take-data-order",
