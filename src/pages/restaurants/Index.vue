@@ -61,7 +61,7 @@
       </div>
       <div
         v-if="store.dt.restaurantsMessage !== ''"
-        class="alert alert-success custom-color fw-bolder py-4 fs-4"
+        class="alert alert-info custom-color fw-bolder py-4 fs-4"
       >
         {{ store.dt.restaurantsMessage }}
       </div>
@@ -75,7 +75,8 @@
             <div class="card shadow rounded-3 overflow-hidden">
               <div v-if="restaurant">
                 <div class="img-container position-relative">
-                  <img class="my-img-fluid" :src="restaurant.image" alt="" />
+                  <img v-if="restaurant.image.includes('http')" class="my-img-fluid" :src="restaurant.image" alt="" />
+                  <img v-else class="my-img-fluid" :src="store.dt.beUrl + '/storage/' + restaurant.image" alt="" />
                 </div>
                 <h2 class="title">{{ restaurant.name }}</h2>
                 <div class="category-badge">
@@ -155,7 +156,7 @@ export default {
 <style lang="scss" scoped>
 .alert-info {
   text-align: center;
-  background-color: #c7626245;
+  background-color: #c7626245 !important;
   border-color: #c76262;
 }
 
