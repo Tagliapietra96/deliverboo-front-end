@@ -5,22 +5,30 @@
     <div class="row row-cols-1">
       <div class="col" v-for="(item, index) in store.dt.myChart" :key="index">
         <div class="single-row py-3 px-5">
-          <div class="row ">
+          <div class="row">
             <div class="col-1 align-items-center d-flex">
-              <div class="card d-flex justify-content-center align-items-center fw-bolder "
-                style="aspect-ratio: 1/1; width: 50px;">
+              <div
+                class="card d-flex justify-content-center align-items-center fw-bolder"
+                style="aspect-ratio: 1/1; width: 50px"
+              >
                 {{ item.quantity }}
               </div>
             </div>
             <div class="col-7 d-flex align-items-center">
               <div class="fw-bolder">{{ item.item.name }}:</div>
             </div>
-            <div class="col-3 text-end d-flex  align-items-center justify-content-end">
+            <div
+              class="col-3 text-end d-flex align-items-center justify-content-end"
+            >
               <div>€ {{ item.price }}</div>
             </div>
-            <div class="col-1 align-items-center d-flex ">
-              <button class="btn btn-primary btn-custom " style="aspect-ratio: 1/1; width: 50px;"><i
-                  class="fa-solid fa-pen"></i></button>
+            <div class="col-1 align-items-center d-flex">
+              <button
+                class="btn btn-primary btn-custom"
+                style="aspect-ratio: 1/1; width: 50px"
+              >
+                <i class="fa-solid fa-pen"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -30,57 +38,67 @@
           <div class="row">
             <div class="col-1"></div>
             <div class="fw-bolder col-7">Totale:</div>
-            <div class=" col-3 text-end">€ {{ total_order.toFixed(2) }}</div>
+            <div class="col-3 text-end">€ {{ total_order.toFixed(2) }}</div>
             <div class="col-1"></div>
           </div>
         </div>
       </div>
     </div>
-    <button v-if="store.dt.myChart.length > 0" class="btn btn-ptimary btn-custom mt-3" @click="dropChart()">
+    <button
+      v-if="store.dt.myChart.length > 0"
+      class="btn btn-ptimary btn-custom mt-3"
+      @click="dropChart()"
+    >
       Elimina carrello
     </button>
     <form class="row g-3" novalidate @submit.prevent="submit">
       <div class="col-md-4">
         <label for="customer_name" class="form-label">Nome e Cognome</label>
-        <input type="text" v-model="customer_name" class="form-control" name="customer_name"
-          :class="{ 'is-invalid': formSubmitted && !customer_name }" required />
+        <input
+          type="text"
+          v-model="customer_name"
+          class="form-control"
+          name="customer_name"
+          :class="{ 'is-invalid': formSubmitted && !customer_name }"
+          required
+        />
         <div class="invalid-feedback" v-if="formSubmitted && !customer_name">
           Inserisci nome e cognome.
         </div>
       </div>
       <div class="col-md-4">
         <label for="customer_address" class="form-label">Indirizzo</label>
-        <input type="text" v-model="customer_address" class="form-control" name="customer_address"
-          :class="{ 'is-invalid': formSubmitted && !customer_address }" required />
+        <input
+          type="text"
+          v-model="customer_address"
+          class="form-control"
+          name="customer_address"
+          :class="{ 'is-invalid': formSubmitted && !customer_address }"
+          required
+        />
         <div class="invalid-feedback" v-if="formSubmitted && !customer_address">
           Inserisci un indirizzo.
         </div>
       </div>
       <div class="col-md-4">
-        <label for="customer_phone" class="form-label">Numero di telefono</label>
-        <input type="number" v-model="customer_phone" class="form-control" name="customer_phone"
-          :class="{ 'is-invalid': formSubmitted && !customer_phone }" required />
+        <label for="customer_phone" class="form-label"
+          >Numero di telefono</label
+        >
+        <input
+          type="number"
+          v-model="customer_phone"
+          class="form-control"
+          name="customer_phone"
+          :class="{ 'is-invalid': formSubmitted && !customer_phone }"
+          required
+        />
         <div class="invalid-feedback" v-if="formSubmitted && !customer_phone">
           Inserisci un numero di telefono.
         </div>
       </div>
-
-      <div class="invalid-feedback" v-if="formSubmitted && !expired">
-        Inserisci una data di scadenza.
-      </div>
-      <div class="col-12">
-        <button class="btn btn-primary" :disabled="
-          store.dt.myChart.length === 0 ||
-          (formSubmitted &&
-            (!customer_name || !customer_address || !customer_phone))
-        " type="submit">
-          Paga e procedi con l'ordine
-        </button>
-      </div>
     </form>
   </div>
   <div>{{ resultPayment }}</div>
-  <!--   <div id="paypal-button-container"></div> -->
   <div id="dropin-wrapper">
     <div id="checkout-message"></div>
     <div id="dropin-container"></div>
@@ -107,7 +125,7 @@ window.addEventListener("DOMContentLoaded", function () {
           // encrypted payment information in a variable called a payment method nonce
           $.ajax({
             type: "POST",
-            url: store.dt.paymentUrl + "&dishes[]=1",
+            url: store.dt.paymentUrl + store.dt.payLink,
             data: { paymentMethodNonce: payload.nonce },
           }).done(function (result) {
             // Tear down the Drop-in UI
@@ -144,8 +162,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      credit_number: "",
-      expired: "",
       customer_name: "",
       customer_address: "",
       customer_phone: "",
@@ -161,6 +177,7 @@ export default {
       store.fn.loadStorage();
     },
     submit() {
+      store.dt.payLink = this.dishesBuy;
       this.formSubmitted = true;
       axios
         .post(
@@ -182,34 +199,37 @@ export default {
           }
         )
         .then((response) => {
-          this.payment();
+          store.dt.myChart = [];
+          store.fn.saveStorage();
           console.log("success");
         })
         .catch((error) => {
-          console.log(error);
-        });
-    },
-    payment() {
-      console.log("ciao");
-      axios
-        .post(this.dishBuyLink)
-        .then((response) => {
-          this.resultPayment = "Transazione avvenuta con successo";
-          store.dt.myChart = [];
-        })
-        .catch((error) => {
-          console.log(error);
           this.resultPayment = "Transazione negata";
+          console.log(error);
         });
     },
   },
 
   mounted() {
     store.fn.loadStorage();
+    const reload = localStorage.getItem("reload");
+    if (reload) {
+      this.reload = JSON.parse(reload);
+    }
+
+    if (this.reload === 0) {
+      this.reload++;
+      window.location.reload();
+      localStorage.setItem("reload", JSON.stringify(this.reload));
+    } else {
+      this.reload = 0;
+      localStorage.setItem("reload", JSON.stringify(this.reload));
+    }
   },
   beforeUnmount() {
     store.fn.saveStorage();
   },
+
   computed: {
     total_order() {
       // Controlla se "store.dt.myChart" esiste ed è un array valido
