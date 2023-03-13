@@ -107,6 +107,7 @@
 </template>
 
 <script>
+import { router } from "../router";
 window.addEventListener("DOMContentLoaded", function () {
   var payButton = document.querySelector("#submit-button");
   braintree.dropin.create(
@@ -140,15 +141,13 @@ window.addEventListener("DOMContentLoaded", function () {
             });
 
             if (result.success) {
+              console.log("funziona");
               store.dt.myChart = [];
               store.fn.saveStorage();
-              window.location.reload();
-              $("#checkout-message").html(
-                '<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>'
-              );
+              router.push("checkout");
             } else {
               $("#checkout-message").html(
-                "<h1>Error</h1><p>Check your console.</p>"
+                "<h1>Error</h1><p>Pagamento rifiutato.</p>"
               );
             }
           });
@@ -162,6 +161,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      customer_email: "",
       customer_name: "",
       customer_address: "",
       customer_phone: "",
