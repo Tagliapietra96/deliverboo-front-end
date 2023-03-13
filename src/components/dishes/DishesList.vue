@@ -9,7 +9,8 @@
       <div>
         <div class="row">
           <div class="col-12 col-md-6 col-lg-5 col-xl-4">
-            <img :src="store.dt.myChart[shoppingIndex].item.image" class="img-fluid" alt="" />
+            <img v-if="store.dt.myChart[shoppingIndex].item.image.includes('http')" :src="store.dt.myChart[shoppingIndex].item.image" class="img-fluid" alt="" />
+            <img v-else :src="store.dt.beUrl + '/storage/' + store.dt.myChart[shoppingIndex].item.image" class="img-fluid" alt="" />
           </div>
           <div class="col-12 col-md-6 col-lg-7 col-xl-8">
             <h5 class="d-none d-xxl-block">
@@ -41,7 +42,8 @@
           <button @click="exitShow()" class="btn btn-primary btn-custom close-show">
             <i class="fa-solid fa-xmark"></i>
           </button>
-          <img :src="cardShow.card.image" class="card-img-top" alt="..." />
+          <img v-if="cardShow.card.image.includes('http')" :src="cardShow.card.image" class="card-img-top" alt="..." />
+          <img v-else :src="store.dt.beUrl + '/storage/' + cardShow.card.image" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">{{ cardShow.card.name }}</h5>
             <p class="card-text">{{ cardShow.card.description }}</p>
