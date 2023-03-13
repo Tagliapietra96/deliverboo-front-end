@@ -99,7 +99,7 @@
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   var payButton = document.querySelector("#submit-button");
-
+  console.log(store.dt.paymentUrl);
   braintree.dropin.create(
     {
       // Insert your tokenization key here
@@ -116,7 +116,7 @@ window.addEventListener("DOMContentLoaded", function () {
           // encrypted payment information in a variable called a payment method nonce
           $.ajax({
             type: "POST",
-            url: "http://127.0.0.1:8000/api/orders/make/payment?token=fake-valid-nonce&dishes[]=1",
+            url: store.dt.paymentUrl + "&dishes[]=1",
             data: { paymentMethodNonce: payload.nonce },
           }).done(function (result) {
             // Tear down the Drop-in UI

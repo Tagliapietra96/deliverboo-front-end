@@ -37,6 +37,8 @@ export const store = reactive({
       "https://images.unsplash.com/photo-1592997571659-0b21ff64313b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8cmljZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
     ],
     loading: false,
+    paymentUrl:
+      "http://127.0.0.1:8000/api/orders/make/payment?token=fake-valid-nonce",
     beUrl: "http://127.0.0.1:8000",
     categoriesUrl: "/api/categories",
     restaurantsUrl: "/api/restaurants/index",
