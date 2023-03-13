@@ -188,7 +188,7 @@ export default {
             customer_phone: this.customer_phone,
             status: "OK",
             order_date: "2023/03/14",
-            order_time: "2023/03/1",
+            order_time: "2023/03/14",
             total_order: this.total_order,
             dish_id: this.dish_id,
           },
