@@ -3,6 +3,7 @@
   <main v-else>
     <div class="bg-first-section"></div>
     <div class="container">
+      <Carousel></Carousel>
       <div class="py-5">
         <h2 class="pt-3 title">La selezione di DeliveBoo</h2>
         <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
@@ -52,8 +53,9 @@
 import { store } from "../stores/store";
 import Loader from "../components/Loader.vue";
 import SearchBar from "../components/SearchBar.vue";
+import Carousel from "../components/Carousel.vue";
 export default {
-  components: { Loader, SearchBar },
+  components: { Loader, SearchBar, Carousel },
   data() {
     return {
       store,
@@ -81,6 +83,7 @@ export default {
   },
   mounted() {
     store.fn.fetchCategories();
+    store.fn.fetchRestaurants();
     store.fn.loadStorage();
 
   },
