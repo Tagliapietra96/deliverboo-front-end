@@ -68,13 +68,42 @@
           Inserisci un numero di telefono.
         </div>
       </div>
+      <div class="col-md-4">
+        <label for="credit_number" class="form-label"
+          >Numero carta di credito</label
+        >
+        <input
+          type="number"
+          v-model="credit_number"
+          max="16"
+          :class="{ 'is-invalid': formSubmitted && !credit_number }"
+          required
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="expired" class="form-label">Scadenza</label>
+        <input
+          type="number"
+          v-model="expired"
+          max="4"
+          :class="{ 'is-invalid': formSubmitted && !expired }"
+          required
+        />
+      </div>
+      <div class="invalid-feedback" v-if="formSubmitted && !expired">
+        Inserisci una data di scadenza.
+      </div>
       <div class="col-12">
         <button
           class="btn btn-primary"
           :disabled="
             store.dt.myChart.length === 0 ||
             (formSubmitted &&
-              (!customer_name || !customer_address || !customer_phone))
+              (!customer_name ||
+                !customer_address ||
+                !customer_phone ||
+                !credit_number ||
+                !expired))
           "
           type="submit"
         >
@@ -92,6 +121,8 @@ import axios from "axios";
 export default {
   data() {
     return {
+      credit_number: "",
+      expired: "",
       customer_name: "",
       customer_address: "",
       customer_phone: "",
