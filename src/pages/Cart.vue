@@ -116,7 +116,9 @@
   <div id="dropin-wrapper">
     <div id="checkout-message"></div>
     <div id="dropin-container"></div>
-    <button @click="submit" id="submit-button">Submit payment</button>
+    <button @click="submit" :disabled="!formComplete" id="submit-button">
+      Submit payment
+    </button>
   </div>
 </template>
 
@@ -155,7 +157,6 @@ window.addEventListener("DOMContentLoaded", function () {
             });
 
             if (result.success) {
-              console.log("funziona");
               store.dt.myChart = [];
               store.fn.saveStorage();
               router.push("checkout");
@@ -243,6 +244,14 @@ export default {
   },
 
   computed: {
+    formComplete() {
+      return (
+        this.customer_name &&
+        this.customer_address &&
+        this.customer_phone &&
+        this.customer_email
+      );
+    },
     total_order() {
       // Controlla se "store.dt.myChart" esiste ed è un array valido
       if (store.dt.myChart && Array.isArray(store.dt.myChart)) {
