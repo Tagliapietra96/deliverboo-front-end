@@ -50,7 +50,7 @@
       <div class="col-5">
         <form class="row g-3" novalidate>
           <div class="col-md-12">
-            <label for="customer_name" class="form-label">Nome e Cognome</label>
+            <label for="customer_name" class="form-label">Nome e Cognome*</label>
             <input type="text" v-model="customer_name" class="form-control" name="customer_name"
               :class="{ 'is-invalid': formSubmitted && !customer_name }" required />
             <div class="invalid-feedback" v-if="formSubmitted && !customer_name">
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="col-md-12">
-            <label for="customer_address" class="form-label">Indirizzo</label>
+            <label for="customer_address" class="form-label">Indirizzo*</label>
             <input type="text" v-model="customer_address" class="form-control" name="customer_address"
               :class="{ 'is-invalid': formSubmitted && !customer_address }" required />
             <div class="invalid-feedback" v-if="formSubmitted && !customer_address">
@@ -66,7 +66,7 @@
             </div>
           </div>
           <div class="col-md-12">
-            <label for="customer_phone" class="form-label">Numero di telefono</label>
+            <label for="customer_phone" class="form-label">Numero di telefono*</label>
             <input type="number" v-model="customer_phone" class="form-control" name="customer_phone"
               :class="{ 'is-invalid': formSubmitted && !customer_phone }" required />
             <div class="invalid-feedback" v-if="formSubmitted && !customer_phone">
@@ -74,7 +74,7 @@
             </div>
           </div>
           <div class="col-md-12">
-            <label for="customer_email" class="form-label">E-mail</label>
+            <label for="customer_email" class="form-label">E-mail*</label>
             <input type="email" v-model="customer_email" class="form-control" name="customer_email"
               :class="{ 'is-invalid': formSubmitted && !customer_email }" required />
             <div class="invalid-feedback" v-if="formSubmitted && !customer_email">
