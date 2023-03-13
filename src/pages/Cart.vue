@@ -96,6 +96,20 @@
           Inserisci un numero di telefono.
         </div>
       </div>
+      <div class="col-md-4">
+        <label for="customer_email" class="form-label">E-mail</label>
+        <input
+          type="email"
+          v-model="customer_email"
+          class="form-control"
+          name="customer_email"
+          :class="{ 'is-invalid': formSubmitted && !customer_email }"
+          required
+        />
+        <div class="invalid-feedback" v-if="formSubmitted && !customer_email">
+          Inserisci una mail valida.
+        </div>
+      </div>
     </form>
   </div>
   <div>{{ resultPayment }}</div>
@@ -183,6 +197,7 @@ export default {
         .post(
           "http://localhost:8000/api/take-data-order",
           {
+            customer_email: this.customer_email,
             customer_name: this.customer_name,
             customer_address: this.customer_address,
             customer_phone: this.customer_phone,
