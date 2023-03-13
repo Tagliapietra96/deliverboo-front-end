@@ -1,8 +1,11 @@
 <template>
-  <div>
-    <div id="dropin-container"></div>
-    <button id="submit-button" @click="submitPayment">Submit payment</button>
-  </div>
+    <div class="my-container custom-bg">
+      <div class="p-5">
+        <h1 class="title pt-5 text-white">Il tuo pagamento è andato a buon fine!</h1>
+        <h5 class="text-center">A breve ti arriverà un mail di riepilogo del tuo ordine!</h5>
+      </div>
+
+    </div>
 </template>
 
 <script>
@@ -32,7 +35,6 @@ braintree.dropin.create(
   }
 );
 import axios from "axios";
-
 export default {
   mounted() {},
   methods: {
@@ -42,3 +44,16 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+  .my-container {
+    min-height: calc(100vh - 214px);
+  }
+  .title {
+  /* font-family: bold; */
+  font-weight: bold;
+  // font-size: 1.5rem;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+</style>dashboard
