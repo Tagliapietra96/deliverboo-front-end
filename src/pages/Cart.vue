@@ -99,7 +99,6 @@
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   var payButton = document.querySelector("#submit-button");
-  console.log(store.dt.paymentUrl);
   braintree.dropin.create(
     {
       // Insert your tokenization key here
@@ -122,8 +121,10 @@ window.addEventListener("DOMContentLoaded", function () {
             // Tear down the Drop-in UI
             instance.teardown(function (teardownErr) {
               if (teardownErr) {
+                console.log("pagamento non inviato");
                 console.error("Could not tear down Drop-in UI!");
               } else {
+                console.log("pagamento inviato");
                 console.info("Drop-in UI has been torn down!");
                 // Remove the 'Submit payment' button
                 $("#submit-button").remove();
