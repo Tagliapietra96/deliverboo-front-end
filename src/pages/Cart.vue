@@ -7,26 +7,19 @@
         <div class="single-row py-3 px-5">
           <div class="row">
             <div class="col-1 align-items-center d-flex">
-              <div
-                class="card d-flex justify-content-center align-items-center fw-bolder"
-                style="aspect-ratio: 1/1; width: 50px"
-              >
+              <div class="card d-flex justify-content-center align-items-center fw-bolder"
+                style="aspect-ratio: 1/1; width: 50px">
                 {{ item.quantity }}
               </div>
             </div>
             <div class="col-7 d-flex align-items-center">
               <div class="fw-bolder">{{ item.item.name }}:</div>
             </div>
-            <div
-              class="col-3 text-end d-flex align-items-center justify-content-end"
-            >
+            <div class="col-3 text-end d-flex align-items-center justify-content-end">
               <div>€ {{ item.price }}</div>
             </div>
             <div class="col-1 align-items-center d-flex">
-              <button
-                class="btn btn-primary btn-custom"
-                style="aspect-ratio: 1/1; width: 50px"
-              >
+              <button class="btn btn-primary btn-custom" style="aspect-ratio: 1/1; width: 50px">
                 <i class="fa-solid fa-pen"></i>
               </button>
             </div>
@@ -44,81 +37,63 @@
         </div>
       </div>
     </div>
-    <button
-      v-if="store.dt.myChart.length > 0"
-      class="btn btn-ptimary btn-custom mt-3"
-      @click="dropChart()"
-    >
+    <button v-if="store.dt.myChart.length > 0" class="btn btn-ptimary btn-custom mt-3" @click="dropChart()">
       Elimina carrello
     </button>
-    <form class="row g-3" novalidate @submit.prevent="submit">
-      <div class="col-md-4">
-        <label for="customer_name" class="form-label">Nome e Cognome</label>
-        <input
-          type="text"
-          v-model="customer_name"
-          class="form-control"
-          name="customer_name"
-          :class="{ 'is-invalid': formSubmitted && !customer_name }"
-          required
-        />
-        <div class="invalid-feedback" v-if="formSubmitted && !customer_name">
-          Inserisci nome e cognome.
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="customer_address" class="form-label">Indirizzo</label>
-        <input
-          type="text"
-          v-model="customer_address"
-          class="form-control"
-          name="customer_address"
-          :class="{ 'is-invalid': formSubmitted && !customer_address }"
-          required
-        />
-        <div class="invalid-feedback" v-if="formSubmitted && !customer_address">
-          Inserisci un indirizzo.
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="customer_phone" class="form-label"
-          >Numero di telefono</label
-        >
-        <input
-          type="number"
-          v-model="customer_phone"
-          class="form-control"
-          name="customer_phone"
-          :class="{ 'is-invalid': formSubmitted && !customer_phone }"
-          required
-        />
-        <div class="invalid-feedback" v-if="formSubmitted && !customer_phone">
-          Inserisci un numero di telefono.
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="customer_email" class="form-label">E-mail</label>
-        <input
-          type="email"
-          v-model="customer_email"
-          class="form-control"
-          name="customer_email"
-          :class="{ 'is-invalid': formSubmitted && !customer_email }"
-          required
-        />
-        <div class="invalid-feedback" v-if="formSubmitted && !customer_email">
-          Inserisci una mail valida.
-        </div>
-      </div>
-    </form>
+
+    <div class="py-1 mt-3 mb-5 custom-bg w-100 rounded-1"></div>
+
   </div>
-  <div>{{ resultPayment }}</div>
-  <div id="dropin-wrapper">
-    <div id="checkout-message"></div>
-    <div id="dropin-container"></div>
-    <button @click="submit" :disabled="!formComplete" id="submit-button">
-      Submit payment
-    </button>
+  <div class="container">
+    <div class="row">
+      <div class="col-5">
+        <form class="row g-3" novalidate>
+          <div class="col-md-12">
+            <label for="customer_name" class="form-label">Nome e Cognome</label>
+            <input type="text" v-model="customer_name" class="form-control" name="customer_name"
+              :class="{ 'is-invalid': formSubmitted && !customer_name }" required />
+            <div class="invalid-feedback" v-if="formSubmitted && !customer_name">
+              Inserisci nome e cognome.
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label for="customer_address" class="form-label">Indirizzo</label>
+            <input type="text" v-model="customer_address" class="form-control" name="customer_address"
+              :class="{ 'is-invalid': formSubmitted && !customer_address }" required />
+            <div class="invalid-feedback" v-if="formSubmitted && !customer_address">
+              Inserisci un indirizzo.
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label for="customer_phone" class="form-label">Numero di telefono</label>
+            <input type="number" v-model="customer_phone" class="form-control" name="customer_phone"
+              :class="{ 'is-invalid': formSubmitted && !customer_phone }" required />
+            <div class="invalid-feedback" v-if="formSubmitted && !customer_phone">
+              Inserisci un numero di telefono.
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label for="customer_email" class="form-label">E-mail</label>
+            <input type="email" v-model="customer_email" class="form-control" name="customer_email"
+              :class="{ 'is-invalid': formSubmitted && !customer_email }" required />
+            <div class="invalid-feedback" v-if="formSubmitted && !customer_email">
+              Inserisci una mail valida.
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-7">
+        <div>{{ resultPayment }}</div>
+        <div id="dropin-wrapper">
+          <div id="checkout-message"></div>
+          <div id="dropin-container"></div>
+          <button class="btn btn-primary btn-custom mb-5" @click="submit" :disabled="!formComplete" id="submit-button">
+            Submit payment
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
