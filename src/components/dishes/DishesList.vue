@@ -78,7 +78,8 @@
             <div class="row g-0 h-100">
               <div class="col-4 h-100">
                 <img v-if="dish.image.includes('http')" class="img-fluid rounded-start h-100" :src="dish.image" alt="" />
-                <img v-else class="img-fluid rounded-start h-100" :src="store.dt.beUrl + '/storage/' + dish.image" alt="" />
+                <img v-else class="img-fluid rounded-start h-100" :src="store.dt.beUrl + '/storage/' + dish.image"
+                  alt="" />
               </div>
               <div class="col-8 h-100">
                 <div class="card-body h-100 d-flex flex-column">
@@ -156,30 +157,40 @@ export default {
       }
 
       let toReturn = true;
+      let abort = false;
 
-      store.dt.myChart.forEach((element, i) => {
-        if(element.item.id === toPush.item.id){
-          toReturn = false;
-          element.quantity += toPush.quantity;
-          element.price = this.totalPrice(
-            element.item.price,
-            element.quantity
-          );
-          this.shoppingIndex = i;
-        }
-      })
+      if (store.dt.myChart.length > 0) {
+        store.dt.myChart.forEach((element, i) => {
+          if (element.item.restaurant_id !== toPush.item.restaurant_id) {
+            toReturn = false;
+            abort = true;
+          } else if (element.item.id === toPush.item.id) {
+            toReturn = false;
+            element.quantity += toPush.quantity;
+            element.price = this.totalPrice(
+              element.item.price,
+              element.quantity
+            );
+            this.shoppingIndex = i;
+          }
+        })
+      }
 
       if (toReturn) {
         store.dt.myChart.push(toPush);
         this.shoppingIndex = (store.dt.myChart.length - 1);
       }
 
-      this.exitShow();
-      this.forcedExit = false;
-      this.popUpVisibility = true;
-      setTimeout(() => {
-        this.popUpVisibility = false;
-      }, 5000);
+      if (abort) {
+        alert('Stai provando ad acquistare un prodotto di un ristorante diverso da quello al quale stai già acquistando. Sei pregato di selezionare piatti da un ristorante alla volta!')
+      } else {
+        this.exitShow();
+        this.forcedExit = false;
+        this.popUpVisibility = true;
+        setTimeout(() => {
+          this.popUpVisibility = false;
+        }, 5000);
+      }
     },
     totalPrice(num1, num2) {
       let total = num1 * num2;
