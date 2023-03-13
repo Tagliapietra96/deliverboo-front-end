@@ -5,6 +5,7 @@ import RestautantShowPage from "./pages/restaurants/Show.vue";
 import CartShow from "./pages/Cart.vue";
 import DishShowPage from "./components/dishes/SingleDish.vue";
 import NotFoundPage from "./pages/NotFound.vue";
+import Checkout from "./pages/Checkout.vue";
 
 const router = createRouter({
   // Serve ad indicare come gestire l'url al cambio pagina
@@ -39,6 +40,11 @@ const router = createRouter({
       path: "/cart",
       name: "cart",
       component: CartShow,
+    },
+    {
+      path: "/checkout",
+      name: "Checkout",
+      component: Checkout,
     },
   ],
 });
