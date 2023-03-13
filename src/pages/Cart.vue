@@ -131,10 +131,8 @@ window.addEventListener("DOMContentLoaded", function () {
             // Tear down the Drop-in UI
             instance.teardown(function (teardownErr) {
               if (teardownErr) {
-                console.log("pagamento non inviato");
                 console.error("Could not tear down Drop-in UI!");
               } else {
-                console.log("pagamento inviato");
                 console.info("Drop-in UI has been torn down!");
                 // Remove the 'Submit payment' button
                 $("#submit-button").remove();
@@ -142,11 +140,13 @@ window.addEventListener("DOMContentLoaded", function () {
             });
 
             if (result.success) {
+              store.dt.myChart = [];
+              store.fn.saveStorage();
+              window.location.reload();
               $("#checkout-message").html(
                 '<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>'
               );
             } else {
-              console.log(result);
               $("#checkout-message").html(
                 "<h1>Error</h1><p>Check your console.</p>"
               );
@@ -199,13 +199,10 @@ export default {
           }
         )
         .then((response) => {
-          store.dt.myChart = [];
           store.fn.saveStorage();
-          console.log("success");
         })
         .catch((error) => {
           this.resultPayment = "Transazione negata";
-          console.log(error);
         });
     },
   },
