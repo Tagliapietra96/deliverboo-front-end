@@ -77,7 +77,8 @@
           <div class="card card-index h-100 mb-3 shadow overflow-hidden" @click="onCardClick(dish)">
             <div class="row g-0 h-100">
               <div class="col-4 h-100">
-                <img :src="dish.image" class="img-fluid rounded-start h-100" alt="..." />
+                <img v-if="dish.image.includes('http')" class="img-fluid rounded-start h-100" :src="dish.image" alt="" />
+                <img v-else class="img-fluid rounded-start h-100" :src="store.dt.beUrl + '/storage/' + dish.image" alt="" />
               </div>
               <div class="col-8 h-100">
                 <div class="card-body h-100 d-flex flex-column">
