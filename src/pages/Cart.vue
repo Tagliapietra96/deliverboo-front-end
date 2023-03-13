@@ -68,9 +68,33 @@
     </form>
   </div>
   <div>{{ resultPayment }}</div>
+  <div id="paypal-button-container"></div>
 </template>
 
 <script>
+import braintree from "braintree-web";
+paypal
+  .Buttons({
+    createOrder: function (data, actions) {
+      return actions.order.create({
+        purchase_units: [
+          {
+            amount: {
+              value: "10.00",
+            },
+          },
+        ],
+      });
+    },
+    onApprove: function (data, actions) {
+      return actions.order.capture().then(function (details) {
+        alert(
+          "Transaction completed by " + details.payer.name.given_name + "!"
+        );
+      });
+    },
+  })
+  .render("#paypal-button-container");
 (() => {
   "use strict";
   const forms = document.querySelectorAll(".needs-validation");
@@ -158,9 +182,13 @@ export default {
   },
   computed: {
     total_order() {
-      return store.dt.myChart.reduce((total, item) => {
-        return total + parseFloat(item.price);
-      }, 0);
+      // Controlla se "store.dt.myChart" esiste ed è un array valido
+      if (store.dt.myChart && Array.isArray(store.dt.myChart)) {
+        return store.dt.myChart.reduce((total, item) => {
+          return total + parseFloat(item.price);
+        }, 0);
+      }
+      return 0; // restituisce 0 se "store.dt.myChart" non è definito o non è un array
     },
     dishesBuy() {
       return store.dt.myChart.flatMap((item) =>
