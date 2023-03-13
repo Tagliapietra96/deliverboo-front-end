@@ -4,12 +4,19 @@
           <div class="slider">
             <div class="slide-track">
               <div class="my-img-container slide p-2" v-for="(restaurants, i) in store.dt.restaurantsList">
-                <img v-if="restaurants.image.includes('http')" class="my-img-fluid  rounded-3" :src="restaurants.image" alt="" />
-                  <img v-else class="my-img-fluid rounded-3" :src="store.dt.beUrl + '/storage/' + restaurants.image" alt="" />
+                <router-link
+                    :to="{
+                      name: 'ristorante',
+                      params: { name: restaurants.name },
+                    }"
+                    @click="onMenuClick(restaurants.id)"
+                    class="h-100">
+                    <img v-if="restaurants.image.includes('http')" class="my-img-fluid  rounded-3" :src="restaurants.image" alt="..." />
+                    <img v-else class="my-img-fluid rounded-3" :src="store.dt.beUrl + '/storage/' + restaurants.image" alt="..." />
+                  </router-link>
               </div>
             </div>
           </div>
-
         </div>
     </div>    
 </template>
@@ -23,6 +30,9 @@
       };
     },
     methods: {
+      onMenuClick(restaurantId) {
+      store.dt.selectedRestaurant = restaurantId;
+    },
      },
     mounted() {
   },
