@@ -199,18 +199,28 @@ export default {
       return (Math.round(total * 100) / 100).toFixed(2);
     },
     minusPop() {
-      if (store.dt.myChart[store.dt.myChart.length - 1].quantity === 1) {
-        store.dt.myChart[store.dt.myChart.length - 1].quantity = 99;
+      if (store.dt.myChart[this.shoppingIndex].quantity === 1) {
+        store.dt.myChart[this.shoppingIndex].quantity = 99;
       } else {
-        store.dt.myChart[store.dt.myChart.length - 1].quantity--;
+        store.dt.myChart[this.shoppingIndex].quantity--;
       }
+
+      store.dt.myChart[this.shoppingIndex].price = this.totalPrice(
+          store.dt.myChart[this.shoppingIndex].item.price,
+          store.dt.myChart[this.shoppingIndex].quantity
+        )
     },
     plusPop() {
-      if (store.dt.myChart[store.dt.myChart.length - 1].quantity === 99) {
-        store.dt.myChart[store.dt.myChart.length - 1].quantity = 1;
+      if (store.dt.myChart[this.shoppingIndex].quantity === 99) {
+        store.dt.myChart[this.shoppingIndex].quantity = 1;
       } else {
-        store.dt.myChart[store.dt.myChart.length - 1].quantity++;
+        store.dt.myChart[this.shoppingIndex].quantity++;
       }
+
+      store.dt.myChart[this.shoppingIndex].price = this.totalPrice(
+          store.dt.myChart[this.shoppingIndex].item.price,
+          store.dt.myChart[this.shoppingIndex].quantity
+        )
     },
     deletePop() {
       this.popUpVisibility = false;

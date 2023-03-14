@@ -7,7 +7,7 @@
       <div class="col" v-for="(item, index) in store.dt.myChart" :key="index">
         <div class="single-row py-3 px-5">
           <div class="row">
-            <div class="col-1 align-items-center d-flex">
+            <div class="col-2 col-lg-1 align-items-center d-flex">
               <div
                 class="card d-flex justify-content-center align-items-center fw-bolder"
                 style="aspect-ratio: 1/1; width: 50px"
@@ -15,7 +15,7 @@
                 {{ item.quantity }}
               </div>
             </div>
-            <div class="col-7 d-flex align-items-center">
+            <div class="col-6 col-lg-7 d-flex align-items-center">
               <div class="fw-bolder">{{ item.item.name }}:</div>
             </div>
             <div
@@ -37,8 +37,8 @@
       <div class="col">
         <div class="single-row py-3 px-5">
           <div class="row">
-            <div class="col-1"></div>
-            <div class="fw-bolder col-7">Totale:</div>
+            <div class="col-2 col-lg-1"></div>
+            <div class="fw-bolder col-6 col-lg-7">Totale:</div>
             <div class="col-3 text-end">€ {{ total_order.toFixed(2) }}</div>
             <div class="col-1"></div>
           </div>
