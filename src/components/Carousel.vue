@@ -63,7 +63,7 @@ $animationSpeed: 20s;
 // Animation
 @keyframes scroll {
 	0% { transform: translateX(0); }
-	100% { transform: translateX(calc(-250px * 3))}
+	100% { transform: translateX(calc(-250px * 1))}
 }
 
 
