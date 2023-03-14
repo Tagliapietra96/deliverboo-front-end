@@ -111,9 +111,10 @@
         Stai provando ad acquistare un prodotto di un ristorante diverso da quello al quale stai già acquistando. Sei
         pregato di selezionare piatti da un ristorante alla volta! <br>
         Se vuoi comunque acquistare questi prodotti, svuota prima il carrello <br>
+        <!-- @click="store.dt.myChart = []; store.fn.saveStorage(); store.fn.loadStorage()" -->
          <button v-if="store.dt.myChart.length > 0"
           class="btn btn-ptimary btn-custom mt-3"
-          @click="store.dt.myChart = []; store.fn.saveStorage(); store.fn.loadStorage()">
+          @click="deleteChart()" >
           Elimina carrello
         </button>
       </div>
@@ -287,6 +288,13 @@ export default {
         element.active = false;
       });
       store.dt.headerLinks[2].active = true;
+    },
+    deleteChart() {
+      if (window.confirm("Sei sicuro di voler eliminare il carrello?")) {
+        this.store.dt.myChart = [];
+        this.store.fn.saveStorage();
+        this.store.fn.loadStorage();
+      }
     }
   },
   mounted() {
