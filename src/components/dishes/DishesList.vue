@@ -84,6 +84,25 @@
       </div>
     </div>
 
+    
+    <div :class="(showCart) ? 'active' : ''" class="cart-preview shadow" v-if="(store.dt.myChart.length > 0 && store.dt.myChart[0].item.restaurant_id === store.dt.selectedRestaurant)">
+      <div class="open-close" @click="(showCart) ? showCart = false : showCart = true ">
+        <i class="fa-solid fa-chevron-up "></i>
+      </div>
+      <h5 class="py-3 custom-color ps-3">Il tuo carrello</h5>
+      <div class="container-fluid overflow-auto">
+        <div class="row align-items-center  border-bottom py-2" v-for="(dish, i) in store.dt.myChart">
+        <div class="col-10 fw-bold">
+          {{ dish.item.name }}:
+        </div>
+        <div class="col-2">
+          {{ dish.quantity }}
+        </div>
+      </div>
+      </div>
+      
+    </div>
+
     <div class="container pb-5">
       <h3 class="py-5">IL NOSTRO MENU</h3>
 
@@ -141,7 +160,19 @@ export default {
       popUpVisibility: false,
       forcedExit: false,
       shoppingIndex: 0,
+      showCart: false,
     };
+  },
+  computed: {
+    total_order() {
+      // Controlla se "store.dt.myChart" esiste ed è un array valido
+      if (store.dt.myChart && Array.isArray(store.dt.myChart)) {
+        return store.dt.myChart.reduce((total, item) => {
+          return total + parseFloat(item.price);
+        }, 0);
+      }
+      return 0; // restituisce 0 se "store.dt.myChart" non è definito o non è un array
+    },
   },
   methods: {
     onCardClick(myCard) {
@@ -387,4 +418,61 @@ export default {
 
 .my-container {
   min-height: calc(100vh - 214px);
-}</style>
+}
+
+.cart-preview{
+  position: fixed;
+  right: 0;
+  top: 74px;
+  bottom: 0;
+  left: 100%;
+  background-color: white;
+  z-index: 3;
+
+  transition: all .4s;
+
+  h5,
+  .container-fluid{
+    opacity: 0;
+
+  }
+
+
+  .open-close{
+    padding: .7rem 2rem;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: rotate(-90deg);
+    border-radius: 10px;
+    border-top: 1px solid lightgrey;
+    padding-bottom: 0.3rem;
+    transition: right .4s;
+
+    i{
+      transform: rotate(0);
+      transition: all .7s;
+    }
+  }
+
+  &.active{
+    left: calc(100vw - 250px);
+
+
+    h5,
+  .container-fluid{
+    opacity: 1;
+    transition: opacity .4s .2s;
+  }
+    .open-close{
+      right: 210px;
+
+      i{
+        transform: rotate(-180deg);
+      }
+    }
+  }
+}
+
+</style>
