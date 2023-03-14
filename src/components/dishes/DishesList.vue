@@ -142,13 +142,19 @@
       </div>
     </div>
   </div>
+
+  <div class="container">
+    <BarChart/>
+
+  </div>
 </template>
 
 <script>
 import { store } from "../../stores/store";
+import BarChart from "../BarChart.vue";
 import Loader from "../Loader.vue";
 export default {
-  components: { Loader },
+  components: { Loader, BarChart },
   data() {
     return {
       store,
