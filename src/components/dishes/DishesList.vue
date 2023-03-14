@@ -449,6 +449,7 @@ export default {
     border-top: 1px solid lightgrey;
     padding-bottom: 0.3rem;
     transition: right .4s;
+    cursor: pointer;
 
     i{
       transform: rotate(0);
