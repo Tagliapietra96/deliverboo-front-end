@@ -9,8 +9,10 @@
       <div>
         <div class="row">
           <div class="col-12 col-md-6 col-lg-5 col-xl-4">
-            <img v-if="store.dt.myChart[shoppingIndex].item.image.includes('http')" :src="store.dt.myChart[shoppingIndex].item.image" class="img-fluid" alt="" />
-            <img v-else :src="store.dt.beUrl + '/storage/' + store.dt.myChart[shoppingIndex].item.image" class="img-fluid" alt="" />
+            <img v-if="store.dt.myChart[shoppingIndex].item.image.includes('http')"
+              :src="store.dt.myChart[shoppingIndex].item.image" class="img-fluid" alt="" />
+            <img v-else :src="store.dt.beUrl + '/storage/' + store.dt.myChart[shoppingIndex].item.image" class="img-fluid"
+              alt="" />
           </div>
           <div class="col-12 col-md-6 col-lg-7 col-xl-8">
             <h5 class="d-none d-xxl-block">
@@ -42,8 +44,10 @@
           <button @click="exitShow()" class="btn btn-primary btn-custom close-show">
             <i class="fa-solid fa-xmark"></i>
           </button>
-          <img v-if="cardShow.card.image.includes('http')" :src="cardShow.card.image" class="card-img-top" alt="..." />
-          <img v-else :src="store.dt.beUrl + '/storage/' + cardShow.card.image" class="card-img-top" alt="..." />
+          <img v-if="cardShow.card.image.includes('http')" :src="cardShow.card.image" class="card-img-top" alt="..."
+            :style="(cardShow.card.visibility) ? 'filter: grayscale(0)' : 'filter: grayscale(100%)'" />
+          <img v-else :src="store.dt.beUrl + '/storage/' + cardShow.card.image" class="card-img-top" alt="..."
+            :style="(cardShow.card.visibility) ? 'filter: grayscale(0)' : 'filter: grayscale(100%)'" />
           <div class="card-body">
             <h5 class="card-title">{{ cardShow.card.name }}</h5>
             <p class="card-text">{{ cardShow.card.description }}</p>
@@ -51,19 +55,28 @@
               <div class="bg-light border text-center py-3 fs-4 rounded-2">
                 € {{ totalPrice(cardShow.card.price, cardShow.quantity) }}
               </div>
-              <div class="text-center py-3">
-                <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-primary btn-custom d-none d-sm-inline" @click="minusBtn()">
+              <div class="text-center py-3" v-if="cardShow.card.visibility">
+                <div class="btn-group " role="group">
+                  <button type="button"
+                    :class="(store.dt.myChart.length === 0) ? '' : (store.dt.myChart[0].item.restaurant_id !== store.dt.selectedRestaurant) ? 'disabled' : ''"
+                    class="btn btn-primary btn-custom d-none d-sm-inline" @click="minusBtn()">
                     -
                   </button>
-                  <button type="button" class="btn btn-primary btn-custom" @click="chartBtn()">
+                  <button type="button"
+                    :class="(store.dt.myChart.length === 0) ? '' : (store.dt.myChart[0].item.restaurant_id !== store.dt.selectedRestaurant) ? 'disabled' : ''"
+                    class="btn btn-primary btn-custom" @click="chartBtn()">
                     <i class="fa-solid fa-cart-shopping me-3 d-none d-md-inline"></i>
                     {{ cardShow.quantity }}
                   </button>
-                  <button type="button" class="btn btn-primary btn-custom d-none d-sm-inline" @click="plusBtn()">
+                  <button type="button"
+                    :class="(store.dt.myChart.length === 0) ? '' : (store.dt.myChart[0].item.restaurant_id !== store.dt.selectedRestaurant) ? 'disabled' : ''"
+                    class="btn btn-primary btn-custom d-none d-sm-inline" @click="plusBtn()">
                     +
                   </button>
                 </div>
+              </div>
+              <div class="pt-3" v-else>
+                <h5 class="text-center custom-color fw-bold">Prodotto attualmente non disponibile</h5>
               </div>
             </div>
           </div>
@@ -74,11 +87,22 @@
     <div class="container pb-5">
       <h3 class="py-5">IL NOSTRO MENU</h3>
 
-      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4">
+      <div v-if="(store.dt.myChart.length > 0 && store.dt.myChart[0].item.restaurant_id !== store.dt.selectedRestaurant)"
+        class="alert alert-info custom-color fw-bolder py-4 fs-4">
+        Stai provando ad acquistare un prodotto di un ristorante diverso da quello al quale stai già acquistando. Sei
+        pregato di selezionare piatti da un ristorante alla volta! <br>
+        Se vuoi comunque acquistare questi prodotti, svuota prima il carrello <br>
+         <button v-if="store.dt.myChart.length > 0"
+          class="btn btn-ptimary btn-custom mt-3"
+          @click="store.dt.myChart = []; store.fn.saveStorage(); store.fn.loadStorage()">
+          Elimina carrello
+        </button>
+      </div>
+      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3">
         <div class="col" v-for="dish in store.dt.dishesList" :key="dish.id">
           <div class="card card-index h-100 mb-3 shadow overflow-hidden" @click="onCardClick(dish)">
             <div class="row g-0 h-100">
-              <div class="col-4 h-100">
+              <div class="col-4 h-100" :style="(dish.visibility) ? 'filter: grayscale(0)' : 'filter: grayscale(100%)'">
                 <img v-if="dish.image.includes('http')" class="img-fluid rounded-start h-100" :src="dish.image" alt="" />
                 <img v-else class="img-fluid rounded-start h-100" :src="store.dt.beUrl + '/storage/' + dish.image"
                   alt="" />
@@ -184,7 +208,7 @@ export default {
       }
 
       if (abort) {
-        alert('Stai provando ad acquistare un prodotto di un ristorante diverso da quello al quale stai già acquistando. Sei pregato di selezionare piatti da un ristorante alla volta!')
+        return
       } else {
         this.exitShow();
         this.forcedExit = false;
@@ -206,9 +230,9 @@ export default {
       }
 
       store.dt.myChart[this.shoppingIndex].price = this.totalPrice(
-          store.dt.myChart[this.shoppingIndex].item.price,
-          store.dt.myChart[this.shoppingIndex].quantity
-        )
+        store.dt.myChart[this.shoppingIndex].item.price,
+        store.dt.myChart[this.shoppingIndex].quantity
+      )
     },
     plusPop() {
       if (store.dt.myChart[this.shoppingIndex].quantity === 99) {
@@ -218,9 +242,9 @@ export default {
       }
 
       store.dt.myChart[this.shoppingIndex].price = this.totalPrice(
-          store.dt.myChart[this.shoppingIndex].item.price,
-          store.dt.myChart[this.shoppingIndex].quantity
-        )
+        store.dt.myChart[this.shoppingIndex].item.price,
+        store.dt.myChart[this.shoppingIndex].quantity
+      )
     },
     deletePop() {
       this.popUpVisibility = false;
@@ -246,6 +270,12 @@ export default {
 
 <style lang="scss" scoped>
 @use "../../styles/main.scss";
+
+.alert-info {
+  text-align: center;
+  background-color: #c7626245 !important;
+  border-color: #c76262;
+}
 
 .my-pop-up {
   position: fixed;
@@ -322,6 +352,7 @@ export default {
       border-radius: 50%;
       opacity: 0.3;
       transition: opacity, 0.4s;
+      z-index: 9999999999999999999999;
 
       &:hover {
         transform: rotate(360deg);
@@ -356,5 +387,4 @@ export default {
 
 .my-container {
   min-height: calc(100vh - 214px);
-}
-</style>
+}</style>
