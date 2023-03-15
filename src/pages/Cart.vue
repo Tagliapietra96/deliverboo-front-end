@@ -376,6 +376,7 @@ export default {
             order_time: "2023/03/14",
             total_order: this.total_order,
             restaurant_id: this.restaurant_id,
+            dish_id: this.dish_id,
           },
           {
             headers: {
@@ -437,11 +438,11 @@ export default {
         ""
       )}`;
     },
-    /* dish_id() {
+    dish_id() {
       return store.dt.myChart.flatMap((item) =>
         Array.from({ length: item.quantity }, () => item.item.id)
       );
-    }, */
+    },
     restaurant_id() {
       const item = this.store.dt.myChart.find((item) => item.quantity > 0);
       return item ? item.item.restaurant_id : null;
