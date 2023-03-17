@@ -180,7 +180,7 @@
       class="btn btn-ptimary btn-custom mt-3"
       @click="dropChart()"
     >
-      Elimina carrello
+      Svuota carrello
     </button>
 
     <div class="py-1 mt-3 mb-5 custom-bg w-100 rounded-1"></div>
@@ -274,7 +274,7 @@
             :disabled="!formComplete"
             id="submit-button"
           >
-            Submit payment
+            Conferma Pagamento
           </button>
         </div>
       </div>

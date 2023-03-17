@@ -75,8 +75,18 @@
             <div class="card shadow rounded-3 overflow-hidden">
               <div v-if="restaurant">
                 <div class="img-container position-relative">
-                  <img v-if="restaurant.image.includes('http')" class="my-img-fluid" :src="restaurant.image" alt="" />
-                  <img v-else class="my-img-fluid" :src="store.dt.beUrl + '/storage/' + restaurant.image" alt="" />
+                  <img
+                    v-if="restaurant.image.includes('http')"
+                    class="my-img-fluid"
+                    :src="restaurant.image"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    class="my-img-fluid"
+                    :src="store.dt.beUrl + '/storage/' + restaurant.image"
+                    alt=""
+                  />
                 </div>
                 <h2 class="title">{{ restaurant.name }}</h2>
                 <div class="category-badge">
@@ -93,7 +103,7 @@
                   <router-link
                     :to="{
                       name: 'ristorante',
-                      params: { name: restaurant.name },
+                      params: { name: restaurant.name.replace(/\s+/g, '-') },
                     }"
                     @click="onMenuClick(restaurant.id)"
                     class="btn btn-primary btn-custom"
