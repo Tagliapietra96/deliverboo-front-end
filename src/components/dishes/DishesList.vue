@@ -205,6 +205,7 @@
 
     <div class="container pb-5">
       <h3 class="py-5">IL NOSTRO MENU</h3>
+      
 
       <div
         v-if="
@@ -227,8 +228,10 @@
           Elimina carrello
         </button>
       </div>
+      
       <div v-if="store.dt.antipasti.length > 0">
-        Antipasti
+        <h3 class="mt-5"><i class="fa-solid fa-shrimp"></i> Antipasti</h3>
+        <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
         <div
           class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
         >
@@ -281,7 +284,9 @@
         </div>
       </div>
       <div v-if="store.dt.primi.length > 0">
-        Primi
+        <h3 class="mt-5"><i class="fa-solid fa-plate-wheat"></i> Primi</h3>
+        <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
+        
         <div
           class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
         >
@@ -330,7 +335,8 @@
         </div>
       </div>
       <div v-if="store.dt.secondi.length > 0">
-        Secondi
+        <h3 class="mt-5"><i class="fa-solid fa-drumstick-bite"></i> Secondi</h3>
+        <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
         <div
           class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
         >
@@ -383,7 +389,8 @@
         </div>
       </div>
       <div v-if="store.dt.pizze.length > 0">
-        Pizze
+        <h3 class="mt-5"><i class="fa-solid fa-pizza-slice"></i> Pizze</h3>
+        <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
         <div
           class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
         >
@@ -432,7 +439,8 @@
         </div>
       </div>
       <div v-if="store.dt.contorni.length > 0">
-        Contorni
+        <h3 class="mt-5"><i class="fa-solid fa-seedling"></i> Contorni</h3>
+        <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
         <div
           class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
         >
@@ -485,11 +493,12 @@
         </div>
       </div>
       <div v-if="store.dt.panini.length > 0">
-        I nostri panini
+        <h3 class="mt-5"><i class="fa-solid fa-burger"></i> I nostri Panini</h3>
+        <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
         <div
           class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
         >
-          <div class="col" v-for="panino in store.dt.pizze" :key="panino.id">
+          <div class="col" v-for="panino in store.dt.panini" :key="panino.id">
             <div
               class="card card-index h-100 mb-3 shadow overflow-hidden"
               @click="onCardClick(panino)"
@@ -534,7 +543,8 @@
         </div>
       </div>
       <div v-if="store.dt.dolci.length > 0">
-        I nostri dolci
+        <h3 class="mt-5"><i class="fa-solid fa-candy-cane"></i> I nostri dolci</h3>
+        <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
         <div
           class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
         >
@@ -584,7 +594,8 @@
       </div>
       <div>
         <div v-if="store.dt.bevande.length > 0">
-          Bevande
+          <h3 class="mt-5"><i class="fa-solid fa-martini-glass-citrus"></i> Bevande</h3>
+          <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
           <div
             class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
           >
@@ -954,7 +965,7 @@ export default {
     cursor: pointer;
 
     i {
-      transform: rotate(0);
+      transform: rotate(90deg);
       transition: all 0.7s;
     }
   }
@@ -971,7 +982,7 @@ export default {
       right: 210px;
 
       i {
-        transform: rotate(-180deg);
+        transform: rotate(450deg);
       }
     }
   }
