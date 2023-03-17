@@ -227,46 +227,410 @@
           Elimina carrello
         </button>
       </div>
-      <div
-        class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
-      >
-        <div class="col" v-for="dish in store.dt.dishesList" :key="dish.id">
+      <div v-if="store.dt.antipasti.length > 0">
+        Antipasti
+        <div
+          class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
+        >
           <div
-            class="card card-index h-100 mb-3 shadow overflow-hidden"
-            @click="onCardClick(dish)"
+            class="col"
+            v-for="antipasto in store.dt.antipasti"
+            :key="antipasto.id"
           >
-            <div class="row g-0 h-100">
-              <div
-                class="col-4 h-100"
-                :style="
-                  dish.visibility
-                    ? 'filter: grayscale(0)'
-                    : 'filter: grayscale(100%)'
-                "
-              >
-                <img
-                  v-if="dish.image.includes('http')"
-                  class="img-fluid rounded-start h-100"
-                  :src="dish.image"
-                  alt=""
-                />
-                <img
-                  v-else
-                  class="img-fluid rounded-start h-100"
-                  :src="store.dt.beUrl + '/storage/' + dish.image"
-                  alt=""
-                />
+            <div
+              class="card card-index h-100 mb-3 shadow overflow-hidden"
+              @click="onCardClick(antipasto)"
+            >
+              <div class="row g-0 h-100">
+                <div
+                  class="col-4 h-100"
+                  :style="
+                    antipasto.visibility
+                      ? 'filter: grayscale(0)'
+                      : 'filter: grayscale(100%)'
+                  "
+                >
+                  <img
+                    v-if="antipasto.image.includes('http')"
+                    class="img-fluid rounded-start h-100"
+                    :src="antipasto.image"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    class="img-fluid rounded-start h-100"
+                    :src="store.dt.beUrl + '/storage/' + antipasto.image"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 h-100">
+                  <div class="card-body h-100 d-flex flex-column">
+                    <h5 class="card-title">{{ antipasto.name }}</h5>
+                    <p class="card-text">{{ antipasto.description }}</p>
+                    <div class="flex-fill"></div>
+                    <p class="card-text">
+                      <small class="text-muted"
+                        >Prezzo:€ {{ antipasto.price.toFixed(2) }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="col-8 h-100">
-                <div class="card-body h-100 d-flex flex-column">
-                  <h5 class="card-title">{{ dish.name }}</h5>
-                  <p class="card-text">{{ dish.description }}</p>
-                  <div class="flex-fill"></div>
-                  <p class="card-text">
-                    <small class="text-muted"
-                      >Prezzo:€ {{ dish.price.toFixed(2) }}</small
-                    >
-                  </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="store.dt.primi.length > 0">
+        Primi
+        <div
+          class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
+        >
+          <div class="col" v-for="primo in store.dt.primi" :key="primo.id">
+            <div
+              class="card card-index h-100 mb-3 shadow overflow-hidden"
+              @click="onCardClick(primo)"
+            >
+              <div class="row g-0 h-100">
+                <div
+                  class="col-4 h-100"
+                  :style="
+                    primo.visibility
+                      ? 'filter: grayscale(0)'
+                      : 'filter: grayscale(100%)'
+                  "
+                >
+                  <img
+                    v-if="primo.image.includes('http')"
+                    class="img-fluid rounded-start h-100"
+                    :src="primo.image"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    class="img-fluid rounded-start h-100"
+                    :src="store.dt.beUrl + '/storage/' + primo.image"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 h-100">
+                  <div class="card-body h-100 d-flex flex-column">
+                    <h5 class="card-title">{{ primo.name }}</h5>
+                    <p class="card-text">{{ primo.description }}</p>
+                    <div class="flex-fill"></div>
+                    <p class="card-text">
+                      <small class="text-muted"
+                        >Prezzo:€ {{ primo.price.toFixed(2) }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="store.dt.secondi.length > 0">
+        Secondi
+        <div
+          class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
+        >
+          <div
+            class="col"
+            v-for="secondo in store.dt.secondi"
+            :key="secondo.id"
+          >
+            <div
+              class="card card-index h-100 mb-3 shadow overflow-hidden"
+              @click="onCardClick(secondo)"
+            >
+              <div class="row g-0 h-100">
+                <div
+                  class="col-4 h-100"
+                  :style="
+                    secondo.visibility
+                      ? 'filter: grayscale(0)'
+                      : 'filter: grayscale(100%)'
+                  "
+                >
+                  <img
+                    v-if="secondo.image.includes('http')"
+                    class="img-fluid rounded-start h-100"
+                    :src="secondo.image"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    class="img-fluid rounded-start h-100"
+                    :src="store.dt.beUrl + '/storage/' + secondo.image"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 h-100">
+                  <div class="card-body h-100 d-flex flex-column">
+                    <h5 class="card-title">{{ secondo.name }}</h5>
+                    <p class="card-text">{{ secondo.description }}</p>
+                    <div class="flex-fill"></div>
+                    <p class="card-text">
+                      <small class="text-muted"
+                        >Prezzo:€ {{ secondo.price.toFixed(2) }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="store.dt.pizze.length > 0">
+        Pizze
+        <div
+          class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
+        >
+          <div class="col" v-for="pizza in store.dt.pizze" :key="pizza.id">
+            <div
+              class="card card-index h-100 mb-3 shadow overflow-hidden"
+              @click="onCardClick(pizza)"
+            >
+              <div class="row g-0 h-100">
+                <div
+                  class="col-4 h-100"
+                  :style="
+                    pizza.visibility
+                      ? 'filter: grayscale(0)'
+                      : 'filter: grayscale(100%)'
+                  "
+                >
+                  <img
+                    v-if="pizza.image.includes('http')"
+                    class="img-fluid rounded-start h-100"
+                    :src="pizza.image"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    class="img-fluid rounded-start h-100"
+                    :src="store.dt.beUrl + '/storage/' + pizza.image"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 h-100">
+                  <div class="card-body h-100 d-flex flex-column">
+                    <h5 class="card-title">{{ pizza.name }}</h5>
+                    <p class="card-text">{{ pizza.description }}</p>
+                    <div class="flex-fill"></div>
+                    <p class="card-text">
+                      <small class="text-muted"
+                        >Prezzo:€ {{ pizza.price.toFixed(2) }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="store.dt.contorni.length > 0">
+        Contorni
+        <div
+          class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
+        >
+          <div
+            class="col"
+            v-for="contorno in store.dt.contorni"
+            :key="contorno.id"
+          >
+            <div
+              class="card card-index h-100 mb-3 shadow overflow-hidden"
+              @click="onCardClick(contorno)"
+            >
+              <div class="row g-0 h-100">
+                <div
+                  class="col-4 h-100"
+                  :style="
+                    contorno.visibility
+                      ? 'filter: grayscale(0)'
+                      : 'filter: grayscale(100%)'
+                  "
+                >
+                  <img
+                    v-if="contorno.image.includes('http')"
+                    class="img-fluid rounded-start h-100"
+                    :src="contorno.image"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    class="img-fluid rounded-start h-100"
+                    :src="store.dt.beUrl + '/storage/' + contorno.image"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 h-100">
+                  <div class="card-body h-100 d-flex flex-column">
+                    <h5 class="card-title">{{ contorno.name }}</h5>
+                    <p class="card-text">{{ contorno.description }}</p>
+                    <div class="flex-fill"></div>
+                    <p class="card-text">
+                      <small class="text-muted"
+                        >Prezzo:€ {{ contorno.price.toFixed(2) }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="store.dt.panini.length > 0">
+        I nostri panini
+        <div
+          class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
+        >
+          <div class="col" v-for="panino in store.dt.pizze" :key="panino.id">
+            <div
+              class="card card-index h-100 mb-3 shadow overflow-hidden"
+              @click="onCardClick(panino)"
+            >
+              <div class="row g-0 h-100">
+                <div
+                  class="col-4 h-100"
+                  :style="
+                    panino.visibility
+                      ? 'filter: grayscale(0)'
+                      : 'filter: grayscale(100%)'
+                  "
+                >
+                  <img
+                    v-if="panino.image.includes('http')"
+                    class="img-fluid rounded-start h-100"
+                    :src="panino.image"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    class="img-fluid rounded-start h-100"
+                    :src="store.dt.beUrl + '/storage/' + panino.image"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 h-100">
+                  <div class="card-body h-100 d-flex flex-column">
+                    <h5 class="card-title">{{ panino.name }}</h5>
+                    <p class="card-text">{{ panino.description }}</p>
+                    <div class="flex-fill"></div>
+                    <p class="card-text">
+                      <small class="text-muted"
+                        >Prezzo:€ {{ panino.price.toFixed(2) }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="store.dt.dolci.length > 0">
+        I nostri dolci
+        <div
+          class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
+        >
+          <div class="col" v-for="dolce in store.dt.dolci" :key="dolce.id">
+            <div
+              class="card card-index h-100 mb-3 shadow overflow-hidden"
+              @click="onCardClick(dolce)"
+            >
+              <div class="row g-0 h-100">
+                <div
+                  class="col-4 h-100"
+                  :style="
+                    dolce.visibility
+                      ? 'filter: grayscale(0)'
+                      : 'filter: grayscale(100%)'
+                  "
+                >
+                  <img
+                    v-if="dolce.image.includes('http')"
+                    class="img-fluid rounded-start h-100"
+                    :src="dolce.image"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    class="img-fluid rounded-start h-100"
+                    :src="store.dt.beUrl + '/storage/' + dolce.image"
+                    alt=""
+                  />
+                </div>
+                <div class="col-8 h-100">
+                  <div class="card-body h-100 d-flex flex-column">
+                    <h5 class="card-title">{{ dolce.name }}</h5>
+                    <p class="card-text">{{ dolce.description }}</p>
+                    <div class="flex-fill"></div>
+                    <p class="card-text">
+                      <small class="text-muted"
+                        >Prezzo:€ {{ dolce.price.toFixed(2) }}</small
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div v-if="store.dt.bevande.length > 0">
+          Bevande
+          <div
+            class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4 mt-3"
+          >
+            <div
+              class="col"
+              v-for="bevanda in store.dt.bevande"
+              :key="bevanda.id"
+            >
+              <div
+                class="card card-index h-100 mb-3 shadow overflow-hidden"
+                @click="onCardClick(bevanda)"
+              >
+                <div class="row g-0 h-100">
+                  <div
+                    class="col-4 h-100"
+                    :style="
+                      bevanda.visibility
+                        ? 'filter: grayscale(0)'
+                        : 'filter: grayscale(100%)'
+                    "
+                  >
+                    <img
+                      v-if="bevanda.image.includes('http')"
+                      class="img-fluid rounded-start h-100"
+                      :src="bevanda.image"
+                      alt=""
+                    />
+                    <img
+                      v-else
+                      class="img-fluid rounded-start h-100"
+                      :src="store.dt.beUrl + '/storage/' + bevanda.image"
+                      alt=""
+                    />
+                  </div>
+                  <div class="col-8 h-100">
+                    <div class="card-body h-100 d-flex flex-column">
+                      <h5 class="card-title">{{ bevanda.name }}</h5>
+                      <p class="card-text">{{ bevanda.description }}</p>
+                      <div class="flex-fill"></div>
+                      <p class="card-text">
+                        <small class="text-muted"
+                          >Prezzo:€ {{ bevanda.price.toFixed(2) }}</small
+                        >
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
