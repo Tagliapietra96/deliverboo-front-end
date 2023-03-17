@@ -65,6 +65,7 @@ export const api = reactive({
           .get(store.dt.beUrl + store.dt.dishesUrl + id)
           .then((resp) => {
             store.dt.dishesList = resp.data;
+            store.fn.dishFilter();
             store.dt.loading = false;
           })
           .catch((e) => {

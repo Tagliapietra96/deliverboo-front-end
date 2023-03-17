@@ -371,7 +371,7 @@ export default {
             customer_name: this.customer_name,
             customer_address: this.customer_address,
             customer_phone: this.customer_phone,
-            status: "OK",
+            status: "In lavorazione",
             order_date: "2023/03/14",
             order_time: "2023/03/14",
             total_order: this.total_order,
