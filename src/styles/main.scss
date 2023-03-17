@@ -8,7 +8,27 @@ $bg-cards: #f9fafa;
 
 
 /*****GENERALS******/
+::-webkit-scrollbar{
+    width: .9em;
+    height: .9em;
+}
 
+::-webkit-scrollbar-track{
+    background: white;
+    border-radius: 100vw;
+    margin-block: .5em;
+}
+
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(180deg,  #c76262, rgba(247, 241, 241, 0.705));
+    border-radius: 100vw;
+    border: .2em solid rgb(245, 245, 243);
+    transition: .3 linear .3;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(180deg, rgba(247, 241, 241, 0.705),  #c76262);   
+}
 
 /*****UTILITIES******/
 .custom-color{
