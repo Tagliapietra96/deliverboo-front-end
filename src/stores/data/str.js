@@ -8,7 +8,7 @@ export const str = reactive({
     categoriesUrl: "/api/categories",
     restaurantsUrl: "/api/restaurants/index",
     restaurantFiltersUrl: "/api/restaurants",
-    dishesUrl: "/api/dishes/",
+    dishesUrl: "/api/dishes/" ,
     dishShowUrl: "/api/dishes/show/",
-    restaurantsMessage: "",
+    restaurantsMessage: String,
 }) 
