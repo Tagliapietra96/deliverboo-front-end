@@ -1,114 +1,37 @@
 <template>
-  <Loader v-if="store.dt.loading" />
+  <Loader v-if="store.dt.bool.loading" />
   <div v-else class="container">
-    <button
-      @click="filtering = true"
-      :class="filtering ? 'active' : ''"
-      class="btn btn-primary btn-custom open-search shadow d-block d-md-none"
-    >
-      <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
+      <FilterCategories/>
     <div class="my-container">
-      <div
-        class="link-container shadow py-4"
-        :class="filtering ? 'active' : ''"
-      >
-        <span class="title ps-3 custom-color">Categoria</span>
-        <button
-          @click="filtering = false"
-          class="btn-close close-search"
-          aria-label="Close"
-        ></button>
-        <div
-          class="pt-3 px-3"
-          v-for="category in store.dt.categoriesList"
-          :key="category.id"
-          @click="store.fn.fetchRestaurants(category.name)"
-        >
-          <div class="form-check my-form-check">
-            <input
-              class="form-check-input my-checkbox"
-              type="checkbox"
-              id="flexCheckChecked"
-              :checked="store.dt.selectedCategories.includes(category.name)"
-            />
-            <label class="form-check-label text-category ps-2">{{
-              category.name
-            }}</label>
-          </div>
-        </div>
-        <div
-          @click="
-            store.dt.selectedCategories = [];
-            store.fn.fetchRestaurants();
-          "
-          class="custom-color text-decoration-underline delete-categories ps-3"
-        >
-          Svuota campi di ricerca
-        </div>
-      </div>
       <h2 class="pt-4">I ristoranti su DeliveBoo</h2>
-
       <SearchBar @filterName="filterChild"></SearchBar>
       <div class="d-none d-md-block text-center mb-3 fw-bolder">
-        <button
-          @click="filtering ? (filtering = false) : (filtering = true)"
-          :class="filtering ? 'active' : ''"
-          class="btn btn-primary btn-custom open-search shadow static"
-        >
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+        <SearchBtn :static="true"/>
       </div>
-      <div
-        v-if="store.dt.restaurantsMessage !== ''"
-        class="alert alert-info custom-color fw-bolder py-4 fs-4"
-      >
-        {{ store.dt.restaurantsMessage }}
+      <div v-if="store.dt.str.restaurantsMessage !== ''" class="alert alert-info custom-color fw-bolder py-4 fs-4">
+        {{ store.dt.str.restaurantsMessage }}
       </div>
       <div class="py-4">
         <div class="row g-3">
-          <div
-            class="col-12 col-md-6 col-lg-4"
-            v-for="(restaurant, i) in filterRestaurants"
-            :key="i"
-          >
+          <div class="col-12 col-md-6 col-lg-4" v-for="(restaurant, i) in filterRestaurants" :key="i">
             <div class="card shadow rounded-3 overflow-hidden">
               <div v-if="restaurant">
                 <div class="img-container position-relative">
-                  <img
-                    v-if="restaurant.image.includes('http')"
-                    class="my-img-fluid"
-                    :src="restaurant.image"
-                    alt=""
-                  />
-                  <img
-                    v-else
-                    class="my-img-fluid"
-                    :src="store.dt.beUrl + '/storage/' + restaurant.image"
-                    alt=""
-                  />
+                  <img v-if="restaurant.image.includes('http')" class="my-img-fluid" :src="restaurant.image" alt="" />
+                  <img v-else class="my-img-fluid" :src="store.dt.beUrl + '/storage/' + restaurant.image" alt="" />
                 </div>
                 <h2 class="title">{{ restaurant.name }}</h2>
                 <div class="category-badge">
-                  <span
-                    class="badge custom-bg m-2"
-                    v-for="(category, index) in restaurant.categories"
-                    :key="index"
-                  >
+                  <span class="badge custom-bg m-2" v-for="(category, index) in restaurant.categories" :key="index">
                     {{ category.name }}
                   </span>
                 </div>
 
                 <div class="d-flex justify-content-center pb-3 pt-4">
-                  <router-link
-                    :to="{
-                      name: 'ristorante',
-                      params: { name: restaurant.name.replace(/\s+/g, '-') },
-                    }"
-                    @click="onMenuClick(restaurant.id)"
-                    class="btn btn-primary btn-custom"
-                    >Menù</router-link
-                  >
+                  <router-link :to="{
+                    name: 'ristorante',
+                    params: { name: restaurant.name.replace(/\s+/g, '-') },
+                  }" @click="onMenuClick(restaurant.id)" class="btn btn-primary btn-custom">Menù</router-link>
                 </div>
               </div>
             </div>
@@ -120,21 +43,22 @@
 </template>
 
 <script>
-import { store } from "../../stores/store";
+import { store } from "../../stores/main-store";
 import Loader from "../../components/Loader.vue";
 import SearchBar from "../../components/SearchBar.vue";
+import SearchBtn from "../../components/SearchBtn.vue";
+import FilterCategories from "../../components/FilterCategories.vue";
 export default {
   data() {
     return {
       store,
-      filtering: false,
       filter: "",
     };
   },
 
   methods: {
     onMenuClick(restaurantId) {
-      store.dt.selectedRestaurant = restaurantId;
+      store.dt.num.selectedRestaurant = restaurantId;
     },
     filterChild(filterName) {
       this.filter = filterName;
@@ -143,23 +67,24 @@ export default {
   computed: {
     filterRestaurants() {
       if (this.filter === "") {
-        return store.dt.restaurantsList;
+        return store.dt.arr.restaurantsList;
       } else {
-        return store.dt.restaurantsList.filter((restaurant) =>
+        return store.dt.arr.restaurantsList.filter((restaurant) =>
           restaurant.name.toLowerCase().includes(this.filter.toLowerCase())
         );
       }
     },
   },
   mounted() {
-    store.fn.loadStorage();
-    store.fn.fetchCategories();
-    store.fn.fetchRestaurants();
+    store.dt.bool.filtering = false;
+    store.fn.storageLocal.load();
+    store.fn.ajax.fetchCategories();
+    store.fn.ajax.fetchRestaurants();
   },
   beforeUnmount() {
-    store.fn.saveStorage();
+    store.fn.storageLocal.save();
   },
-  components: { Loader, SearchBar },
+  components: { Loader, SearchBar, SearchBtn, FilterCategories },
 };
 </script>
 
@@ -170,60 +95,7 @@ export default {
   border-color: #c76262;
 }
 
-.open-search {
-  position: fixed;
-  border-radius: 50% !important;
-  height: 60px;
-  width: 60px;
-  top: 89px;
-  left: 15px;
-  z-index: 15;
-  transition: left, 0.5s, opacity, 0.5s;
 
-  &.static {
-    position: static !important;
-    height: 80px;
-    width: 80px;
-
-    &.active {
-      opacity: 1;
-    }
-  }
-
-  &.active {
-    left: -150px;
-    opacity: 0;
-  }
-}
-
-.link-container {
-  width: 250px;
-  position: fixed;
-  left: -400px;
-  top: 74px;
-  bottom: 0;
-  background-color: white !important;
-  z-index: 15;
-  opacity: 0;
-  transition: all, 0.5s;
-
-  .delete-categories {
-    cursor: pointer;
-    position: absolute;
-    bottom: 20px;
-  }
-
-  &.active {
-    left: 0;
-    opacity: 0.99;
-  }
-
-  .close-search {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-}
 
 .my-container {
   min-height: calc(100vh - 214px);
