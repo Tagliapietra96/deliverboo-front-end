@@ -1,11 +1,11 @@
-import {reactive} from 'vue';
-import {api } from '../api/api';
+import { reactive } from 'vue';
+import { api } from '../api/api';
 
 export const ajax = reactive({
-    fetchCategories(){
+    fetchCategories() {
         api.categories.index();
     },
-    fetchRestaurants(){
+    fetchRestaurants() {
         api.restaurants.index(category);
     }
 })
