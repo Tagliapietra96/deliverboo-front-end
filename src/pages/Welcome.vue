@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { store } from "../stores/store";
+import { store } from "../stores/main-store";
 import Loader from "../components/Loader.vue";
 import SearchBar from "../components/SearchBar.vue";
 import Carousel from "../components/Carousel.vue";
@@ -24,15 +24,15 @@ export default {
       store,
     };
   },
-  
-  mounted() {
-    store.fn.fetchCategories();
-    store.fn.fetchRestaurants();
-    store.fn.loadStorage();
 
+  mounted() {
+    store.dt.arr.selectedCategories = [];
+    store.fn.ajax.fetchCategories();
+    store.fn.ajax.fetchRestaurants();
+    store.fn.storageLocal.load();
   },
   beforeUnmount() {
-    store.fn.saveStorage()
+    store.fn.storageLocal.save();
   },
 };
 </script>
@@ -47,5 +47,4 @@ export default {
   /* Do not repeat the image */
   background-size: cover;
 }
-
 </style>

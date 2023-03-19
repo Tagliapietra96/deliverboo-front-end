@@ -4,7 +4,7 @@
         <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
         <div class="row g-2 g-sm-3 g-md-5">
           <div
-            v-for="(element, i) in store.dt.categoriesList"
+            v-for="(element, i) in store.dt.arr.categoriesList"
             :class="colSelector(i)"
             class="col-6 img-section position-relative filter-hover"
           >
@@ -14,7 +14,7 @@
             >
               <img
                 class="my-img-fluid rounded-4"
-                :src="store.dt.categoriesImgs[i]"
+                :src="store.dt.arr.categoriesImgs[i]"
                 alt=""
               />
               <span class="description">{{ element.name }}</span>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { store } from "../stores/store";
+import { store } from "../stores/main-store";
 export default {
     data(){
         return{
@@ -47,9 +47,9 @@ export default {
       }
     },
     onCardClick(category) {
-      store.dt.selectedCategories = [];
-      store.dt.selectedCategories.push(category);
-      store.dt.headerLinks[1].active = true;
+      store.dt.arr.selectedCategories = [];
+      store.dt.arr.selectedCategories.push(category);
+      store.dt.arr.headerLinks[1].active = true;
     },
   },
 }

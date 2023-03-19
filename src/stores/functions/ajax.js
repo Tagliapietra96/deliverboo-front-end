@@ -5,7 +5,7 @@ export const ajax = reactive({
     fetchCategories() {
         api.categories.index();
     },
-    fetchRestaurants() {
+    fetchRestaurants(category) {
         api.restaurants.index(category);
     }
 })
