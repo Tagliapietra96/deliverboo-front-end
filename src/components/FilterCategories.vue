@@ -72,4 +72,34 @@ export default {
     top: 10px;
     right: 10px;
   }
-}</style>
+}
+
+.my-form-check {
+  * {
+    transition: transform, 0.5s, font-weight, 0.5s, color, 0.5s;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    .my-checkbox {
+      // width: 20px;
+      // height: 20px;
+      transform: scale(1.05);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .text-category {
+      font-weight: bold;
+      color: #c76262;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+</style>
