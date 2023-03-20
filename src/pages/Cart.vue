@@ -168,9 +168,12 @@
         <div class="single-row p-3 pe-0">
           <div class="row">
             <!-- <div class="col-2 col-lg-1"></div> -->
-            <div class="fw-bolder col-sm-3 col-6 col-lg-7">Totale:</div>
-            <div class=" col-sm-3 col text-end">€ {{ total_order.toFixed(2) }}</div>
-            <div class="col-1"></div>
+            <div class=" col">
+              <span class="fw-bolder">Totale:</span> 
+              <span class=" ms-3">€ {{ total_order.toFixed(2) }}</span>
+            </div>
+            
+            
           </div>
         </div>
       </div>

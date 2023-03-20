@@ -66,9 +66,9 @@
         {{ store.dt.restaurantsMessage }}
       </div>
       <div class="py-4">
-        <div class="row g-3 justify-content-center mb-5">
+        <div class="row g-3 g-sm-5 justify-content-center mb-5">
           <div
-            class="col-12 col-md-6 col-lg-4"
+            class="col-12 col-md-6 pb-4 px-3 col-lg-4"
             v-for="(restaurant, i) in filterRestaurants"
             :key="i"
           >

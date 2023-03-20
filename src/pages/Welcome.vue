@@ -9,11 +9,11 @@
       <div class="py-5">
         <h3 class="pt-3 title">Le nostre cagetorie</h3>
         <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
-        <div class="row g-2 g-sm-3 g-md-5">
+        <div class="row g-2 g-sm-4">
           <div
             v-for="(element, i) in store.dt.categoriesList"
             :class="colSelector(i)"
-            class="col-12 col-sm-6 img-section position-relative filter-hover"
+            class="col-12  px-3 pb-4 col-sm-6 img-section position-relative filter-hover"
           >
             <router-link
               :to="'/i-nostri-ristoranti'"
