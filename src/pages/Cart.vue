@@ -126,7 +126,7 @@
     </div>
   </div>
 
-  <div class="container pt-3"  style="min-height: 100%">
+  <div class="container pt-3" >
     <h2 class="pt-3 pb-2">Il tuo Carrello</h2>
     <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
     <div class="row row-cols-1">
@@ -190,7 +190,7 @@
 
     <div class="py-1 mt-3 mb-5 custom-bg w-100 rounded-1"></div>
   </div>
-  <div class="container" style="margin-top: 10vh; margin-bottom: 10vh; min-height: 100%;">
+  <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-5">
         <form class="row g-3" novalidate>
