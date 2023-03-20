@@ -59,7 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 .my-pop-up {
-  position: fixed;
+  position: fixed !important;
   top: calc(74px + 20px);
   right: -400px;
   width: 30vw;

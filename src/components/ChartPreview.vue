@@ -1,7 +1,8 @@
 <template>
-    <div :class="store.dt.bool.showChartPreview ? 'active' : ''" class="cart-preview shadow" v-if="
+    <div :class="store.dt.bool.showChartPreview ? 'active' : ''" class="cart-preview shadow" 
+    v-if="
         store.dt.arr.myChart.length > 0 &&
-        store.dt.arr.myChart[0].item.restaurant_id === store.dt.selectedRestaurant">
+        store.dt.arr.myChart[0].item.restaurant_id === store.dt.num.selectedRestaurant">
         <div class="open-close"
             @click="store.dt.bool.showChartPreview ? (store.dt.bool.showChartPreview = false) : (store.dt.bool.showChartPreview = true)">
             <i class="fa-solid fa-cart-shopping me-2 ms-2"></i>
@@ -62,7 +63,7 @@ export default {
 
 <style lang="scss" scoped>
 .cart-preview {
-  position: fixed;
+  position: fixed !important;
   right: 0;
   top: 74px;
   bottom: 0;
