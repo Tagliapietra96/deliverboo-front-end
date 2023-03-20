@@ -11,7 +11,7 @@
           <div
             v-for="(element, i) in store.dt.categoriesList"
             :class="colSelector(i)"
-            class="col-6 img-section position-relative filter-hover"
+            class="col-12 col-sm-6 img-section position-relative filter-hover"
           >
             <router-link
               :to="'/i-nostri-ristoranti'"

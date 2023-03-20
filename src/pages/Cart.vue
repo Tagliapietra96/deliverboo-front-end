@@ -126,30 +126,30 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container"  style="min-height: 100%">
     <h2 class="pt-3 pb-2">Il tuo Carrello</h2>
     <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
     <div class="row row-cols-1">
       <div class="col" v-for="(item, index) in store.dt.myChart" :key="index">
-        <div class="single-row py-3 px-5">
+        <div class="single-row py-3 px-3">
           <div class="row">
             <div class="col-2 col-lg-1 align-items-center d-flex">
               <div
-                class="card d-flex justify-content-center align-items-center fw-bolder"
+                class="card  border-0 ms-0 d-flex justify-content-center align-items-center fw-bolder"
                 style="aspect-ratio: 1/1; width: 50px"
               >
                 {{ item.quantity }}
               </div>
             </div>
-            <div class="col-6 col-lg-7 d-flex align-items-center">
-              <div class="fw-bolder">{{ item.item.name }}:</div>
+            <div class="col-5 col-lg-7 d-flex align-items-center">
+              <div class="fw-bolder p-0  mx-auto">{{ item.item.name }}:</div>
             </div>
             <div
               class="col-3 text-end d-flex align-items-center justify-content-end"
             >
               <div>€ {{ item.price }}</div>
             </div>
-            <div class="col-1 align-items-center d-flex">
+            <div class="col-1 ps-0 align-items-center d-flex">
               <button
                 class="btn btn-primary btn-custom"
                 style="aspect-ratio: 1/1; width: 50px"
@@ -169,25 +169,27 @@
           <div class="row">
             <div class="col-2 col-lg-1"></div>
             <div class="fw-bolder col-6 col-lg-7">Totale:</div>
-            <div class="col-3 text-end">€ {{ total_order.toFixed(2) }}</div>
+            <div class="col text-end">€ {{ total_order.toFixed(2) }}</div>
             <div class="col-1"></div>
           </div>
         </div>
       </div>
     </div>
-    <button
-      v-if="store.dt.myChart.length > 0"
-      class="btn btn-ptimary btn-custom mt-3"
-      @click="dropChart()"
-    >
-      Svuota carrello
-    </button>
+    <div class="d-flex justify-content-center">
+      <button
+        v-if="store.dt.myChart.length > 0"
+        class="btn btn-ptimary btn-custom mt-3 "
+        @click="dropChart()"
+      >   Svuota carrello
+      </button>
+    </div>
+   
 
     <div class="py-1 mt-3 mb-5 custom-bg w-100 rounded-1"></div>
   </div>
-  <div class="container">
+  <div class="container" style="margin-top: 10vh; margin-bottom: 10vh; min-height: 100%;">
     <div class="row">
-      <div class="col-5">
+      <div class="col-sm-12 col-md-5">
         <form class="row g-3" novalidate>
           <div class="col-md-12">
             <label for="customer_name" class="form-label"
@@ -263,7 +265,7 @@
           </div>
         </form>
       </div>
-      <div class="col-7">
+      <div class="col-sm-12 col-md-7">
         <div>{{ resultPayment }}</div>
         <div id="dropin-wrapper">
           <div id="checkout-message"></div>
