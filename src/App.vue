@@ -1,11 +1,11 @@
 <template>
-  <div class="">
+  
     <AppHeader/>
-  <div class="main-page">
-    <router-view></router-view>
-    <AppFooter class="" />
-  </div>
-  </div>
+    <div class="main-page">
+      <router-view></router-view>
+      <AppFooter class="" />
+    </div>
+
 </template>
 
 <script>
