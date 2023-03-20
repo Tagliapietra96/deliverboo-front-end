@@ -47,7 +47,7 @@
           Svuota campi di ricerca
         </div>
       </div>
-      <h2 class="pt-4">I ristoranti su DeliveBoo</h2>
+      <strong><h1 style="padding-top: 9vh;">I ristoranti su DeliveBoo</h1></strong>
 
       <SearchBar @filterName="filterChild"></SearchBar>
       <div class="d-none d-md-block text-center mb-3 fw-bolder">
@@ -66,7 +66,7 @@
         {{ store.dt.restaurantsMessage }}
       </div>
       <div class="py-4">
-        <div class="row g-3">
+        <div class="row g-3 justify-content-center mb-5">
           <div
             class="col-12 col-md-6 col-lg-4"
             v-for="(restaurant, i) in filterRestaurants"
