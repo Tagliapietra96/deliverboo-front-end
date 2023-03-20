@@ -59,7 +59,7 @@ export const store = reactive({
     panini: Array,
     selectedCategories: [],
     myChart: [],
-    selectedRestaurant: Number,
+    selectedRestaurant: 0,
     quantityDish: 1,
     restaurantsMessage: "",
   },
@@ -84,12 +84,21 @@ export const store = reactive({
     },
     saveStorage() {
       localStorage.setItem("myChart", JSON.stringify(store.dt.myChart));
+      if(store.dt.selectedRestaurant!=undefined){
+        localStorage.setItem("restaurantId", JSON.stringify(store.dt.selectedRestaurant));
+      }
     },
     loadStorage() {
       const myChart = localStorage.getItem("myChart");
       if (myChart) {
         store.dt.myChart = JSON.parse(myChart);
       }
+      if(store.dt.selectedRestaurant!=undefined){
+      const restaurantId = localStorage.getItem("restaurantId");
+      if (restaurantId != "undefined"){
+        store.dt.selectedRestaurant = JSON.parse(restaurantId);
+      }
+    }
     },
     dishFilter() {
       store.dt.antipasti = store.dt.dishesList.filter((element) => {
