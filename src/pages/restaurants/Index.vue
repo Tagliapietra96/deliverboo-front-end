@@ -10,7 +10,7 @@
     </button>
     <div class="my-container">
       <div
-        class="link-container shadow py-4"
+        class="link-container shadow py-4 overflow-auto"
         :class="filtering ? 'active' : ''"
       >
         <span class="title ps-3 custom-color">Categoria</span>
@@ -209,8 +209,7 @@ export default {
 
   .delete-categories {
     cursor: pointer;
-    position: absolute;
-    bottom: 20px;
+    margin-top: 3rem;
   }
 
   &.active {
