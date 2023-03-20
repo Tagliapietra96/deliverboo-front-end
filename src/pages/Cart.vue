@@ -178,7 +178,7 @@
     <div class="d-flex justify-content-center">
       <button
         v-if="store.dt.myChart.length > 0"
-        class="btn btn-ptimary btn-custom mt-3 "
+        class="btn btn-ptimary btn-custom mt-5 mb-4 "
         @click="dropChart()"
       >   Svuota carrello
       </button>
