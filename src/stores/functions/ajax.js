@@ -1,4 +1,5 @@
 import { reactive } from 'vue';
+import { store } from '../main-store';
 import { api } from '../api/api';
 
 export const ajax = reactive({
@@ -7,5 +8,8 @@ export const ajax = reactive({
     },
     fetchRestaurants(category) {
         api.restaurants.index(category);
+    },
+    fetchDishes() {
+        api.dishes.index(store.dt.num.selectedRestaurant);
     }
 })

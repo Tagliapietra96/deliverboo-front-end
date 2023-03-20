@@ -32,7 +32,7 @@
                         </button>
                     </div>
                     <div class="pt-3">
-                        <router-link :to="'/cart'" class="custom-color" @click="toChartPage()">
+                        <router-link :to="'/cart'" class="custom-color" @click="store.fn.chart.toChartPage()">
                             <small>Vai al tuo carrello!</small>
                         </router-link>
                     </div>

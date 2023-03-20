@@ -1,76 +1,8 @@
 <template>
-  <Loader v-if="store.dt.loading"></Loader>
+  <Loader v-if="store.dt.bool.loading"></Loader>
   <div v-else class="my-container">
     <ChartPopUp/>
-    <div v-if="cardShow.active" :class="cardShow.active ? 'active' : ''" class="selected-dish">
-      <div class="h-100 w-100 bg-invisible">
-        <div class="card card-show border-0 rounded-4 overflow-hidden">
-          <button @click="exitShow()" class="btn btn-primary btn-custom close-show">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-          <img v-if="cardShow.card.image.includes('http')" :src="cardShow.card.image" class="card-img-top" alt="..."
-            :style="
-              cardShow.card.visibility
-                ? 'filter: grayscale(0)'
-                : 'filter: grayscale(100%)'
-            " />
-          <img v-else :src="store.dt.beUrl + '/storage/' + cardShow.card.image" class="card-img-top" alt="..." :style="
-            cardShow.card.visibility
-              ? 'filter: grayscale(0)'
-              : 'filter: grayscale(100%)'
-          " />
-          <div class="card-body">
-            <h5 class="card-title">{{ cardShow.card.name }}</h5>
-            <p class="card-text">{{ cardShow.card.description }}</p>
-            <div class="px-3">
-              <div class="bg-light border text-center py-3 fs-4 rounded-2">
-                € {{ totalPrice(cardShow.card.price, cardShow.quantity) }}
-              </div>
-              <div class="text-center py-3" v-if="cardShow.card.visibility">
-                <div class="btn-group" role="group">
-                  <button type="button" :class="
-                    store.dt.myChart.length === 0
-                      ? ''
-                      : store.dt.myChart[0].item.restaurant_id !==
-                        store.dt.selectedRestaurant
-                        ? 'disabled'
-                        : ''
-                  " class="btn btn-primary btn-custom d-none d-sm-inline" @click="minusBtn()">
-                    -
-                  </button>
-                  <button type="button" :class="
-                    store.dt.myChart.length === 0
-                      ? ''
-                      : store.dt.myChart[0].item.restaurant_id !==
-                        store.dt.selectedRestaurant
-                        ? 'disabled'
-                        : ''
-                  " class="btn btn-primary btn-custom" @click="chartBtn()">
-                    <i class="fa-solid fa-cart-shopping me-3 d-none d-md-inline"></i>
-                    {{ cardShow.quantity }}
-                  </button>
-                  <button type="button" :class="
-                    store.dt.myChart.length === 0
-                      ? ''
-                      : store.dt.myChart[0].item.restaurant_id !==
-                        store.dt.selectedRestaurant
-                        ? 'disabled'
-                        : ''
-                  " class="btn btn-primary btn-custom d-none d-sm-inline" @click="plusBtn()">
-                    +
-                  </button>
-                </div>
-              </div>
-              <div class="pt-3" v-else>
-                <h5 class="text-center custom-color fw-bold">
-                  Prodotto attualmente non disponibile
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
     <div :class="showCart ? 'active' : ''" class="cart-preview shadow" v-if="
       store.dt.myChart.length > 0 &&
@@ -399,7 +331,7 @@
 </template>
 
 <script>
-import { store } from "../../stores/store";
+import { store } from "../../stores/main-store";
 import ChartPopUp from "../ChartPopUp.vue";
 import Loader from "../Loader.vue";
 export default {
@@ -560,11 +492,14 @@ export default {
     },
   },
   mounted() {
-    store.fn.fetchDishes();
-    store.fn.loadStorage();
+    store.dt.obj.cardShow.active = false;
+    store.dt.num.dishShoppingIndex = 0;
+    store.dt.obj.cardShow.quantity = 1;
+    store.fn.ajax.fetchDishes();
+    store.fn.storageLocal.load();
   },
   beforeUnmount() {
-    store.fn.saveStorage();
+    store.fn.storageLocal.save();
   },
 };
 </script>
