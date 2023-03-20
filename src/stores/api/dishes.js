@@ -9,7 +9,7 @@ export const dishes = reactive({
           .get(store.dt.str.beUrl + store.dt.str.dishesUrl + id)
           .then((resp) => {
             store.dt.arr.dishesList = resp.data;
-            // store.fn.dishFilter();
+            store.fn.dish.dishFilter();
             store.dt.bool.loading = false;
           })
           .catch((e) => {

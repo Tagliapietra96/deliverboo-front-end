@@ -32,7 +32,7 @@
                                             store.dt.num.selectedRestaurant
                                             ? 'disabled'
                                             : ''
-                                " class="btn btn-primary btn-custom d-none d-sm-inline" @click="store.fn.chart.minusBtn()">
+                                " class="btn btn-primary btn-custom d-none d-sm-inline" @click="store.fn.chart.minusBtnShow()">
                                     -
                                 </button>
                                 <button type="button" :class="
@@ -53,7 +53,7 @@
                                             store.dt.num.selectedRestaurant
                                             ? 'disabled'
                                             : ''
-                                " class="btn btn-primary btn-custom d-none d-sm-inline" @click="store.fn.chart.plusBtn()">
+                                " class="btn btn-primary btn-custom d-none d-sm-inline" @click="store.fn.chart.plusBtnShow()">
                                     +
                                 </button>
                             </div>
@@ -81,4 +81,59 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.selected-dish {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba($color: #000000, $alpha: 0.7);
+  z-index: 9999999999999999999992;
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+  }
+
+  .card-show {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40vw;
+
+    &:hover {
+      .close-show {
+        opacity: 1;
+      }
+    }
+
+    .close-show {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      opacity: 0.3;
+      transition: opacity, 0.4s;
+      z-index: 9999999999999999999999;
+
+      &:hover {
+        transform: rotate(360deg);
+      }
+
+      &:active {
+        transform: rotate(-360deg);
+      }
+    }
+
+    img {
+      aspect-ratio: 2/1;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+}
+</style>

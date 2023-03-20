@@ -5,5 +5,6 @@ export const bool = reactive({
     loading: Boolean,
     filtering: Boolean,
     popUpForcedExit: Boolean,
-    popUpVisibility: Boolean
+    popUpVisibility: Boolean,
+    showChartPreview: Boolean
 }) 

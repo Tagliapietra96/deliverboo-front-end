@@ -96,4 +96,8 @@ export default {
     aspect-ratio: 1/1;
   }
 }
+
+small{
+  cursor: pointer;
+}
 </style>

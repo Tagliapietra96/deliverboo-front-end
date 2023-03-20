@@ -105,5 +105,25 @@ export const chart = reactive({
                 store.dt.bool.popUpVisibility = false;
             }, 5000);
         }
-    }
+    },
+    chartPreviewBtn(index) {
+        store.dt.num.dishShoppingIndex = index;
+        store.dt.bool.popUpForcedExit = false;
+        store.dt.bool.popUpVisibility = true;
+        setTimeout(() => {
+            store.dt.bool.popUpVisibility = false;
+        }, 5000);
+    },
+    deleteChart() {
+        if (window.confirm("Sei sicuro di voler eliminare il carrello?")) {
+            store.dt.arr.myChart = [];
+            store.fn.storageLocal.save();
+            store.fn.storageLocal.load();
+        }
+    },
+    onCardClick(myCard) {
+        store.dt.obj.cardShow.card = myCard;
+        store.dt.obj.cardShow.quantity = 1;
+        store.dt.obj.cardShow.active = true;
+    },
 })

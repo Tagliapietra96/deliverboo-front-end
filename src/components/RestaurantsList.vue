@@ -39,6 +39,7 @@ export default {
     methods: {
         onMenuClick(restaurantId) {
             store.dt.num.selectedRestaurant = restaurantId;
+            console.log(store.dt.num.selectedRestaurant)
         },
     },
     computed: {
