@@ -665,6 +665,7 @@ export default {
   z-index: 9999999999999999999992;
   opacity: 0;
 
+
   &.active {
     opacity: 1;
   }
@@ -674,7 +675,8 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 40vw;
+    // width: 40vw;
+  
 
     &:hover {
       .close-show {
