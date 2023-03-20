@@ -1,7 +1,11 @@
-<template lang="">
-  <AppHeader/>
-  <router-view></router-view>
-  <AppFooter/>
+<template>
+  <div class="">
+    <AppHeader/>
+  <div class="main-page">
+    <router-view></router-view>
+    <AppFooter class="" />
+  </div>
+  </div>
 </template>
 
 <script>
@@ -24,4 +28,8 @@ export default {
 
 <style lang="scss">
 @use "./styles/main.scss";
+.main-page{
+  height: calc(100vh - 74px);
+  
+}
 </style>
