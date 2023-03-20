@@ -3,9 +3,11 @@
   <main v-else>
     <div class="bg-first-section"></div>
     <div class="container">
+      <h3 class="title" style="margin-top: 10vh">I nostri ristoranti</h3>
+        <div class="py-1 mt-2  custom-bg w-100 rounded-1"></div>
       <Carousel></Carousel>
       <div class="py-5">
-        <h2 class="pt-3 title">La selezione di DeliveBoo</h2>
+        <h3 class="pt-3 title">Le nostre cagetorie</h3>
         <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
         <div class="row g-2 g-sm-3 g-md-5">
           <div
@@ -94,6 +96,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .bg-first-section {
   background-image: url("../assets/bg-homepage.jpg");
   height: 60vh;
@@ -170,19 +173,8 @@ export default {
 
 @media screen and (max-width: 1000px) {
   .description {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 }
 
-@media screen and (max-width: 500px) {
-  .description {
-    font-size: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 385px) {
-  .description {
-    font-size: 1rem;
-  }
-}
 </style>

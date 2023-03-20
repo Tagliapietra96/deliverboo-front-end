@@ -74,7 +74,7 @@
                         store.dt.selectedRestaurant
                         ? 'disabled'
                         : ''
-                  " class="btn btn-primary btn-custom d-none d-sm-inline" @click="minusBtn()">
+                  " class="btn btn-primary btn-custom d-sm-inline" @click="minusBtn()">
                     -
                   </button>
                   <button type="button" :class="
@@ -95,7 +95,7 @@
                         store.dt.selectedRestaurant
                         ? 'disabled'
                         : ''
-                  " class="btn btn-primary btn-custom d-none d-sm-inline" @click="plusBtn()">
+                  " class="btn btn-primary btn-custom  d-sm-inline" @click="plusBtn()">
                     +
                   </button>
                 </div>
@@ -610,6 +610,7 @@ export default {
 <style lang="scss" scoped>
 @use "../../styles/main.scss";
 
+
 .alert-info {
   text-align: center;
   background-color: #c7626245 !important;
@@ -675,8 +676,7 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    // width: 40vw;
-  
+    width: 40vw;
 
     &:hover {
       .close-show {
@@ -684,7 +684,7 @@ export default {
       }
     }
 
-    .close-show {
+.close-show {
       position: absolute;
       top: 15px;
       right: 15px;
@@ -702,7 +702,7 @@ export default {
       &:active {
         transform: rotate(-360deg);
       }
-    }
+}
 
     img {
       aspect-ratio: 2/1;
@@ -711,6 +711,13 @@ export default {
     }
   }
 }
+
+@media screen and ( max-width:500px ) {
+    .selected-dish .card-show {
+        width: 90vw;
+    }
+}
+
 
 .card-index {
   transition: all, 0.4s;

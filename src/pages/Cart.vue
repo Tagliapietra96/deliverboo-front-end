@@ -126,14 +126,14 @@
     </div>
   </div>
 
-  <div class="container"  style="min-height: 100%">
+  <div class="container pt-3"  style="min-height: 100%">
     <h2 class="pt-3 pb-2">Il tuo Carrello</h2>
     <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
     <div class="row row-cols-1">
       <div class="col" v-for="(item, index) in store.dt.myChart" :key="index">
-        <div class="single-row py-3 px-3">
+        <div class="single-row py-3 px-1">
           <div class="row">
-            <div class="col-2 col-lg-1 align-items-center d-flex">
+            <div class=" col-sm-1 col-2 col-lg-1 align-items-center d-flex">
               <div
                 class="card  border-0 ms-0 d-flex justify-content-center align-items-center fw-bolder"
                 style="aspect-ratio: 1/1; width: 50px"
@@ -165,11 +165,11 @@
         </div>
       </div>
       <div class="col">
-        <div class="single-row py-3 px-5">
+        <div class="single-row p-3 pe-0">
           <div class="row">
-            <div class="col-2 col-lg-1"></div>
-            <div class="fw-bolder col-6 col-lg-7">Totale:</div>
-            <div class="col text-end">€ {{ total_order.toFixed(2) }}</div>
+            <!-- <div class="col-2 col-lg-1"></div> -->
+            <div class="fw-bolder col-sm-3 col-6 col-lg-7">Totale:</div>
+            <div class=" col-sm-3 col text-end">€ {{ total_order.toFixed(2) }}</div>
             <div class="col-1"></div>
           </div>
         </div>
@@ -270,7 +270,8 @@
         <div id="dropin-wrapper">
           <div id="checkout-message"></div>
           <div id="dropin-container"></div>
-          <button
+          <div class="d-flex btn-payment">
+            <button
             class="btn btn-primary btn-custom mb-5"
             @click="submit"
             :disabled="!formComplete"
@@ -278,6 +279,7 @@
           >
             Conferma Pagamento
           </button>
+          </div>
         </div>
       </div>
     </div>
@@ -455,6 +457,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media screen and ( max-width:500px ) {
+    .btn-payment {
+        justify-content: center;
+    }
+}
 .container {
   min-height: calc(100vh - 214px);
 
