@@ -58,6 +58,9 @@ export default {
             return 0; // restituisce 0 se "store.dt.myChart" non è definito o non è un array
         },
     },
+    mounted() {
+      store.dt.bool.showChartPreview = false;
+    },
 }
 </script>
 

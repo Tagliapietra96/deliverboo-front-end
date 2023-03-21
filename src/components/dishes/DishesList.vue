@@ -21,14 +21,14 @@
           Svuota carrello
         </button>
       </div>
-      <DishTypeRow :array="store.dt.arr.antipasti" :title="'Antipasti'" :icon="'fa-shrimp'" />
-      <DishTypeRow :array="store.dt.arr.primi" :title="'Primi'" :icon="'fa-plate-wheat'" />
-      <DishTypeRow :array="store.dt.arr.secondi" :title="'Secondi'" :icon="'fa-drumstick-bite'" />
-      <DishTypeRow :array="store.dt.arr.pizze" :title="'Pizze'" :icon="'fa-pizza-slice'" />
-      <DishTypeRow :array="store.dt.arr.contorni" :title="'Contorni'" :icon="'fa-seedling'" />
-      <DishTypeRow :array="store.dt.arr.panini" :title="'Panini'" :icon="'fa-burger'" />
+      <DishTypeRow :array="store.dt.arr.antipasti" :title="'Antipasti'" :icon="'fa-shrimp'"/>
+      <DishTypeRow :array="store.dt.arr.primi" :title="'Primi'" :icon="'fa-plate-wheat'"/>
+      <DishTypeRow :array="store.dt.arr.secondi" :title="'Secondi'" :icon="'fa-drumstick-bite'"/>
+      <DishTypeRow :array="store.dt.arr.pizze" :title="'Pizze'" :icon="'fa-pizza-slice'"/>
+      <DishTypeRow :array="store.dt.arr.contorni" :title="'Contorni'" :icon="'fa-seedling'"/>
+      <DishTypeRow :array="store.dt.arr.panini" :title="'Panini'" :icon="'fa-burger'"/>
       <DishTypeRow :array="store.dt.arr.dolci" :title="'Dolci'" :icon="'fa-candy-cane'" />
-      <DishTypeRow :array="store.dt.arr.bevande" :title="'Bevande'" :icon="'fa-martini-glass-citrus'" />
+      <DishTypeRow :array="store.dt.arr.bevande" :title="'Bevande'" :icon="'fa-martini-glass-citrus'"/>
     </div>
   </div>
 </template>

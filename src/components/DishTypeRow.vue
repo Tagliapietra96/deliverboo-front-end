@@ -39,7 +39,7 @@
 import { store } from '../stores/main-store';
 export default {
     props: {
-        array: Array,
+        array: null,
         icon: String,
         title: String
     },
