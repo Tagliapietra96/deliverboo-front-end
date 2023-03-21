@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div class="py-5">
         <h2 class="pt-3 title">La selezione di DeliveBoo</h2>
         <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>

@@ -38,6 +38,9 @@ export default {
       this.filter = filterName;
     },
   },
+  created() {
+    store.dt.bool.loading = true;
+  },
   mounted() {
     store.dt.bool.filtering = false;
     store.fn.storageLocal.load();
