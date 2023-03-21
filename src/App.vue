@@ -1,11 +1,11 @@
-<template lang="">
+<template>
   <AppHeader/>
   <router-view></router-view>
   <AppFooter/>
 </template>
 
 <script>
-import { store } from "./stores/store";
+import { store } from "./stores/main-store";
 import AppHeader from './components/AppHeader.vue'; 
 import AppFooter from './components/AppFooter.vue'; 
 export default {
@@ -14,10 +14,10 @@ export default {
     return {};
   },
   mounted() {
-    store.fn.loadStorage()
+    store.fn.storageLocal.load();
   },
   beforeUnmount(){
-    store.fn.saveStorage()
+    store.fn.storageLocal.save();
   }
 };
 </script>

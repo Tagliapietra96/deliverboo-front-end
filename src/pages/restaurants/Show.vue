@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import { store } from '../../stores/store';
 import DishesList from "../../components/dishes/DishesList.vue";
 export default {
   components: {DishesList},

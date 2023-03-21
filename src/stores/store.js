@@ -117,14 +117,6 @@ export const store = reactive({
       store.dt.panini = store.dt.dishesList.filter((element) => {
         return element.type === 'Panino';
       });
-      console.log(store.dt.antipasti)
-      console.log(store.dt.pizze)
-      console.log(store.dt.primi)
-      console.log(store.dt.secondi)
-      console.log(store.dt.contorni)
-      console.log(store.dt.bevande)
-      console.log(store.dt.dolci)
-      console.log(store.dt.panini)
     }
   },
 });

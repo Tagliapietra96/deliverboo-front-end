@@ -3,7 +3,7 @@
         <div class="pt-4 d-flex">
           <div class="slider">
             <div class="slide-track">
-              <div class="my-img-container slide p-2" v-for="(restaurants, i) in store.dt.restaurantsList">
+              <div class="my-img-container slide p-2" v-for="(restaurants, i) in store.dt.arr.restaurantsList">
                 <router-link
                     :to="{
                       name: 'ristorante',
@@ -22,7 +22,7 @@
 </template>
   
   <script>
-  import { store } from "../stores/store";
+  import { store } from "../stores/main-store";
   export default {
     data() {
       return {
@@ -31,7 +31,7 @@
     },
     methods: {
       onMenuClick(restaurantId) {
-      store.dt.selectedRestaurant = restaurantId;
+      store.dt.num.selectedRestaurant = restaurantId;
     },
      },
     mounted() {
