@@ -1,54 +1,8 @@
 <template>
   <Loader v-if="store.dt.bool.loading" />
   <div v-else>
-    <DishChartEdit/>
-    <div class="container">
-      <h2 class="pt-3 pb-2">Il tuo Carrello</h2>
-      <div class="py-1 mt-2 mb-5 custom-bg w-100 rounded-1"></div>
-      <div class="row row-cols-1">
-        <div class="col" v-for="(item, index) in store.dt.myChart" :key="index">
-          <div class="single-row py-3 px-5">
-            <div class="row">
-              <div class="col-2 col-lg-1 align-items-center d-flex">
-                <div class="card d-flex justify-content-center align-items-center fw-bolder"
-                  style="aspect-ratio: 1/1; width: 50px">
-                  {{ item.quantity }}
-                </div>
-              </div>
-              <div class="col-6 col-lg-7 d-flex align-items-center">
-                <div class="fw-bolder">{{ item.item.name }}:</div>
-              </div>
-              <div class="col-3 text-end d-flex align-items-center justify-content-end">
-                <div>€ {{ item.price }}</div>
-              </div>
-              <div class="col-1 align-items-center d-flex">
-                <button class="btn btn-primary btn-custom" style="aspect-ratio: 1/1; width: 50px" @click="
-                  selectedDish = index;
-                forceExit = false;
-                                  ">
-                  <i class="fa-solid fa-pen"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="single-row py-3 px-5">
-            <div class="row">
-              <div class="col-2 col-lg-1"></div>
-              <div class="fw-bolder col-6 col-lg-7">Totale:</div>
-              <div class="col-3 text-end">€ {{ total_order.toFixed(2) }}</div>
-              <div class="col-1"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button v-if="store.dt.myChart.length > 0" class="btn btn-ptimary btn-custom mt-3" @click="dropChart()">
-        Svuota carrello
-      </button>
-
-      <div class="py-1 mt-3 mb-5 custom-bg w-100 rounded-1"></div>
-    </div>
+    <DishChartEdit />
+    <ChartList />
     <div class="container">
       <div class="row">
         <div class="col-5">
@@ -118,12 +72,12 @@ window.addEventListener("DOMContentLoaded", function () {
           requestPaymentMethodErr,
           payload
         ) {
-          store.dt.loading = true;
+          store.dt.bool.loading = true;
           // When the user clicks on the 'Submit payment' button this code will send the
           // encrypted payment information in a variable called a payment method nonce
           $.ajax({
             type: "POST",
-            url: store.dt.paymentUrl + store.dt.payLink,
+            url: store.dt.str.paymentUrl + store.dt.arr.payLink,
             data: { paymentMethodNonce: payload.nonce },
           }).done(function (result) {
             // Tear down the Drop-in UI
@@ -138,15 +92,16 @@ window.addEventListener("DOMContentLoaded", function () {
             });
 
             if (result.success) {
-              store.dt.myChart = [];
-              store.fn.saveStorage();
+              store.dt.arr.myChart = [];
+              store.fn.storageLocal.save();
+              store.fn.storageLocal.load();
               router.push("checkout");
             } else {
               $("#checkout-message").html(
                 "<h1>Error</h1><p>Pagamento rifiutato.</p>"
               );
             }
-            store.dt.loading = false;
+            store.dt.bool.loading = false;
           });
         });
       });
@@ -157,6 +112,7 @@ import { store } from "../stores/main-store";
 import axios from "axios";
 import Loader from "../components/Loader.vue";
 import DishChartEdit from "../components/DishChartEdit.vue";
+import ChartList from "../components/ChartList.vue";
 export default {
   data() {
     return {
@@ -167,22 +123,11 @@ export default {
       formSubmitted: false,
       store,
       resultPayment: "",
-      selectedDish: -1,
-      forceExit: true,
     };
   },
   methods: {
-    dropChart() {
-      store.dt.myChart = [];
-      store.fn.saveStorage();
-      store.fn.loadStorage();
-    },
-    totalPrice(num1, num2) {
-      let total = num1 * num2;
-      return (Math.round(total * 100) / 100).toFixed(2);
-    },
     submit() {
-      store.dt.payLink = this.dishesBuy;
+      store.dt.arr.payLink = this.dishesBuy;
       this.formSubmitted = true;
       axios
         .post(
@@ -206,7 +151,8 @@ export default {
           }
         )
         .then((response) => {
-          store.fn.saveStorage();
+          store.fn.storageLocal.save();
+          store.fn.storageLocal.load();
         })
         .catch((error) => {
           this.resultPayment = "Transazione negata";
@@ -214,7 +160,7 @@ export default {
     },
   },
   mounted() {
-    store.fn.loadStorage();
+    store.fn.storageLocal.load();
     const reload = localStorage.getItem("reload");
     if (reload) {
       this.reload = JSON.parse(reload);
@@ -227,9 +173,10 @@ export default {
       this.reload = 0;
       localStorage.setItem("reload", JSON.stringify(this.reload));
     }
+    store.dt.bool.loading = false;
   },
   beforeUnmount() {
-    store.fn.saveStorage();
+    store.fn.storageLocal.save();
   },
   computed: {
     formComplete() {
@@ -240,17 +187,9 @@ export default {
         this.customer_email
       );
     },
-    total_order() {
-      // Controlla se "store.dt.myChart" esiste ed è un array valido
-      if (store.dt.myChart && Array.isArray(store.dt.myChart)) {
-        return store.dt.myChart.reduce((total, item) => {
-          return total + parseFloat(item.price);
-        }, 0);
-      }
-      return 0; // restituisce 0 se "store.dt.myChart" non è definito o non è un array
-    },
+
     dishesBuy() {
-      return store.dt.myChart.flatMap((item) =>
+      return store.dt.arr.myChart.flatMap((item) =>
         Array.from({ length: item.quantity }, () => `&dishes[]=${item.item.id}`)
       );
     },
@@ -260,16 +199,16 @@ export default {
       )}`;
     },
     dish_id() {
-      return store.dt.myChart.flatMap((item) =>
+      return store.dt.arr.myChart.flatMap((item) =>
         Array.from({ length: item.quantity }, () => item.item.id)
       );
     },
     restaurant_id() {
-      const item = this.store.dt.myChart.find((item) => item.quantity > 0);
+      const item = store.dt.arr.myChart.find((item) => item.quantity > 0);
       return item ? item.item.restaurant_id : null;
     },
   },
-  components: { Loader, DishChartEdit },
+  components: { Loader, DishChartEdit, ChartList },
 };
 </script>
 
@@ -277,9 +216,5 @@ export default {
 .container {
   min-height: calc(100vh - 214px);
 
-  .single-row {
-    border-bottom: 1px solid #c76262;
-    border-collapse: collapse !important;
-  }
 }
 </style>
