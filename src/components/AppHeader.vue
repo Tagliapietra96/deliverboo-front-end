@@ -79,32 +79,12 @@ export default {
       return toReturn;
     }
   },
-  mounted() {
-    window.onscroll = function () {
-      scrollFunction();
-    };
-
-    function scrollFunction() {
-      if (document.body.scrollTop > 74 || document.documentElement.scrollTop > 74) {
-        document.getElementById("navbar").style.opacity = ".7";
-      } else {
-        document.getElementById("navbar").style.opacity = "1";
-      }
-    }
-  },
 };
 
 
 </script>
 
 <style lang="scss" scoped>
-#navbar {
-  transition: opacity, 0.8s;
-
-  &:hover {
-    opacity: 1 !important;
-  }
-}
 
 .header-spacer {
   height: 74px;
