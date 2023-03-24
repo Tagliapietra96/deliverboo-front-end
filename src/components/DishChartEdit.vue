@@ -1,6 +1,6 @@
 <template>
     <div v-if="store.dt.num.dishShoppingIndex !== -1 && !store.dt.bool.popUpForcedExit"
-        :class="store.dt.num.dishShoppingIndex ? 'active' : ''" class="selected-dish">
+        :class="store.dt.num.dishShoppingIndex !== -1 ? 'active' : ''" class="selected-dish">
         <div class="h-100 w-100 bg-invisible">
             <div class="card card-show border-0 rounded-4 overflow-hidden">
                 <button @click="store.dt.num.dishShoppingIndex = -1" class="btn btn-primary btn-custom close-show">
@@ -95,7 +95,7 @@ export default {
   left: 0;
   right: 0;
   background-color: rgba($color: #000000, $alpha: 0.7);
-  z-index: 9999999999999999999992;
+  z-index: 9999999999999999999992 !important;
   opacity: 0;
 
   &.active {
